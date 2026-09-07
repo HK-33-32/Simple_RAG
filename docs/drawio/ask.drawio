@@ -1,0 +1,45 @@
+<mxfile host="app.diagrams.net" agent="Simply RAG" version="22.1.0">
+  <diagram id="ask" name="Ответ">
+    <mxGraphModel dx="800" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="Ответ по документам · POST /api/ask" style="text;html=1;fontFamily=Segoe UI;fontSize=18;fontStyle=1;fontColor=#1c1e22;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="560" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="a1" value="Вопрос пользователя" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1c1e22;fontColor=#ffffff;strokeColor=#1c1e22;fontFamily=Segoe UI;fontSize=14;fontStyle=1;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="360" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="a2" value="Эмбеддинг вопроса · BGE-M3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2231a;strokeWidth=2;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="170" width="360" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="a3" value="Chroma similarity search · top_k = 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="260" width="360" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="a4" value="CRAG-оценщик&#10;порог релевантности 0.35" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff7f6;strokeColor=#e2231a;strokeWidth=2;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#1c1e22;" vertex="1" parent="1">
+          <mxGeometry x="210" y="350" width="340" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="a5" value="Ниже порога&#10;фиксированный отказ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="520" width="240" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="a6" value="Выше порога&#10;контекст для LLM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=13;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="520" width="240" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="a7" value="Gemini&#10;только retrieved context" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1c1e22;fontColor=#ffffff;strokeColor=#1c1e22;fontFamily=Segoe UI;fontSize=13;fontStyle=1;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="640" width="240" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="a8" value="Ответ + источники&#10;файл · страница · цитата в PDF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2231a;strokeColor=#e2231a;fontColor=#ffffff;fontFamily=Segoe UI;fontSize=14;fontStyle=1;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="200" y="780" width="360" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="a1" target="a2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="a2" target="a3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="a3" target="a4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="нет" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Segoe UI;fontSize=11;" edge="1" parent="1" source="a4" target="a5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" value="да" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;fontFamily=Segoe UI;fontSize=11;" edge="1" parent="1" source="a4" target="a6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="a6" target="a7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="a7" target="a8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#c5cad3;strokeWidth=2;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="a5" target="a8"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

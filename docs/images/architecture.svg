@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 720" role="img" aria-label="Архитектура Simply RAG">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7f8fa"/>
+      <stop offset="100%" stop-color="#eceff3"/>
+    </linearGradient>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1c2430" flood-opacity=".08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e2231a"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="720" fill="url(#bg)"/>
+  <text x="56" y="48" font-family="Segoe UI, Inter, Arial" font-size="22" font-weight="800" fill="#1c1e22">Архитектура системы</text>
+  <text x="56" y="74" font-family="Segoe UI, Inter, Arial" font-size="13" fill="#5d626b">НАМИ — база знаний · Simply RAG</text>
+  <rect x="980" y="28" width="84" height="8" rx="2" fill="#e2231a"/>
+
+  <!-- Layer labels -->
+  <text x="56" y="118" font-family="Segoe UI, Inter, Arial" font-size="11" font-weight="700" letter-spacing="1.4" fill="#8a9098">КЛИЕНТ</text>
+  <rect x="56" y="128" width="1008" height="86" rx="18" fill="#fff" stroke="#e6e8ec" filter="url(#shadow)"/>
+  <rect x="80" y="148" width="220" height="46" rx="12" fill="#fff" stroke="#e2231a" stroke-width="1.6"/>
+  <text x="190" y="176" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#1c1e22">Браузер · static/index.html</text>
+  <rect x="330" y="148" width="200" height="46" rx="12" fill="#fff7f6" stroke="#e2231a"/>
+  <text x="430" y="176" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#1c1e22">Чат · документы · PDF</text>
+  <rect x="560" y="148" width="220" height="46" rx="12" fill="#fff" stroke="#d8dce3"/>
+  <text x="670" y="176" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="650" fill="#1c1e22">Ключ Gemini через UI</text>
+  <rect x="810" y="148" width="228" height="46" rx="12" fill="#fff" stroke="#d8dce3"/>
+  <text x="924" y="176" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="650" fill="#1c1e22">Прогресс индексации</text>
+
+  <line x1="560" y1="214" x2="560" y2="248" stroke="#e2231a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="56" y="272" font-family="Segoe UI, Inter, Arial" font-size="11" font-weight="700" letter-spacing="1.4" fill="#8a9098">СЕРВЕР</text>
+  <rect x="56" y="282" width="1008" height="132" rx="18" fill="#fff" stroke="#e6e8ec" filter="url(#shadow)"/>
+  <rect x="80" y="306" width="300" height="84" rx="14" fill="#1c1e22"/>
+  <text x="230" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#fff">FastAPI · uvicorn</text>
+  <text x="230" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#c8ccd3">app.py · /api/upload · /api/ask</text>
+  <rect x="410" y="306" width="300" height="84" rx="14" fill="#fff" stroke="#e2231a" stroke-width="1.8"/>
+  <text x="560" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#1c1e22">rag.py</text>
+  <text x="560" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">конвейер из книги Huang</text>
+  <rect x="740" y="306" width="300" height="84" rx="14" fill="#fff7f6" stroke="#e2231a"/>
+  <text x="890" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#1c1e22">rag_ext.py</text>
+  <text x="890" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">GPU, инкремент, источники</text>
+
+  <line x1="230" y1="414" x2="230" y2="456" stroke="#e2231a" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="560" y1="414" x2="560" y2="456" stroke="#e2231a" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="890" y1="414" x2="890" y2="456" stroke="#e2231a" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="56" y="480" font-family="Segoe UI, Inter, Arial" font-size="11" font-weight="700" letter-spacing="1.4" fill="#8a9098">МОДЕЛИ И ХРАНИЛИЩА</text>
+  <rect x="56" y="490" width="1008" height="168" rx="18" fill="#fff" stroke="#e6e8ec" filter="url(#shadow)"/>
+
+  <rect x="80" y="514" width="220" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="190" y="552" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">Chroma</text>
+  <text x="190" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">vector_db</text>
+  <text x="190" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">коллекция rag-chroma</text>
+
+  <rect x="324" y="514" width="220" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="434" y="552" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">BGE-M3</text>
+  <text x="434" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">эмбеддинги</text>
+  <text x="434" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">CUDA · RTX 5080</text>
+
+  <rect x="568" y="514" width="220" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="678" y="552" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">Gemini</text>
+  <text x="678" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">Google AI Studio</text>
+  <text x="678" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">генерация ответа</text>
+
+  <rect x="812" y="514" width="228" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="926" y="552" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">Файлы</text>
+  <text x="926" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">data/uploads · docs</text>
+  <text x="926" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">models.json</text>
+
+  <text x="56" y="694" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#8a9098">Docker: uvicorn 0.0.0.0:8000 · тома data, vector_db, huggingface_cache</text>
+</svg>

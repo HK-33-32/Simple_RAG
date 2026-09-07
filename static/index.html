@@ -1,0 +1,1554 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>НАМИ — база знаний</title>
+  <style>
+    :root {
+      --ink: #1c1e22;
+      --muted: #5d626b;
+      --quiet: #8a9098;
+      --paper: rgba(255, 255, 255, .22);
+      --surface: rgba(255, 255, 255, .16);
+      --surface-solid: #ffffff;
+      --line: rgba(255, 255, 255, .42);
+      --line-strong: rgba(28, 32, 40, .12);
+      --red: #e2231a;
+      --red-dark: #be1711;
+      --soft-red: rgba(226, 35, 26, .1);
+      --success: #18794e;
+      --orange: #f04a42;
+      --orange-deep: #e2231a;
+      --glass: rgba(255, 255, 255, .12);
+      --glass-strong: rgba(255, 255, 255, .22);
+      --shadow: 0 14px 36px rgba(28, 36, 50, .07), inset 0 1px 0 rgba(255,255,255,.55);
+      --radius-panel: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
+      --control-h: 36px;
+      --bar-h: 56px;
+      --header-h: 80px;
+      --history-w: 248px;
+      --library-w: 292px;
+      --viewer-w: 430px;
+      --mx: .5;
+      --my: .32;
+      --ease: cubic-bezier(.22, .9, .28, 1);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html, body { height: 100%; }
+    body { margin: 0; min-width: 320px; color: var(--ink); background: #ffffff; font-size: 16px; overflow: hidden; }
+    .scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: #ffffff; }
+    .scene-sky { position: absolute; inset: 0; background: #ffffff; }
+    .scene-car {
+      position: absolute; left: 50%; bottom: 4%;
+      width: min(42vw, calc(58vh * 1.755), 640px);
+      aspect-ratio: 1264 / 720;
+      height: auto;
+      transform: translateX(-50%); transform-origin: 50% 100%;
+      transition: transform .8s var(--ease), width .8s var(--ease), bottom .8s var(--ease);
+    }
+    .car-video, .car-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center center; transition: opacity .24s ease; }
+    .car-still { opacity: 1; mix-blend-mode: multiply; }
+    .car-video { opacity: 0; mix-blend-mode: multiply; }
+    .car-video.is-on { opacity: 1; }
+    .scene-car:has(.car-video.is-on) .car-still { opacity: 0; }
+    body.is-asking .scene-car { transform: translateX(-50%) scale(1.04); }
+    .car-lights { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+    .car-lights .headlight, .car-lights .indicator { opacity: 0; }
+    .car-lights .headlight { fill: #eef7ff; filter: url(#headlight-glow); }
+    .car-lights .indicator { fill: none; stroke: #ffbf46; stroke-width: 4; stroke-linecap: round; filter: url(#indicator-glow); }
+    body.is-asking .car-lights .headlight { opacity: .88; }
+    body.is-asking .car-lights .indicator { animation: signal 1.1s ease-in-out infinite; }
+    @keyframes signal { 0%, 42% { opacity: .95; } 55%, 100% { opacity: 0; } }
+    body.is-asking .car-video { opacity: 0 !important; }
+    body.is-asking .car-still { opacity: 1 !important; }
+    .scene-veil { display: none; }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .glass { position: relative; isolation: isolate; background: linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.07)); border: 1px solid rgba(255,255,255,.38); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(140%); -webkit-backdrop-filter: blur(12px) saturate(140%); }
+    .glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; background:
+      radial-gradient(720px 240px at calc(var(--mx) * 100%) calc(var(--my) * 100%), rgba(255,255,255,.22), transparent 42%),
+      linear-gradient(120deg, rgba(255,255,255,.16), transparent 32%, transparent 68%, rgba(255,255,255,.06));
+      mix-blend-mode: soft-light; opacity: .45; }
+    .glass > * { position: relative; z-index: 1; }
+    .topbar.glass { overflow: visible; }
+    .topbar.glass > .top-actions { position: static; }
+    .topbar { height: 56px; margin: 12px; display: flex; align-items: center; gap: 16px; padding: 0 16px; border-radius: var(--radius-panel); z-index: 30; transition: opacity .55s var(--ease), transform .55s var(--ease); }
+    .brand { display: inline-flex; align-items: center; gap: 16px; height: var(--control-h); }
+    .brand-mark { position: relative; display: inline-block; font-size: 24px; line-height: 1; font-weight: 860; letter-spacing: -.08em; transform: skew(-5deg); }
+    .brand-mark::after { content: ""; position: absolute; left: 1px; right: -1px; bottom: -6px; height: 3px; border-radius: 2px; background: var(--red); transform: skew(5deg); }
+    .product-name { padding-left: 16px; border-left: 1px solid var(--line); color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; line-height: var(--control-h); }
+    .top-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; height: var(--control-h); }
+    .panel-controls { display: flex; align-items: center; gap: 2px; height: var(--control-h); padding: 2px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.22); box-shadow: inset 0 1px 0 rgba(255,255,255,.56); }
+    .panel-toggle { width: 32px; height: 32px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: var(--muted); cursor: pointer; transition: color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease); }
+    .panel-toggle:hover { color: var(--ink); background: rgba(255,255,255,.42); }
+    .panel-toggle[aria-pressed="true"] { color: var(--ink); background: rgba(255,255,255,.62); box-shadow: 0 3px 10px rgba(35,44,61,.08), inset 0 1px 0 rgba(255,255,255,.7); }
+    .icon-button, .model-button, .primary-button, .ghost-button, .refresh-models, .dialog-close {
+      height: var(--control-h); min-height: var(--control-h); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); cursor: pointer; transition: border-color .2s var(--ease), background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+    }
+    .icon-button:hover, .model-button:hover, .ghost-button:hover, .refresh-models:hover { border-color: rgba(255,255,255,.9); background: rgba(255,255,255,.62); }
+    .icon-button { width: var(--control-h); display: none; align-items: center; justify-content: center; padding: 0; }
+    .model-wrap { position: relative; height: var(--control-h); }
+    .model-button { display: flex; align-items: center; gap: 8px; padding: 0 12px; max-width: 270px; font-size: 13px; font-weight: 650; }
+    .model-button svg { flex: none; }
+    .model-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .model-menu { position: absolute; right: 0; top: calc(100% + 10px); width: min(390px, calc(100vw - 32px)); max-height: calc(100dvh - 96px); overflow-y: auto; padding: 8px; border-radius: var(--radius-panel); z-index: 60; background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.90)); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); box-shadow: 0 18px 40px rgba(28, 36, 50, .16), inset 0 1px 0 rgba(255,255,255,.9); }
+    .model-menu.glass { background: linear-gradient(180deg, rgba(255,255,255,.985), rgba(255,255,255,.975)); }
+    .model-menu.glass::before { opacity: .1; }
+    .model-menu[hidden] { display: none; }
+    .menu-title { padding: 8px 12px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .menu-tools { display: grid; grid-template-columns: 1fr var(--control-h); gap: 8px; padding: 4px 4px 8px; align-items: center; }
+    .model-search { width: 100%; height: var(--control-h); padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: rgba(255,255,255,.94); outline: 0; font-size: 14px; }
+    .model-search:focus { border-color: rgba(20,25,32,.3); background: #fff; }
+    .refresh-models { width: var(--control-h); display: grid; place-items: center; padding: 0; }
+    .model-row { display: flex; align-items: stretch; gap: 0; }
+    .model-row .model-option { flex: 1; min-width: 0; }
+    .model-delete { flex: none; align-self: center; width: 32px; height: 32px; margin-right: 4px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: var(--quiet); cursor: pointer; opacity: .45; transition: opacity .15s, background .15s, color .15s; }
+    .model-row:hover .model-delete, .model-delete:focus-visible { opacity: 1; }
+    .model-delete:hover { color: var(--red); background: rgba(226,35,26,.08); }
+    .model-delete svg { width: 16px; height: 16px; display: block; }
+    .model-option { width: 100%; display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 10px 12px; border: 0; border-radius: var(--radius-md); background: transparent; text-align: left; cursor: pointer; }
+    .model-option:hover { background: rgba(28, 32, 40, .05); }
+    .model-option[aria-selected="true"] { background: var(--soft-red); }
+    .model-option.unavailable { opacity: .62; }
+    .radio { width: 16px; height: 16px; border: 1px solid var(--line-strong); border-radius: 50%; position: relative; }
+    .model-option[aria-selected="true"] .radio { border-color: var(--red); }
+    .model-option[aria-selected="true"] .radio::after { content: ""; position: absolute; inset: 3px; border-radius: inherit; background: var(--red); }
+    .model-name { display: block; min-width: 0; overflow-wrap: anywhere; white-space: normal; font-size: 14px; font-weight: 650; }
+    .model-meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .model-details { display: block; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 11px; font-weight: 500; }
+    .model-empty { padding: 18px 12px; color: var(--muted); font-size: 13px; line-height: 1.5; text-align: center; }
+    .connect-model { width: 100%; margin-top: 6px; height: var(--control-h); padding: 0 12px; border: 0; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius-md) var(--radius-md); background: transparent; color: var(--red); text-align: left; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .connect-model:hover { background: var(--soft-red); }
+    .dialog-layer { position: fixed; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(30,36,48,.28); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); z-index: 90; }
+    .dialog-layer[hidden] { display: none; }
+    .dialog { width: min(560px, 100%); max-height: min(760px, calc(100vh - 40px)); overflow: auto; border-radius: var(--radius-panel); background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.68)); backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%); }
+    .dialog-head { height: var(--bar-h); min-height: var(--bar-h); display: flex; align-items: center; gap: 12px; padding: 0 16px; border-bottom: 1px solid var(--line); }
+    .dialog-head h2 { margin: 0; flex: 1; font-size: 16px; font-weight: 700; }
+    .dialog-close { width: var(--control-h); display: grid; place-items: center; padding: 0; font-size: 22px; line-height: 1; background: transparent; }
+    .dialog-body { padding: 20px; }
+    .found-models { display: grid; gap: 6px; margin-bottom: 18px; }
+    .found-models:empty { display: none; }
+    .found-heading { margin: 0 0 3px; color: var(--muted); font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: .06em; }
+    .found-model { width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.7); text-align: left; font-size: 13px; cursor: pointer; }
+    .found-model:hover { border-color: var(--ink); }
+    .field { display: grid; gap: 7px; margin-bottom: 14px; }
+    .field label { font-size: 13px; font-weight: 700; }
+    .field input, .field select { width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: rgba(255,255,255,.78); color: var(--ink); font-size: 14px; }
+    .field input:focus, .field select:focus { border-color: var(--ink); outline: 0; }
+    .field-note { color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .form-row { display: grid; grid-template-columns: 1fr 145px; gap: 12px; }
+    .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 6px; }
+    .dialog-actions .primary-button { margin: 0; }
+    .workspace {
+      height: calc(100% - var(--header-h)); display: grid; align-items: stretch; justify-items: stretch;
+      grid-template-columns: var(--history-w) 12px var(--library-w) 12px minmax(280px, 1fr) 12px var(--viewer-w);
+      grid-template-areas: "history rh library rl chat rv viewer";
+      padding: 0 12px 12px; gap: 0; background: transparent; position: relative; z-index: 1; overflow: hidden;
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+    }
+    .history { grid-area: history; }
+    .resizer-history { grid-area: rh; }
+    .library { grid-area: library; }
+    .resizer-library { grid-area: rl; }
+    .chat-panel { grid-area: chat; container-type: inline-size; }
+    .resizer-viewer { grid-area: rv; }
+    .viewer { grid-area: viewer; }
+    .workspace.history-hidden .history, .workspace.library-hidden .library, .workspace.viewer-hidden .viewer { display: none; }
+    .workspace.history-hidden .resizer-history, .workspace.library-hidden .resizer-library, .workspace.viewer-hidden .resizer-viewer { display: none; }
+    .panel-resizer { position: relative; min-width: 12px; border: 0; padding: 0; background: transparent; cursor: col-resize; touch-action: none; user-select: none; z-index: 4; }
+    .panel-resizer::before { content: ""; position: absolute; top: 50%; left: 50%; width: 3px; height: 54px; border-radius: 3px; background: rgba(255,255,255,.62); box-shadow: 0 0 0 1px rgba(30,38,52,.08), 0 5px 16px rgba(30,38,52,.13); transform: translate(-50%,-50%); transition: height .2s var(--ease), background .2s var(--ease); }
+    .panel-resizer:hover::before, .panel-resizer:focus-visible::before, .panel-resizer.dragging::before { height: 82px; background: rgba(255,255,255,.92); }
+    .panel-resizer:focus-visible { outline-offset: -2px; }
+    body.resizing-panels { cursor: col-resize; user-select: none; }
+    body.resizing-panels iframe { pointer-events: none; }
+    .library, .history, .chat-panel, .viewer { min-width: 0; min-height: 0; max-width: 100%; border-radius: var(--radius-panel); overflow: hidden; display: flex; flex-direction: column; }
+    .workspace > .glass { backdrop-filter: blur(2px) saturate(130%); -webkit-backdrop-filter: blur(2px) saturate(130%); }
+    .chat-panel.glass { background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04)); }
+    .section-head, .chat-head, .viewer-head {
+      height: var(--bar-h); min-height: var(--bar-h); display: flex; align-items: center; gap: 10px;
+      margin: 0; padding: 0 16px; border-bottom: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.1); flex: none;
+    }
+    .section-title, .chat-head h1, .viewer-title { margin: 0; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 750; letter-spacing: .01em; line-height: 1; }
+    .chat-head h1 { font-size: 15px; }
+    .count { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .primary-button { margin-left: auto; padding: 0 14px; border-color: rgba(20,20,21,.82); background: rgba(20,20,21,.9); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 5px 14px rgba(0,0,0,.12); font-size: 13px; font-weight: 700; }
+    .primary-button:hover { background: var(--red); border-color: var(--red); }
+    .ghost-button { padding: 0 12px; font-size: 13px; font-weight: 650; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .chat-head .ghost-button, .viewer-actions { margin-left: auto; }
+    .drop-hint { margin: 8px 12px; padding: 10px; border: 1px dashed rgba(28,32,40,.18); border-radius: var(--radius-lg); color: var(--muted); font-size: 13px; text-align: center; }
+    .drop-hint.dragging { border-color: var(--red); color: var(--red); background: var(--soft-red); }
+    .panel-search-wrap { padding: 0 12px 8px; }
+    .panel-search { width: 100%; height: var(--control-h); padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: rgba(255,255,255,.28); outline: 0; font-size: 13px; }
+    .panel-search:focus { border-color: rgba(20,25,32,.3); background: rgba(255,255,255,.55); }
+    .file-list { flex: 1; min-height: 0; overflow-x: hidden; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; padding: 8px; isolation: isolate; }
+    .history .file-list { padding-top: 8px; gap: 0; background: transparent; }
+    .history.glass::before { content: none; display: none; }
+    .file-row, .chat-row { position: relative; width: 100%; min-width: 0; flex: none; display: flex; align-items: stretch; gap: 0; }
+    .file-row .file-item { flex: 1; min-width: 0; padding-right: 8px; }
+    .chat-row { background: transparent; }
+    .chat-row .chat-item {
+      flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: stretch; justify-content: center;
+      gap: 2px; padding: 10px 8px 10px 12px; overflow: hidden; min-height: 48px;
+      border: 0; border-radius: 0; background: transparent !important; box-shadow: none !important;
+      text-align: left; cursor: pointer; color: inherit;
+    }
+    .chat-row .chat-item.active { box-shadow: none !important; }
+    .chat-row .chat-item.active .file-name { color: var(--red); }
+    .chat-row .file-name, .chat-row .file-meta { width: 100%; max-width: 100%; position: static; }
+    .file-delete, .chat-delete { flex: none; align-self: center; width: 32px; height: 32px; margin-right: 6px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: var(--quiet); cursor: pointer; opacity: .45; transition: opacity .15s, background .15s, color .15s; }
+    .file-row:hover .file-delete, .chat-row:hover .chat-delete, .file-delete:focus-visible, .chat-delete:focus-visible { opacity: 1; }
+    .file-delete:hover, .chat-delete:hover { color: var(--red); background: rgba(226,35,26,.08); }
+    .file-delete svg, .chat-delete svg { width: 16px; height: 16px; display: block; }
+    .file-item { width: auto; max-width: 100%; display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid transparent; border-radius: var(--radius-lg); background: transparent; text-align: left; cursor: pointer; position: relative; overflow: hidden; min-height: 52px; }
+    .file-item:hover { background: rgba(255,255,255,.36); }
+    .file-item.active { border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.48); box-shadow: inset 3px 0 0 var(--red); }
+    .file-item:disabled { cursor: wait; }
+    .file-row.uploading .file-item { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.4); }
+    .file-row.uploading .file-delete { display: none; }
+    .file-row.uploading .file-meta { color: var(--orange-deep); }
+    .file-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(240, 74, 66, .16); pointer-events: none; }
+    .file-progress > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f6b16a, var(--orange) 52%, var(--orange-deep)); box-shadow: 0 0 10px rgba(240, 74, 66, .4); transition: width .12s linear; }
+    .file-icon { width: 36px; height: 36px; min-width: 36px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.58); font-size: 8px; font-weight: 800; letter-spacing: .03em; position: relative; overflow: hidden; }
+    .file-icon::after { content: ""; position: absolute; top: 0; right: 0; width: 8px; height: 8px; background: linear-gradient(45deg, transparent 49%, var(--line-strong) 51%); }
+    .file-icon.image { color: var(--success); }
+    .file-icon.pdf { color: var(--red); }
+    .file-icon.chat { color: var(--muted); }
+    .file-icon.chat::after { display: none; }
+    .file-icon.chat svg { width: 16px; height: 16px; display: block; }
+    .file-copy { min-width: 0; overflow: hidden; }
+    .file-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 650; }
+    .file-meta { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .empty-list { padding: 28px 12px; color: var(--muted); font-size: 14px; text-align: center; }
+    .chat { flex: 1; min-height: 0; overflow-y: auto; padding: 24px clamp(20px, 5vw, 64px); scroll-behavior: smooth; }
+    .message { width: min(720px, 100%); margin: 0 auto 24px; animation: enter .28s var(--ease); }
+    @keyframes enter { from { opacity: 0; transform: translateY(8px) scale(.985); } }
+    .message.user { display: flex; justify-content: flex-end; }
+    .bubble { max-width: 82%; padding: 12px 16px; background: rgba(255,255,255,.28); border: 1px solid rgba(255,255,255,.42); border-radius: var(--radius-lg) var(--radius-lg) 6px var(--radius-lg); box-shadow: 0 8px 22px rgba(40,48,62,.05), inset 0 1px 0 rgba(255,255,255,.5); backdrop-filter: blur(10px) saturate(140%); -webkit-backdrop-filter: blur(10px) saturate(140%); font-size: 15px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .message.assistant .bubble { max-width: 100%; border-radius: 6px var(--radius-lg) var(--radius-lg) var(--radius-lg); font-size: 16px; }
+    .message-label { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; color: var(--muted); font-size: 11px; font-weight: 750; text-transform: uppercase; letter-spacing: .06em; }
+    .message-label::before { content: ""; width: 16px; height: 3px; border-radius: 2px; background: var(--red); }
+    .sources { margin-top: 16px; display: grid; gap: 8px; }
+    .source-card { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid rgba(255,255,255,.4); border-radius: var(--radius-lg); background: rgba(255,255,255,.22); backdrop-filter: blur(10px); text-align: left; cursor: pointer; transition: border-color .2s var(--ease), background .2s var(--ease); }
+    .source-card:is(:hover, :focus-visible) { border-color: rgba(28,32,40,.25); background: rgba(255,255,255,.95); }
+    .source-card :is(.source-title, .source-snippet, .source-score) { transition: color .2s var(--ease); }
+    .source-card:is(:hover, :focus-visible) .source-title { color: #15171b; }
+    .source-card:is(:hover, :focus-visible) .source-snippet { color: #242830; }
+    .source-card:is(:hover, :focus-visible) .source-score { color: #383e48; }
+    .source-copy { min-width: 0; }
+    .source-title { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 650; }
+    .source-snippet { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .source-score { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 12px; padding-top: 2px; }
+    .cite { display: inline; margin: 0 1px; padding: 0 5px; border: 0; border-radius: 8px; background: rgba(240, 74, 66, .12); color: var(--orange-deep); font: inherit; font-size: .84em; font-weight: 750; cursor: pointer; }
+    .cite:hover { background: rgba(240, 74, 66, .22); }
+    .typing { display: flex; gap: 5px; padding: 6px 0; }
+    .typing i { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: pulse 1s infinite; }
+    .typing i:nth-child(2) { animation-delay: .15s; }
+    .typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes pulse { 0%, 70%, 100% { opacity: .25; } 35% { opacity: 1; } }
+    .composer-wrap { padding: 12px clamp(16px, 4vw, 48px) 16px; border-top: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.03); }
+    .composer { width: min(820px, 100%); height: 52px; min-height: 52px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px; border-radius: 18px; background: linear-gradient(180deg, rgba(255,255,255,.32), rgba(255,255,255,.14)); }
+    .composer:focus-within { border-color: rgba(28,32,40,.28); }
+    .composer input { flex: 1; min-width: 0; height: 36px; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 15px; }
+    .composer input::placeholder { color: var(--quiet); }
+    @container (max-width: 440px) {
+      .chat { padding: 20px 16px; }
+      .composer-wrap { padding: 12px; }
+      .bubble { max-width: 94%; }
+      .source-card { padding: 10px; gap: 8px; }
+    }
+    .send-button { width: var(--control-h); height: var(--control-h); display: grid; place-items: center; flex: none; border: 0; border-radius: var(--radius-md); background: linear-gradient(145deg,#f04a42,#d7160e); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 16px rgba(226,35,26,.25); color: #fff; cursor: pointer; }
+    .send-button:hover { background: var(--red-dark); }
+    .send-button:disabled { opacity: .45; cursor: wait; }
+    .viewer-actions { display: flex; align-items: center; gap: 8px; }
+    .viewer-zoom { display: flex; align-items: center; gap: 2px; }
+    .viewer-zoom .ghost-button { width: 32px; min-width: 32px; padding: 0; font-size: 18px; line-height: 1; }
+    .viewer-zoom-value { width: auto !important; min-width: 52px !important; padding: 0 8px !important; font-size: 12px !important; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .viewer-body { flex: 1; min-height: 0; overflow: auto; background: rgba(255,255,255,.08); }
+    .viewer-stack { height: 100%; display: flex; flex-direction: column; min-height: 0; }
+    .viewer-stack .pdf-frame, .viewer-stack .pdf-viewer, .viewer-stack .doc-text, .viewer-stack .image-stage { flex: 1; min-height: 0; }
+    .evidence-banner { flex: none; margin: 12px 12px 0; padding: 10px 14px; border-left: 3px solid var(--orange-deep); border-radius: 0 var(--radius-md) var(--radius-md) 0; background: rgba(255,255,255,.72); box-shadow: inset 0 1px 0 rgba(255,255,255,.8); color: var(--ink); font-size: 13px; line-height: 1.5; }
+    .evidence-banner { transition: background .2s var(--ease), color .2s var(--ease); }
+    .evidence-banner:hover { background: rgba(255,255,255,.96); color: #15171b; }
+    .viewer-empty { height: 100%; display: grid; place-items: center; padding: 32px; color: var(--muted); text-align: center; font-size: 14px; }
+    .viewer-empty svg { display: block; margin: 0 auto 14px; color: var(--line-strong); }
+    .doc-text { min-height: 100%; margin: 0; padding: 24px; overflow: auto; color: #282826; background: #fff; font: 14px/1.7 "Segoe UI", Arial, sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .doc-text mark { background: #ffe1df; color: inherit; }
+    .image-stage { min-height: 100%; display: grid; place-items: center; padding: 24px; overflow: auto; }
+    .image-stage.is-zoomed { place-items: start; }
+    .image-stage img { display: block; max-width: 100%; max-height: calc(100vh - 185px); object-fit: contain; box-shadow: 0 8px 32px rgba(0,0,0,.14); }
+    .image-stage.is-zoomed img { max-width: none; max-height: none; height: auto; }
+    .pdf-frame { width: 100%; height: 100%; min-height: 500px; border: 0; background: #fff; }
+    .pdf-viewer { height: 100%; min-height: 0; display: flex; flex-direction: column; background: #ececef; }
+    .pdf-toolbar { flex: none; height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px; border-bottom: 1px solid var(--line-strong); background: rgba(255,255,255,.94); }
+    .pdf-toolbar .ghost-button { width: 36px; padding: 0; font-size: 20px; line-height: 1; }
+    .pdf-page-label { min-width: 92px; text-align: center; color: var(--muted); font-size: 12px; font-weight: 650; font-variant-numeric: tabular-nums; }
+    .pdf-stage { flex: 1; min-height: 0; overflow: auto; background: #d8dbe0; }
+    .pdf-stage canvas { display: block; margin: 0 auto; background: #fff; box-shadow: 0 2px 16px rgba(20,24,32,.12); }
+    .viewer-close { display: inline-flex; }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 12px); max-width: calc(100vw - 32px); padding: 12px 16px; border-radius: var(--radius-lg); background: rgba(22, 24, 28, .78); color: #fff; box-shadow: 0 18px 40px rgba(20,24,32,.28); font-size: 13px; opacity: 0; pointer-events: none; transition: opacity .22s var(--ease), transform .22s var(--ease); z-index: 100; backdrop-filter: blur(18px); }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .scrim { display: none; }
+    .idle-hint { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 8; margin: 0; color: var(--quiet); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; opacity: 0; pointer-events: none; transition: opacity .6s var(--ease); }
+    .idle-exit { position: fixed; inset: 0; border: 0; background: transparent; z-index: 80; cursor: pointer; }
+    body.is-idle .topbar, body.is-idle .workspace { opacity: 0; pointer-events: none; }
+    body.is-idle .topbar { transform: translateY(-18px); }
+    body.is-idle .workspace { transform: translateY(14px); }
+    body.is-idle .toast { opacity: 0 !important; }
+    body.is-idle .dialog-layer, body.is-idle .scrim { opacity: 0; pointer-events: none; }
+    body.is-idle .idle-hint { opacity: .55; }
+    body.is-idle .scene-car { width: min(56vw, calc(72vh * 1.755), 860px); bottom: 10%; }
+    body.is-idle.is-asking .scene-car { transform: translateX(-50%) scale(1.05); }
+    svg { width: 18px; height: 18px; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: rgba(90, 96, 108, .28); border-radius: 99px; }
+    @media (max-width: 1180px) {
+      .topbar { z-index: 70; }
+      .workspace { display: block; grid-template-columns: none !important; grid-template-areas: none !important; overflow: visible; z-index: auto; }
+      .history, .library, .chat-panel, .viewer, .panel-resizer { grid-area: auto; }
+      .panel-resizer { display: none !important; }
+      .history, .library { position: fixed; top: var(--header-h); left: 12px; bottom: 12px; width: min(320px, calc(100vw - 24px)); box-shadow: var(--shadow); z-index: 50; transform: translateX(calc(-100% - 24px)); transition: transform .35s var(--ease); display: flex; border-radius: var(--radius-panel); background-color: rgba(255,255,255,.84); }
+      .history.open { transform: translateX(0); z-index: 52; }
+      .library.open { transform: translateX(0); z-index: 53; }
+      .workspace.history-hidden .history, .workspace.library-hidden .library { display: flex; }
+      .viewer { position: fixed; top: var(--header-h); right: 12px; bottom: 12px; width: min(520px, 92vw); box-shadow: var(--shadow); z-index: 50; transform: translateX(calc(100% + 24px)); transition: transform .35s var(--ease); display: flex; border-radius: var(--radius-panel); }
+      .viewer.open { transform: translateX(0); z-index: 54; }
+      .viewer { background-color: rgba(255,255,255,.84); }
+      .workspace.viewer-hidden .viewer { display: flex; }
+      .viewer-close { display: inline-flex; }
+      .chat-panel { height: 100%; min-width: 0; position: relative; z-index: 1; }
+      .scrim { position: fixed; inset: var(--header-h) 0 0; background: rgba(16, 16, 16, .28); z-index: 45; }
+      .scrim.open { display: block; }
+    }
+    @media (max-width: 760px) {
+      .topbar { padding: 0 10px; gap: 6px; }
+      .top-actions, .model-wrap, .model-button { min-width: 0; }
+      .top-actions { flex: 1; justify-content: flex-end; }
+      .model-button { width: 100%; }
+      .icon-button, .brand { flex: none; }
+      .brand-mark { font-size: 20px; }
+      .brand { min-width: 0; gap: 12px; }
+      .product-name { display: none; }
+      .icon-button { display: inline-flex; }
+      .model-button { max-width: 185px; padding: 0 10px; }
+      .model-wrap { position: static; }
+      .panel-controls { display: none; }
+      .model-menu { position: absolute; top: calc(100% + 10px); left: 0; right: 0; width: auto; max-height: calc(100dvh - 96px); }
+      .form-row { grid-template-columns: minmax(0,1fr); }
+      .scene-car { width: min(92vw, calc(52vh * 1.755)); }
+      body.is-idle .scene-car { width: min(96vw, calc(72vh * 1.755)); }
+      .chat-panel { height: 100%; }
+      .chat { padding: 22px 18px; }
+      .composer-wrap { padding: 10px; }
+      .message.user .bubble { max-width: 90%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+      .car-video { display: none !important; }
+      .car-still { opacity: 1 !important; }
+      body.is-asking .car-lights .indicator { opacity: .8; }
+    }
+    @supports (height: 100dvh) { html, body { height: 100dvh; } }
+  </style>
+</head>
+<body>
+  <div class="scene" id="scene" aria-hidden="true">
+    <div class="scene-sky"></div>
+    <div class="scene-car">
+      <img class="car-still" id="car-still" src="/assets/aurus-senat-turn.jpg" width="1264" height="720" alt="">
+      <video class="car-video" id="car-idle" muted loop playsinline preload="metadata" poster="/assets/aurus-senat-turn.jpg" src="/assets/aurus-senat-safe-turn.mp4" tabindex="-1"></video>
+      <!-- Coordinates are in the actual 1264×720 poster plane. The optical
+           centres and indicator strips scale with that same plane. -->
+      <svg class="car-lights" viewBox="0 0 1264 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <filter id="headlight-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="indicator-glow" x="-40%" y="-150%" width="180%" height="400%"><feGaussianBlur stdDeviation="2"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <ellipse class="headlight" cx="181" cy="333" rx="6" ry="9"/>
+        <ellipse class="headlight" cx="603" cy="322" rx="11" ry="12"/>
+        <path class="indicator" d="M177 312 L210 316"/>
+        <path class="indicator" d="M500 311 L550 308 L569 303"/>
+        <path class="indicator" d="M890 227 Q923 222 948 227"/>
+      </svg>
+    </div>
+    <div class="scene-veil"></div>
+  </div>
+  <header class="topbar glass">
+    <button class="icon-button" id="history-toggle" type="button" aria-label="Открыть историю чатов"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5h14v12H8l-3 3z"/><path d="M9 9h6M9 13h4"/></svg></button>
+    <button class="icon-button" id="library-toggle" type="button" aria-label="Открыть документы"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16M8 7h8M8 11h8"/></svg></button>
+    <button class="icon-button" id="idle-toggle-mobile" type="button" aria-label="Режим ожидания" aria-pressed="false" title="Режим ожидания"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><circle cx="12" cy="12" r="2.4"/></svg></button>
+    <div class="brand"><span class="brand-mark">НАМИ</span></div>
+    <div class="top-actions">
+      <div class="panel-controls" aria-label="Панели интерфейса">
+        <button class="panel-toggle" id="history-visibility" type="button" aria-label="Показать или скрыть историю чатов" aria-pressed="true" title="История"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5h14v12H8l-3 3z"/><path d="M9 9h6M9 13h4"/></svg></button>
+        <button class="panel-toggle" id="library-visibility" type="button" aria-label="Показать или скрыть документы" aria-pressed="true" title="Документы"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M5.8 8h.4M5.8 12h.4M5.8 16h.4"/></svg></button>
+        <button class="panel-toggle" id="viewer-visibility" type="button" aria-label="Показать или скрыть просмотр документа" aria-pressed="true" title="Просмотр"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16M7 9h4M7 13h4"/></svg></button>
+        <button class="panel-toggle" id="idle-toggle" type="button" aria-label="Режим ожидания" aria-pressed="false" title="Режим ожидания"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><circle cx="12" cy="12" r="2.4"/></svg></button>
+      </div>
+      <div class="model-wrap">
+        <button class="model-button" id="model-button" type="button" aria-haspopup="dialog" aria-controls="model-menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
+          <span class="model-label" id="model-label">Модель</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+        </button>
+        <div class="model-menu glass" id="model-menu" role="dialog" aria-label="Выбор модели" hidden><div class="menu-title">Установленные модели</div><div class="menu-tools"><input class="model-search" id="model-search" placeholder="Найти модель" aria-label="Найти модель"><button class="refresh-models" id="refresh-models" type="button" aria-label="Обновить список"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 9a7 7 0 0 1 11.5-2L20 12M4 12l2.4 5a7 7 0 0 0 11.5-2"/></svg></button></div><div id="model-list" role="listbox" aria-label="Головная модель"></div><button class="connect-model" id="connect-model-button" type="button">Подключить API…</button></div>
+      </div>
+    </div>
+  </header>
+  <main class="workspace">
+    <aside class="history glass" id="history" aria-label="История чатов">
+      <div class="section-head"><h2 class="section-title">История</h2><span class="count" id="chat-count">0</span><button class="primary-button" id="new-chat-button" type="button">Новый</button></div>
+      <div class="file-list" id="chat-list"></div>
+    </aside>
+    <button class="panel-resizer resizer-history" id="history-resizer" type="button" role="separator" aria-label="Изменить ширину истории чатов" aria-orientation="vertical" aria-valuemin="200" aria-valuemax="420" aria-valuenow="248"></button>
+    <aside class="library glass" id="library" aria-label="Документы">
+      <div class="section-head"><h2 class="section-title">Документы</h2><span class="count" id="file-count">0</span><button class="primary-button" id="upload-button" type="button">Добавить</button><input id="file-input" type="file" accept=".md,.txt,.pdf,.png,.jpg,.jpeg,.webp,.bmp" multiple hidden></div>
+      <div class="panel-search-wrap"><input class="panel-search" id="file-search" type="search" placeholder="Поиск документов" aria-label="Поиск документов" autocomplete="off"></div>
+      <div class="drop-hint" id="drop-hint">Перетащите файлы сюда</div>
+      <div class="file-list" id="file-list"></div>
+    </aside>
+    <button class="panel-resizer resizer-library" id="library-resizer" type="button" role="separator" aria-label="Изменить ширину панели документов" aria-orientation="vertical" aria-valuemin="230" aria-valuemax="520" aria-valuenow="292"></button>
+    <section class="chat-panel glass" aria-label="Диалог">
+      <div class="chat-head"><h1 id="chat-title">Ассистент</h1><button class="ghost-button" id="chat-new" type="button">Новый чат</button></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="composer-wrap"><form class="composer glass" id="question-form"><input id="question" autocomplete="off" aria-label="Вопрос" placeholder="Введите вопрос" required><button class="send-button" id="send-button" type="submit" aria-label="Отправить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 14-7-4 14-3-6z"/><path d="m12 13 7-8"/></svg></button></form></div>
+    </section>
+    <button class="panel-resizer resizer-viewer" id="viewer-resizer" type="button" role="separator" aria-label="Изменить ширину просмотра документа" aria-orientation="vertical" aria-valuemin="320" aria-valuemax="760" aria-valuenow="430"></button>
+    <section class="viewer glass" id="viewer" aria-label="Просмотр файла">
+      <div class="viewer-head"><div class="viewer-title" id="viewer-title">Просмотр</div><div class="viewer-actions"><div class="viewer-zoom" id="viewer-zoom" hidden><button class="ghost-button" id="viewer-zoom-out" type="button" aria-label="Уменьшить">−</button><button class="ghost-button viewer-zoom-value" id="viewer-zoom-reset" type="button" title="По ширине">100%</button><button class="ghost-button" id="viewer-zoom-in" type="button" aria-label="Увеличить">+</button></div><a class="ghost-button" id="download-link" href="#" target="_blank" rel="noopener" hidden>Открыть</a><button class="ghost-button viewer-close" id="viewer-close" type="button">Закрыть</button></div></div>
+      <div class="viewer-body" id="viewer-body"><div class="viewer-empty"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></svg>Выберите документ или изображение</div></div></div>
+    </section>
+  </main>
+  <div class="scrim" id="scrim"></div>
+  <button class="idle-exit" id="idle-exit" type="button" aria-label="Вернуться к работе" hidden></button>
+  <p class="idle-hint" id="idle-hint">Нажмите, чтобы продолжить</p>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="dialog-layer" id="model-dialog" hidden>
+    <section class="dialog glass" role="dialog" aria-modal="true" aria-labelledby="model-dialog-title">
+      <div class="dialog-head"><h2 id="model-dialog-title">Подключить модель</h2><button class="dialog-close" id="model-dialog-close" type="button" aria-label="Закрыть">×</button></div>
+      <div class="dialog-body">
+        <div class="found-models" id="found-models"></div>
+        <form id="connect-model-form">
+          <div class="field"><label for="provider">Подключение</label><select id="provider"><option value="google">Google AI Studio</option><option value="huggingface">Модель в папке</option><option value="ollama">Ollama</option><option value="lm_studio">LM Studio</option><option value="openai_compatible">Другой API</option></select></div>
+          <div id="local-fields" hidden>
+            <div class="form-row">
+              <div class="field"><label for="local-model-path">Папка модели</label><input id="local-model-path" placeholder="C:\models\my-model" autocomplete="off"></div>
+              <div class="field"><label for="model-device">Устройство</label><select id="model-device"><option value="auto">Авто</option><option value="cpu">CPU</option><option value="cuda">CUDA</option></select></div>
+            </div>
+            <div class="field-note">Поддерживаются модели Transformers с файлом config.json.</div>
+          </div>
+          <div id="api-fields">
+            <div class="field" id="api-base-url-field" hidden><label for="api-base-url">Адрес API</label><input id="api-base-url" placeholder="http://127.0.0.1:1234/v1" autocomplete="url"></div>
+            <div class="field"><label for="api-model-name">Имя модели</label><input id="api-model-name" placeholder="gemini-3.6-flash" autocomplete="off"></div>
+            <div class="field"><label for="api-key">API-ключ</label><input id="api-key" type="password" placeholder="Ключ Google AI Studio" autocomplete="off"><span class="field-note">Ключ хранится только на этом компьютере, в исходный код не попадает.</span></div>
+          </div>
+          <div class="dialog-actions"><button class="ghost-button" id="model-dialog-cancel" type="button">Отмена</button><button class="primary-button" id="connect-submit" type="submit">Подключить</button></div>
+        </form>
+      </div>
+    </section>
+  </div>
+  <div class="dialog-layer" id="delete-dialog" hidden>
+    <section class="dialog glass" style="width:min(420px,100%)" role="alertdialog" aria-modal="true" aria-labelledby="delete-dialog-title" aria-describedby="delete-dialog-text">
+      <div class="dialog-head"><h2 id="delete-dialog-title">Удалить документ?</h2><button class="dialog-close" id="delete-dialog-close" type="button" aria-label="Закрыть">×</button></div>
+      <div class="dialog-body"><p id="delete-dialog-text" style="margin:0 0 20px;line-height:1.55"></p><div class="dialog-actions"><button class="ghost-button" id="delete-cancel" type="button">Отмена</button><button class="primary-button" id="delete-confirm" type="button" style="background:var(--red);border-color:var(--red)">Удалить</button></div></div>
+    </section>
+  </div>
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const state = { files: [], uploads: [], chats: [], activeChatId: null, activeFile: null, pendingDelete: null, models: [], activeModel: null, modelQuery: "", fileQuery: "", busy: false };
+    const imageTypes = new Set(["png", "jpg", "jpeg", "webp", "bmp"]);
+    let activeRequest = null;
+    let fileRequest = 0;
+    let fileAbort = null;
+    let pdfjsReady = null;
+    let pdfViewer = { doc: null, url: "", page: 1, pages: 1, renderTask: null, observer: null };
+    const VIEWER_ZOOM_MIN = 0.5;
+    const VIEWER_ZOOM_MAX = 4;
+    let viewerZoom = 1;
+    let viewerKind = "";
+    let modelRevision = 0;
+    let changingModel = false;
+    let dialogReturnFocus = null;
+    const evidenceStore = new Map();
+    let evidenceSeq = 0;
+    const PANEL_MIN = { history: 200, library: 230, viewer: 320 };
+    const PANEL_MAX = { history: 420, library: 520, viewer: 760 };
+    const layoutStorageKey = "nami-rag-layout-v2";
+    const chatsStorageKey = "nami-rag-chats-v1";
+    const layoutDefaults = { historyWidth: 248, libraryWidth: 292, viewerWidth: 430, historyVisible: true, libraryVisible: true, viewerVisible: true };
+    const welcomeHtml = '<article class="message assistant"><div class="message-label">НАМИ</div><div class="bubble">Задайте вопрос по документам.</div></article>';
+    const chatIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5h14v12H8l-3 3z"/><path d="M9 9h6M9 13h4"/></svg>';
+    const trashSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg>';
+    let storedLayout = {};
+    try { storedLayout = JSON.parse(localStorage.getItem(layoutStorageKey) || "{}"); } catch (_) {}
+    if (!storedLayout || typeof storedLayout !== "object" || Array.isArray(storedLayout)) storedLayout = {};
+    if (!Object.keys(storedLayout).length) {
+      try { storedLayout = JSON.parse(localStorage.getItem("nami-rag-layout-v1") || "{}"); } catch (_) {}
+    }
+    const layout = { ...layoutDefaults, ...storedLayout };
+    // Remember requested widths separately from the widths fitted to this viewport.
+    const preferredWidths = Object.fromEntries(["history", "library", "viewer"].map((panel) => [`${panel}Width`, layout[`${panel}Width`]]));
+    for (const panel of ["history", "library", "viewer"]) {
+      if (typeof layout[`${panel}Visible`] !== "boolean") layout[`${panel}Visible`] = true;
+    }
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+    function panelWidthLimit(panel) {
+      const others = ["history", "library", "viewer"].filter((name) => name !== panel && layout[`${name}Visible`]);
+      const otherWidth = others.reduce((sum, name) => sum + layout[`${name}Width`] + 12, 0);
+      return Math.max(PANEL_MIN[panel], Math.min(PANEL_MAX[panel], window.innerWidth - 24 - 12 - otherWidth - 280));
+    }
+    function saveLayout() {
+      try { localStorage.setItem(layoutStorageKey, JSON.stringify({ ...layout, ...preferredWidths })); } catch (_) {}
+    }
+    function applyLayout(persist = false) {
+      const desktop = window.innerWidth > 1180;
+      ["history", "library", "viewer"].forEach((panel) => {
+        const key = `${panel}Width`;
+        preferredWidths[key] = clamp(Number(preferredWidths[key]) || layoutDefaults[key], PANEL_MIN[panel], PANEL_MAX[panel]);
+        layout[key] = preferredWidths[key];
+      });
+      if (desktop) {
+        const visible = ["history", "library", "viewer"].filter((panel) => layout[`${panel}Visible`]);
+        const chatMin = 280;
+        const available = window.innerWidth - 24 - visible.length * 12;
+        let side = visible.reduce((sum, panel) => sum + layout[`${panel}Width`], 0);
+        const maxSide = Math.max(0, available - chatMin);
+        if (side > maxSide && side > 0) {
+          visible.forEach((panel) => {
+            layout[`${panel}Width`] = Math.max(PANEL_MIN[panel], Math.floor(layout[`${panel}Width`] * (maxSide / side)));
+          });
+          side = visible.reduce((sum, panel) => sum + layout[`${panel}Width`], 0);
+          let extra = side - maxSide;
+          const order = [...visible].sort((a, b) => layout[`${b}Width`] - layout[`${a}Width`]);
+          for (const panel of order) {
+            if (extra <= 0) break;
+            const take = Math.min(extra, layout[`${panel}Width`] - PANEL_MIN[panel]);
+            layout[`${panel}Width`] -= take;
+            extra -= take;
+          }
+        }
+      }
+      document.documentElement.style.setProperty("--history-w", `${layout.historyWidth}px`);
+      document.documentElement.style.setProperty("--library-w", `${layout.libraryWidth}px`);
+      document.documentElement.style.setProperty("--viewer-w", `${layout.viewerWidth}px`);
+      const workspace = $(".workspace");
+      workspace.classList.toggle("history-hidden", !layout.historyVisible);
+      workspace.classList.toggle("library-hidden", !layout.libraryVisible);
+      workspace.classList.toggle("viewer-hidden", !layout.viewerVisible);
+      if (desktop) {
+        const cols = [];
+        const areas = [];
+        if (layout.historyVisible) { cols.push("var(--history-w)", "12px"); areas.push("history", "rh"); }
+        if (layout.libraryVisible) { cols.push("var(--library-w)", "12px"); areas.push("library", "rl"); }
+        cols.push("minmax(280px, 1fr)");
+        areas.push("chat");
+        if (layout.viewerVisible) { cols.push("12px", "var(--viewer-w)"); areas.push("rv", "viewer"); }
+        workspace.style.gridTemplateColumns = cols.join(" ");
+        workspace.style.gridTemplateAreas = `"${areas.join(" ")}"`;
+        ["history", "library", "viewer"].forEach((name) => $(`#${name}`).classList.remove("open"));
+        $("#scrim").classList.remove("open");
+      } else {
+        workspace.style.gridTemplateColumns = "";
+        workspace.style.gridTemplateAreas = "";
+      }
+      const titles = {
+        history: ["Скрыть историю", "Показать историю"],
+        library: ["Скрыть документы", "Показать документы"],
+        viewer: ["Скрыть просмотр", "Показать просмотр"],
+      };
+      ["history", "library", "viewer"].forEach((panel) => {
+        const button = $(`#${panel}-visibility`);
+        const visible = desktop ? layout[`${panel}Visible`] : $(`#${panel}`).classList.contains("open");
+        button.setAttribute("aria-pressed", String(visible));
+        button.title = visible ? titles[panel][0] : titles[panel][1];
+        button.setAttribute("aria-controls", panel);
+        $(`#${panel}`).inert = !visible;
+        const mobileButton = $(`#${panel}-toggle`);
+        if (mobileButton) { mobileButton.setAttribute("aria-expanded", String(visible)); mobileButton.setAttribute("aria-controls", panel); }
+        $(`#${panel}-resizer`).setAttribute("aria-valuenow", String(Math.round(layout[`${panel}Width`])));
+        $(`#${panel}-resizer`).setAttribute("aria-valuemax", String(panelWidthLimit(panel)));
+      });
+      const drawerOpen = !desktop && ["history", "library", "viewer"].some((panel) => $(`#${panel}`).classList.contains("open"));
+      $(".chat-panel").inert = drawerOpen;
+      if (persist) saveLayout();
+    }
+    function isMobileLayout() { return window.innerWidth <= 1180; }
+    function setPanelVisibility(panel, visible) {
+      if (panel !== "history" && panel !== "library" && panel !== "viewer") return;
+      if (visible) toggleModelMenu(false);
+      const el = $(`#${panel}`);
+      if (isMobileLayout()) {
+        ["history", "library", "viewer"].forEach((name) => {
+          if (name !== panel) $(`#${name}`).classList.remove("open");
+        });
+        if (visible) {
+          el.classList.add("open");
+          $("#scrim").classList.add("open");
+        } else {
+          el.classList.remove("open");
+          $("#scrim").classList.remove("open");
+        }
+      } else {
+        layout[`${panel}Visible`] = visible;
+        el.classList.remove("open");
+        $("#scrim").classList.remove("open");
+      }
+      applyLayout(true);
+      if (isMobileLayout() && visible) $(`#${panel}`).querySelector("button, input, a[href]")?.focus();
+      if (!visible) (isMobileLayout() && window.innerWidth <= 760 ? ($(`#${panel}-toggle`) || $("#question")) : $(`#${panel}-visibility`))?.focus();
+    }
+    function bindResizer(selector, panel) {
+      const handle = $(selector);
+      const widthKey = `${panel}Width`;
+      const min = PANEL_MIN[panel];
+      const direction = panel === "viewer" ? -1 : 1;
+      handle.addEventListener("pointerdown", (event) => {
+        if (window.innerWidth <= 1180 || event.button !== 0) return;
+        event.preventDefault();
+        handle.setPointerCapture(event.pointerId);
+        const startX = event.clientX;
+        const startWidth = layout[widthKey];
+        handle.classList.add("dragging");
+        document.body.classList.add("resizing-panels");
+        const move = (moveEvent) => {
+          preferredWidths[widthKey] = clamp(startWidth + (moveEvent.clientX - startX) * direction, min, panelWidthLimit(panel));
+          applyLayout();
+        };
+        const stop = () => {
+          handle.classList.remove("dragging");
+          document.body.classList.remove("resizing-panels");
+          window.removeEventListener("pointermove", move);
+          window.removeEventListener("pointerup", stop);
+          window.removeEventListener("pointercancel", stop);
+          handle.removeEventListener("lostpointercapture", stop);
+          window.removeEventListener("blur", stop);
+          saveLayout();
+        };
+        window.addEventListener("pointermove", move);
+        window.addEventListener("pointerup", stop, { once: true });
+        window.addEventListener("pointercancel", stop, { once: true });
+        handle.addEventListener("lostpointercapture", stop, { once: true });
+        window.addEventListener("blur", stop, { once: true });
+      });
+      handle.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        const step = event.shiftKey ? 32 : 12;
+        const keyboardDirection = event.key === "ArrowRight" ? 1 : -1;
+        preferredWidths[widthKey] = clamp(layout[widthKey] + step * keyboardDirection * direction, min, panelWidthLimit(panel));
+        applyLayout(true);
+      });
+    }
+    const esc = (value = "") => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+    function formatSize(bytes) { if (!Number.isFinite(bytes)) return ""; if (bytes < 1024) return `${bytes} Б`; if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} КБ`; return `${(bytes / 1024 / 1024).toFixed(1)} МБ`; }
+    let toastTimer;
+    function showToast(message) { const toast = $("#toast"); toast.textContent = message; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 2600); }
+    function errorMessage(payload, status) {
+      const detail = payload && payload.detail;
+      if (typeof detail === "string") return detail;
+      if (Array.isArray(detail)) return detail.map((item) => item.msg || item).join("; ");
+      return `Ошибка ${status}`;
+    }
+    async function api(url, options = {}) {
+      let response;
+      try { response = await fetch(url, { ...options, signal: options.signal || AbortSignal.timeout(30000) }); }
+      catch (error) {
+        if (error.name === "AbortError") throw error;
+        throw new Error(error.name === "TimeoutError" ? "Сервер не ответил вовремя. Повторите запрос." : "Нет соединения с сервером. Проверьте, запущено ли приложение.");
+      }
+      let payload;
+      try { payload = await response.json(); } catch (_) { throw new Error("Сервер вернул некорректный ответ."); }
+      if (!response.ok) throw new Error(errorMessage(payload, response.status));
+      return payload;
+    }
+    async function refreshHealth() { try { state.health = await api("/api/health"); } catch (_) { state.health = null; } }
+    function fileKind(type) { if (imageTypes.has(type)) return "image"; return type === "pdf" ? "pdf" : "text"; }
+    function formatTime(ts) {
+      try { return new Date(ts).toLocaleString("ru", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
+      catch (_) { return ""; }
+    }
+    function indexStageLabel(index) {
+      if (!index) return "Индексация…";
+      if (index.stage === "embed" && index.total) return `Индексация ${index.current} / ${index.total}`;
+      if (index.stage === "model") return "Загрузка модели…";
+      if (index.stage === "parse") return "Чтение документа…";
+      if (index.stage === "split") return "Разбиение на фрагменты…";
+      return "Индексация…";
+    }
+    function applyIndexProgress(item, health) {
+      if (!health?.indexing) return;
+      const index = health.index || {};
+      if (index.filename && index.filename !== item.name) return;
+      item.indexLabel = indexStageLabel(index);
+      if (index.stage === "embed" && index.total > 0) item.progress = 0.15 + 0.85 * (index.current / index.total);
+      else if (index.stage === "split") item.progress = Math.max(item.progress || 0, 0.12);
+      else if (index.stage === "parse") item.progress = Math.max(item.progress || 0, 0.08);
+      else item.progress = Math.max(item.progress || 0, 0.05);
+      updateUploadRow(item);
+    }
+    function fileRowHtml(file, { uploading = false } = {}) {
+      const kind = fileKind(file.type);
+      const progress = Math.round((file.progress || 0) * 100);
+      const meta = uploading ? (file.error ? file.error : (file.indexLabel || (progress >= 100 ? "Индексация…" : `${progress}%`))) : formatSize(file.size);
+      const progressHtml = uploading ? `<span class="file-progress" aria-hidden="true"><span style="width:${progress}%"></span></span>` : "";
+      const openAttr = uploading ? "disabled" : `data-open-file="${esc(file.name)}"`;
+      const deleteBtn = uploading ? "" : `<button class="file-delete" type="button" data-delete-file="${esc(file.name)}" aria-label="Удалить ${esc(file.name)}">${trashSvg}</button>`;
+      return `<div class="file-row${uploading ? " uploading" : ""}"${uploading ? ` data-upload-id="${esc(file.id)}"` : ""}"><button class="file-item ${!uploading && state.activeFile === file.name ? "active" : ""}" type="button" ${openAttr}><span class="file-icon ${kind}">${esc((file.type || "").toUpperCase())}</span><span class="file-copy"><span class="file-name">${esc(file.name)}</span><span class="file-meta">${esc(meta)}</span></span>${progressHtml}</button>${deleteBtn}</div>`;
+    }
+    function renderFiles() {
+      $("#file-count").textContent = state.files.length;
+      const list = $("#file-list");
+      const query = state.fileQuery.trim().toLocaleLowerCase();
+      const uploadingNames = new Set(state.uploads.map((item) => item.name));
+      const ready = state.files.filter((file) => !uploadingNames.has(file.name));
+      const matches = (name) => !query || String(name || "").toLocaleLowerCase().includes(query);
+      const visibleUploads = state.uploads.filter((item) => matches(item.name));
+      const visibleReady = ready.filter((file) => matches(file.name));
+      if (!state.uploads.length && !ready.length) { list.innerHTML = '<div class="empty-list">Файлов пока нет</div>'; return; }
+      if (!visibleUploads.length && !visibleReady.length) { list.innerHTML = '<div class="empty-list">Ничего не найдено</div>'; return; }
+      list.innerHTML = [...visibleUploads.map((item) => fileRowHtml(item, { uploading: true })), ...visibleReady.map((file) => fileRowHtml(file))].join("");
+      list.querySelectorAll("[data-open-file]").forEach((button) => button.addEventListener("click", () => openFile(button.dataset.openFile)));
+      list.querySelectorAll("[data-delete-file]").forEach((button) => button.addEventListener("click", () => confirmDeleteFile(button.dataset.deleteFile)));
+    }
+    function updateUploadRow(item) {
+      const row = document.querySelector(`[data-upload-id="${item.id}"]`);
+      if (!row) return;
+      const bar = row.querySelector(".file-progress > span");
+      const meta = row.querySelector(".file-meta");
+      const progress = Math.max(0, Math.min(100, Math.round((item.progress || 0) * 100)));
+      if (bar) bar.style.width = `${progress}%`;
+      if (meta) meta.textContent = item.error ? item.error : (item.indexLabel || (progress >= 100 ? "Индексация…" : `${progress}%`));
+    }
+    async function loadFiles() { try { state.files = await api("/api/files"); renderFiles(); } catch (error) { showToast(error.message); } }
+    function confirmDeleteFile(name) {
+      state.pendingDelete = { type: "file", name };
+      $("#delete-dialog-title").textContent = "Удалить документ?";
+      $("#delete-dialog-text").textContent = name;
+      showDialog("#delete-dialog", "#delete-cancel");
+    }
+    function confirmDeleteChat(id) {
+      const target = chatId(id);
+      const chat = state.chats.find((item) => chatId(item.id) === target);
+      if (!chat) return;
+      state.pendingDelete = { type: "chat", id: target };
+      $("#delete-dialog-title").textContent = "Удалить чат?";
+      $("#delete-dialog-text").textContent = chat.title;
+      showDialog("#delete-dialog", "#delete-cancel");
+    }
+    function closeDeleteDialog() { if ($("#delete-confirm").disabled) return; state.pendingDelete = null; hideDialog("#delete-dialog"); }
+    function resetViewer() {
+      ++fileRequest;
+      fileAbort?.abort();
+      destroyPdfViewer();
+      state.activeFile = null;
+      viewerKind = "";
+      viewerZoom = 1;
+      $("#viewer-zoom").hidden = true;
+      $("#viewer-title").textContent = "Просмотр";
+      $("#download-link").hidden = true;
+      $("#viewer-body").innerHTML = '<div class="viewer-empty">Выберите документ или изображение</div>';
+    }
+    async function confirmPendingDelete() {
+      const pending = state.pendingDelete;
+      if (!pending) return;
+      if (pending.type === "chat") {
+        const id = pending.id;
+        closeDeleteDialog();
+        deleteChat(id);
+        return;
+      }
+      if (pending.type === "model") {
+        const id = pending.id;
+        const name = pending.name;
+        $("#delete-confirm").disabled = true;
+        try {
+          const data = await api(`/api/models?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+          state.models = data.models || [];
+          state.activeModel = data.active_model || null;
+          renderModels();
+          $("#delete-confirm").disabled = false;
+          closeDeleteDialog();
+          showToast(`${name} удалена`);
+        } catch (error) { showToast(error.message); }
+        finally { $("#delete-confirm").disabled = false; }
+        return;
+      }
+      const name = pending.name;
+      if (!name) return;
+      $("#delete-confirm").disabled = true;
+      try {
+        await api(`/api/file?name=${encodeURIComponent(name)}`, { method: "DELETE" });
+        if (state.activeFile === name) resetViewer();
+        $("#delete-confirm").disabled = false;
+        closeDeleteDialog();
+        await Promise.all([loadFiles(), refreshHealth()]);
+        showToast(`${name} удалён`);
+      } catch (error) { showToast(error.message); }
+      finally { $("#delete-confirm").disabled = false; }
+    }
+    function openDrawer(panel) { togglePanel(panel); }
+    function openViewerPanel() { setPanelVisibility("viewer", true); }
+    function closePanels() {
+      const focusedPanel = ["history", "library", "viewer"].find((panel) => $(`#${panel}`).classList.contains("open") && $(`#${panel}`).contains(document.activeElement));
+      if (isMobileLayout()) {
+        ["history", "library", "viewer"].forEach((panel) => $(`#${panel}`).classList.remove("open"));
+        $("#scrim").classList.remove("open");
+      }
+      applyLayout();
+      if (isMobileLayout() && focusedPanel) ($(`#${focusedPanel}-toggle`) || $("#question"))?.focus();
+    }
+    function locateFragment(text, fragment) {
+      const raw = String(fragment || "").trim();
+      if (!raw || !text) return null;
+      const tries = [raw, raw.slice(0, 180), raw.slice(0, 80)];
+      for (const needle of tries) {
+        if (!needle) continue;
+        let index = text.indexOf(needle);
+        if (index >= 0) return { start: index, end: index + needle.length };
+        index = text.toLocaleLowerCase().indexOf(needle.toLocaleLowerCase());
+        if (index >= 0) return { start: index, end: index + needle.length };
+      }
+      const compact = raw.slice(0, 160).trim().split(/\s+/).filter(Boolean).map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s+");
+      if (!compact) return null;
+      try {
+        const match = text.match(new RegExp(compact, "i"));
+        if (match && match.index != null) return { start: match.index, end: match.index + match[0].length };
+      } catch (_) {}
+      return null;
+    }
+    function highlightText(text, fragment) {
+      const found = locateFragment(text, fragment);
+      if (!found) return esc(text);
+      return `${esc(text.slice(0, found.start))}<mark id="evidence-mark">${esc(text.slice(found.start, found.end))}</mark>${esc(text.slice(found.end))}`;
+    }
+    function evidenceQuote(loc) {
+      return String(loc.quote || loc.chunk_text || loc.highlight || "").replace(/\s+/g, " ").trim().slice(0, 240);
+    }
+    function wrapViewer(inner, quote) {
+      if (!quote) return inner;
+      return `<div class="viewer-stack"><div class="evidence-banner">${esc(quote)}</div>${inner}</div>`;
+    }
+    function pdfSrc(rawUrl, loc) {
+      const parts = ["navpanes=0", "view=FitH"];
+      if (loc.page) parts.unshift(`page=${Number(loc.page)}`);
+      return `${rawUrl}#${parts.join("&")}`;
+    }
+    function loadPdfjs() {
+      if (!pdfjsReady) {
+        pdfjsReady = import("/assets/pdfjs/pdf.min.mjs").then((mod) => {
+          mod.GlobalWorkerOptions.workerSrc = "/assets/pdfjs/pdf.worker.min.mjs";
+          return mod;
+        });
+      }
+      return pdfjsReady;
+    }
+    function destroyPdfViewer() {
+      pdfViewer.observer?.disconnect();
+      try { pdfViewer.renderTask?.cancel(); } catch (_) {}
+      try { pdfViewer.doc?.destroy(); } catch (_) {}
+      pdfViewer = { doc: null, url: "", page: 1, pages: 1, renderTask: null, observer: null };
+    }
+    function clampViewerZoom(value) {
+      return Math.min(VIEWER_ZOOM_MAX, Math.max(VIEWER_ZOOM_MIN, value));
+    }
+    function updateZoomControls() {
+      const label = $("#viewer-zoom-reset");
+      if (label) label.textContent = `${Math.round(viewerZoom * 100)}%`;
+      const out = $("#viewer-zoom-out");
+      const inn = $("#viewer-zoom-in");
+      if (out) out.disabled = viewerZoom <= VIEWER_ZOOM_MIN + 0.001;
+      if (inn) inn.disabled = viewerZoom >= VIEWER_ZOOM_MAX - 0.001;
+    }
+    function applyViewerZoom() {
+      updateZoomControls();
+      if (viewerKind === "image") {
+        const stage = $(".image-stage");
+        const img = stage?.querySelector("img");
+        if (!stage || !img) return;
+        stage.classList.toggle("is-zoomed", viewerZoom > 1.001);
+        if (viewerZoom <= 1.001) {
+          img.style.width = "";
+          img.style.maxWidth = "";
+          img.style.maxHeight = "";
+        } else {
+          img.style.width = `${viewerZoom * 100}%`;
+          img.style.maxWidth = "none";
+          img.style.maxHeight = "none";
+        }
+        return;
+      }
+      if (viewerKind === "text") {
+        const text = $(".doc-text");
+        if (text) text.style.fontSize = `${14 * viewerZoom}px`;
+        return;
+      }
+      if (viewerKind === "pdf" && pdfViewer.doc) return renderPdfPage({ keepScroll: true });
+    }
+    function setViewerZoom(next, { origin } = {}) {
+      const zoom = clampViewerZoom(Number(next) || 1);
+      if (Math.abs(zoom - viewerZoom) < 0.001) { updateZoomControls(); return; }
+      const stage = document.querySelector("[data-pdf-stage]") || $(".image-stage") || $(".doc-text");
+      let anchor = null;
+      if (origin && stage) {
+        const rect = stage.getBoundingClientRect();
+        const x = origin.clientX - rect.left + stage.scrollLeft;
+        const y = origin.clientY - rect.top + stage.scrollTop;
+        anchor = { xRatio: x / Math.max(stage.scrollWidth, 1), yRatio: y / Math.max(stage.scrollHeight, 1), clientX: origin.clientX, clientY: origin.clientY };
+      }
+      viewerZoom = zoom;
+      const done = applyViewerZoom();
+      const restore = () => {
+        if (!anchor || !stage) return;
+        const rect = stage.getBoundingClientRect();
+        stage.scrollLeft = anchor.xRatio * stage.scrollWidth - (anchor.clientX - rect.left);
+        stage.scrollTop = anchor.yRatio * stage.scrollHeight - (anchor.clientY - rect.top);
+      };
+      if (done && typeof done.then === "function") done.then(restore);
+      else restore();
+    }
+    function updatePdfLabel() {
+      const label = document.querySelector("[data-pdf-label]");
+      if (label) label.textContent = `стр. ${pdfViewer.page} / ${pdfViewer.pages}`;
+      const prev = document.querySelector("[data-pdf-prev]");
+      const next = document.querySelector("[data-pdf-next]");
+      if (prev) prev.disabled = pdfViewer.page <= 1;
+      if (next) next.disabled = pdfViewer.page >= pdfViewer.pages;
+      if (state.activeFile) $("#viewer-title").textContent = `${state.activeFile} · с. ${pdfViewer.page}`;
+      updateZoomControls();
+    }
+    async function renderPdfPage({ keepScroll = false } = {}) {
+      const stage = document.querySelector("[data-pdf-stage]");
+      const canvas = stage?.querySelector("canvas");
+      if (!pdfViewer.doc || !stage || !canvas) return;
+      const scrollLeft = stage.scrollLeft;
+      const scrollTop = stage.scrollTop;
+      const page = await pdfViewer.doc.getPage(pdfViewer.page);
+      const base = page.getViewport({ scale: 1 });
+      let width = stage.clientWidth;
+      if (width < 8) {
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        width = Math.max(1, stage.clientWidth);
+      }
+      const cssWidth = Math.max(1, width * viewerZoom);
+      const dpr = window.devicePixelRatio || 1;
+      const viewport = page.getViewport({ scale: (cssWidth * dpr) / base.width });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      canvas.style.width = `${cssWidth}px`;
+      canvas.style.height = `${cssWidth * (base.height / base.width)}px`;
+      try { pdfViewer.renderTask?.cancel(); } catch (_) {}
+      const task = page.render({ canvasContext: canvas.getContext("2d", { alpha: false }), viewport });
+      pdfViewer.renderTask = task;
+      try { await task.promise; } catch (error) {
+        if (error?.name !== "RenderingCancelledException") throw error;
+      }
+      if (keepScroll) {
+        stage.scrollLeft = scrollLeft;
+        stage.scrollTop = scrollTop;
+      } else {
+        stage.scrollTop = 0;
+        stage.scrollLeft = 0;
+      }
+      updatePdfLabel();
+    }
+    async function mountPdfViewer(root, url, loc, requestId) {
+      const startPage = Math.max(1, Number(loc.page) || 1);
+      try {
+        const pdfjs = await loadPdfjs();
+        if (requestId !== fileRequest) return;
+        if (pdfViewer.url !== url || !pdfViewer.doc) {
+          try { pdfViewer.doc?.destroy(); } catch (_) {}
+          pdfViewer.doc = await pdfjs.getDocument({ url }).promise;
+          pdfViewer.url = url;
+        }
+        if (requestId !== fileRequest) return;
+        pdfViewer.pages = pdfViewer.doc.numPages;
+        pdfViewer.page = Math.min(startPage, pdfViewer.pages);
+        root.querySelector("[data-pdf-prev]")?.addEventListener("click", () => {
+          if (pdfViewer.page <= 1) return;
+          pdfViewer.page -= 1;
+          renderPdfPage();
+        });
+        root.querySelector("[data-pdf-next]")?.addEventListener("click", () => {
+          if (pdfViewer.page >= pdfViewer.pages) return;
+          pdfViewer.page += 1;
+          renderPdfPage();
+        });
+        pdfViewer.observer?.disconnect();
+        let resizeTimer = 0;
+        pdfViewer.observer = new ResizeObserver(() => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => renderPdfPage({ keepScroll: true }), 80);
+        });
+        const stage = root.querySelector("[data-pdf-stage]");
+        if (stage) pdfViewer.observer.observe(stage);
+        await renderPdfPage();
+      } catch (error) {
+        if (requestId !== fileRequest) return;
+        root.outerHTML = `<iframe class="pdf-frame" src="${esc(pdfSrc(url, loc))}" title="PDF"></iframe>`;
+      }
+    }
+    async function openFile(name, loc = {}) {
+      const requestId = ++fileRequest;
+      fileAbort?.abort();
+      fileAbort = new AbortController();
+      pdfViewer.observer?.disconnect();
+      pdfViewer.observer = null;
+      if (!String(name).toLowerCase().endsWith(".pdf")) destroyPdfViewer();
+      if (typeof loc === "string") loc = { chunk_text: loc };
+      state.activeFile = name;
+      renderFiles();
+      openViewerPanel();
+      $("#viewer-title").textContent = loc.page ? `${name} · с. ${loc.page}` : name;
+      $("#download-link").hidden = true;
+      $("#viewer-body").innerHTML = '<div class="viewer-empty"><div class="typing"><i></i><i></i><i></i></div></div>';
+      try {
+        const file = await api(`/api/file?name=${encodeURIComponent(name)}`, { signal: AbortSignal.any([fileAbort.signal, AbortSignal.timeout(30000)]) });
+        if (requestId !== fileRequest) return;
+        const type = name.split(".").pop().toLowerCase();
+        const rawUrl = `/api/raw?name=${encodeURIComponent(name)}`;
+        const download = $("#download-link");
+        download.href = rawUrl;
+        download.hidden = false;
+        const quote = evidenceQuote(loc);
+        viewerZoom = 1;
+        $("#viewer-zoom").hidden = false;
+        updateZoomControls();
+        if (imageTypes.has(type)) {
+          viewerKind = "image";
+          $("#viewer-body").innerHTML = wrapViewer(`<div class="image-stage"><img src="${esc(rawUrl)}" alt="${esc(name)}"></div>`, quote);
+        } else if (type === "pdf") {
+          viewerKind = "pdf";
+          $("#viewer-body").innerHTML = wrapViewer(`<div class="pdf-viewer" id="pdf-viewer"><div class="pdf-toolbar"><button class="ghost-button" type="button" data-pdf-prev aria-label="Предыдущая страница">‹</button><span class="pdf-page-label" data-pdf-label>стр. 1</span><button class="ghost-button" type="button" data-pdf-next aria-label="Следующая страница">›</button></div><div class="pdf-stage" data-pdf-stage><canvas></canvas></div></div>`, quote);
+          await mountPdfViewer($("#pdf-viewer"), rawUrl, loc, requestId);
+        }
+        else {
+          viewerKind = "text";
+          $("#viewer-body").innerHTML = wrapViewer(`<pre class="doc-text">${highlightText(file.text || "", loc.chunk_text || loc.quote || "")}</pre>`, quote);
+          $("#evidence-mark")?.scrollIntoView({ block: "center" });
+        }
+      } catch (error) {
+        if (requestId === fileRequest && error.name !== "AbortError") {
+          viewerKind = "";
+          $("#viewer-zoom").hidden = true;
+          $("#viewer-body").innerHTML = `<div class="viewer-empty">${esc(error.message)}</div>`;
+        }
+      }
+    }
+    function openEvidence(source) {
+      if (!source?.source) return;
+      openFile(source.source, { page: source.page, chunk_text: source.chunk_text || source.quote || source.snippet || "", quote: source.quote || source.snippet || "" });
+    }
+    function sourceTitle(source) {
+      const name = source.title || source.source || "Источник";
+      return source.page ? `${name} · с. ${source.page}` : name;
+    }
+    function storeSources(sources) {
+      return sources.map((source) => {
+        const id = `ev-${++evidenceSeq}`;
+        evidenceStore.set(id, source);
+        return id;
+      });
+    }
+    function renderAnswerText(content, sourceIds) {
+      return esc(content).replace(/\[(\d+)\]/g, (match, raw) => {
+        const id = sourceIds[Number(raw) - 1];
+        if (!id) return match;
+        return `<button class="cite" type="button" data-evidence="${esc(id)}" aria-label="Источник ${raw}">[${raw}]</button>`;
+      });
+    }
+    function bindEvidence(root) {
+      root.querySelectorAll("[data-evidence]").forEach((button) => button.addEventListener("click", () => {
+        const source = evidenceStore.get(button.dataset.evidence);
+        if (source) openEvidence(source);
+      }));
+    }
+    function renderModels() {
+      const activeId = state.activeModel?.selection_id; $("#model-label").textContent = state.activeModel?.name || "Выберите модель";
+      const query = state.modelQuery.trim().toLocaleLowerCase(); const visible = state.models.filter((model) => !query || `${model.name} ${model.source} ${model.format}`.toLocaleLowerCase().includes(query));
+      $("#model-list").innerHTML = visible.length ? visible.map((model) => `<div class="model-row"><button class="model-option" type="button" role="option" aria-selected="${model.id === activeId}" data-model="${esc(model.id)}"><span class="radio" aria-hidden="true"></span><span class="model-name">${esc(model.name)}<span class="model-details">${esc(model.source)} · ${esc(model.format)}${model.available ? "" : " · нет ключа"}</span></span><span class="model-meta">${esc(model.size || "")}</span></button><button class="model-delete" type="button" data-delete-model="${esc(model.id)}" aria-label="Удалить ${esc(model.name)}">${trashSvg}</button></div>`).join("") : `<div class="model-empty">${query ? "Ничего не найдено" : "Подключите модель через «Подключить API»"}</div>`;
+      $("#model-list").querySelectorAll("[data-model]").forEach((button) => button.addEventListener("click", () => selectModel(button.dataset.model)));
+      $("#model-list").querySelectorAll("[data-delete-model]").forEach((button) => button.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        confirmDeleteModel(button.getAttribute("data-delete-model"));
+      }));
+    }
+    function confirmDeleteModel(id) {
+      const model = state.models.find((item) => item.id === id);
+      if (!model) return;
+      state.pendingDelete = { type: "model", id: model.id, name: model.name };
+      $("#delete-dialog-title").textContent = "Удалить модель?";
+      $("#delete-dialog-text").textContent = model.name;
+      showDialog("#delete-dialog", "#delete-cancel");
+    }
+    async function loadModels(showResult = false) { const revision = modelRevision; try { $("#refresh-models").disabled = true; const data = await api("/api/models"); if (revision !== modelRevision) return; state.models = data.models; state.activeModel = data.active_model; renderModels(); if (showResult) showToast(`Найдено моделей: ${data.models.length}`); } catch (error) { showToast(error.message); } finally { $("#refresh-models").disabled = false; } }
+    async function selectModel(modelId) {
+      if (changingModel || state.busy) { showToast("Дождитесь завершения текущего запроса"); return; }
+      if (modelId === state.activeModel?.selection_id) { toggleModelMenu(false); return; }
+      changingModel = true;
+      ++modelRevision;
+      $("#model-button").disabled = true;
+      const previous = state.activeModel; toggleModelMenu(false);
+      try { const data = await api("/api/models/select", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ model_id: modelId }) }); state.activeModel = data.active_model; renderModels(); showToast(`${data.model.name} выбрана`); }
+      catch (error) { state.activeModel = previous; renderModels(); showToast(error.message); }
+      finally { changingModel = false; $("#model-button").disabled = false; }
+    }
+    function toggleModelMenu(force) { const menu = $("#model-menu"); const button = $("#model-button"); const open = force ?? menu.hidden; const wasInside = menu.contains(document.activeElement); if (open && isMobileLayout()) closePanels(); menu.hidden = !open; button.setAttribute("aria-expanded", String(open)); if (open) $("#model-search").focus(); else if (wasInside) button.focus(); }
+    function showDialog(selector, focusSelector) {
+      dialogReturnFocus = document.activeElement;
+      $(selector).hidden = false;
+      $(".topbar").inert = true;
+      $(".workspace").inert = true;
+      $(focusSelector).focus();
+    }
+    function hideDialog(selector) {
+      if ($(selector).hidden) return;
+      $(selector).hidden = true;
+      $(".topbar").inert = false;
+      $(".workspace").inert = false;
+      if (dialogReturnFocus?.isConnected) dialogReturnFocus.focus();
+    }
+    function closeModelDialog() { if (changingModel) return; hideDialog("#model-dialog"); $("#api-key").value = ""; }
+    function setProvider(provider) {
+      $("#provider").value = provider;
+      const local = provider === "huggingface";
+      const google = provider === "google";
+      $("#local-fields").hidden = !local;
+      $("#api-fields").hidden = local;
+      $("#api-base-url-field").hidden = google || local;
+      if (google && !$("#api-model-name").value.trim()) $("#api-model-name").value = "gemini-3.6-flash";
+      if (provider === "ollama") $("#api-base-url").value = "http://127.0.0.1:11434/v1";
+      if (provider === "lm_studio") $("#api-base-url").value = "http://127.0.0.1:1234/v1";
+      if (provider === "openai_compatible" && /127\.0\.0\.1:(11434|1234)/.test($("#api-base-url").value)) $("#api-base-url").value = "";
+    }
+    async function openModelDialog() {
+      toggleModelMenu(false); $("#found-models").innerHTML = ""; setProvider("google"); showDialog("#model-dialog", "#api-key");
+    }
+    async function connectModel(event) {
+      event.preventDefault(); const provider = $("#provider").value; const local = provider === "huggingface";
+      if (changingModel || state.busy) { showToast("Дождитесь завершения текущего запроса"); return; }
+      const payload = local
+        ? { provider, model: $("#local-model-path").value.trim(), device: $("#model-device").value }
+        : { provider, model: $("#api-model-name").value.trim(), name: $("#api-model-name").value.trim(), base_url: $("#api-base-url").value.trim(), api_key: $("#api-key").value };
+      $("#connect-submit").disabled = true;
+      changingModel = true;
+      ++modelRevision;
+      try { const data = await api("/api/models/connect", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }); state.activeModel = data.active_model; state.models = data.models || []; renderModels(); changingModel = false; closeModelDialog(); showToast(`${data.active_model.name} подключена`); }
+      catch (error) { showToast(error.message); }
+      finally { changingModel = false; $("#connect-submit").disabled = false; }
+    }
+    function getActiveChat() { return state.chats.find((chat) => chatId(chat.id) === chatId(state.activeChatId)) || null; }
+    function saveChats() {
+      try { localStorage.setItem(chatsStorageKey, JSON.stringify({ chats: state.chats, activeChatId: state.activeChatId })); }
+      catch (_) { showToast("Не удалось сохранить историю в браузере. Оставьте страницу открытой, чтобы не потерять переписку."); }
+    }
+    function chatId(value) { return value == null ? "" : String(value); }
+    function loadChats() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(chatsStorageKey) || "null");
+        if (saved && Array.isArray(saved.chats)) {
+          state.chats = saved.chats.filter((chat) => chat && typeof chat === "object").map((chat) => ({
+            id: chatId(chat.id),
+            title: String(chat.title || "Новый чат"),
+            createdAt: Number(chat.createdAt) || Date.now(),
+            updatedAt: Number(chat.updatedAt || chat.createdAt) || Date.now(),
+            messages: Array.isArray(chat.messages) ? chat.messages.filter((message) => message && typeof message === "object").map((message) => ({
+              role: message.role === "assistant" ? "assistant" : "user",
+              content: String(message.content || ""),
+              sources: Array.isArray(message.sources) ? message.sources.filter((source) => source && typeof source === "object") : [],
+            })) : [],
+          })).filter((chat) => chat.id);
+          state.activeChatId = chatId(saved.activeChatId);
+        }
+      } catch (_) {}
+      if (!state.chats.length) {
+        state.activeChatId = null;
+        return;
+      }
+      state.chats.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+      if (!state.chats.some((chat) => chat.id === chatId(state.activeChatId))) state.activeChatId = state.chats[0].id;
+    }
+    function createChat({ silent = false } = {}) {
+      if (!silent && isMobileLayout()) closePanels();
+      const current = getActiveChat();
+      if (!silent && current && !current.messages.length) {
+        state.activeChatId = current.id;
+        renderChatList();
+        renderChatThread();
+        return current;
+      }
+      const chat = {
+        id: (crypto.randomUUID && crypto.randomUUID()) || `chat-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        title: "Новый чат",
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        messages: [],
+      };
+      state.chats.unshift(chat);
+      state.activeChatId = chat.id;
+      saveChats();
+      renderChatList();
+      renderChatThread();
+      return chat;
+    }
+    function selectChat(id) {
+      const nextId = chatId(id);
+      if (isMobileLayout()) closePanels();
+      if (!nextId || nextId === chatId(state.activeChatId)) return;
+      state.activeChatId = nextId;
+      saveChats();
+      renderChatList();
+      renderChatThread();
+      if (isMobileLayout()) closePanels();
+    }
+    function deleteChat(id) {
+      const target = chatId(id);
+      if (!target) return;
+      const next = state.chats.filter((chat) => chatId(chat.id) !== target);
+      if (next.length === state.chats.length) {
+        showToast("Не удалось удалить чат");
+        return;
+      }
+      state.chats = next;
+      if (chatId(state.activeChatId) === target) state.activeChatId = state.chats[0]?.id || null;
+      saveChats();
+      renderChatList();
+      renderChatThread();
+      showToast("Чат удалён");
+    }
+    function renderChatList() {
+      $("#chat-count").textContent = state.chats.length;
+      const list = $("#chat-list");
+      if (!state.chats.length) { list.innerHTML = '<div class="empty-list">Чатов пока нет</div>'; return; }
+      const active = chatId(state.activeChatId);
+      const chats = [...state.chats].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+      list.innerHTML = chats.map((chat) => {
+        const id = chatId(chat.id);
+        const title = String(chat.title || "Новый чат").trim() || "Новый чат";
+        const preview = chat.messages && chat.messages.length
+          ? `${chat.messages.length} сообщ. · ${formatTime(chat.updatedAt || chat.createdAt)}`
+          : formatTime(chat.updatedAt || chat.createdAt);
+        return `<div class="chat-row"><button class="chat-item ${id === active ? "active" : ""}" type="button" data-open-chat="${esc(id)}"><span class="file-name">${esc(title)}</span><span class="file-meta">${esc(preview)}</span></button><button class="chat-delete" type="button" data-delete-chat="${esc(id)}" aria-label="Удалить чат">${trashSvg}</button></div>`;
+      }).join("");
+      list.querySelectorAll("[data-open-chat]").forEach((button) => button.addEventListener("click", () => selectChat(button.getAttribute("data-open-chat"))));
+      list.querySelectorAll("[data-delete-chat]").forEach((button) => button.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        confirmDeleteChat(button.getAttribute("data-delete-chat"));
+      }));
+    }
+    function renderChatThread() {
+      evidenceStore.clear();
+      const chat = getActiveChat();
+      $("#chat-title").textContent = chat?.title || "Ассистент";
+      const root = $("#chat");
+      root.innerHTML = "";
+      if (!chat || !chat.messages.length) { root.innerHTML = welcomeHtml; return; }
+      chat.messages.forEach((message) => addMessage(message.role, message.content, message.sources || [], { scroll: false }));
+      if (activeRequest?.chatId === chat.id) addPendingMessage();
+      root.scrollTop = root.scrollHeight;
+    }
+    function addPendingMessage() {
+      const pending = addMessage("assistant", "");
+      pending.dataset.pending = "true";
+      pending.querySelector(".bubble").innerHTML = '<span role="status" aria-label="Модель готовит ответ" class="typing"><i></i><i></i><i></i></span>';
+      return pending;
+    }
+    function addMessage(role, content, sources = [], { scroll = true } = {}) {
+      const article = document.createElement("article"); article.className = `message ${role}`;
+      if (role === "assistant") {
+        const sourceIds = storeSources(sources);
+        const sourceHtml = sources.length ? `<div class="sources">${sources.map((source, index) => `<button class="source-card" type="button" data-evidence="${esc(sourceIds[index])}"><span class="source-copy"><span class="source-title">[${index + 1}] ${esc(sourceTitle(source))}</span><span class="source-snippet">${esc(source.snippet || source.quote || source.chunk_text || "")}</span></span><span class="source-score">${Math.round(Number(source.score || 0) * 100)}%</span></button>`).join("")}</div>` : "";
+        article.innerHTML = `<div class="message-label">НАМИ</div><div class="bubble">${renderAnswerText(content, sourceIds)}</div>${sourceHtml}`;
+        bindEvidence(article);
+      } else article.innerHTML = `<div class="bubble">${esc(content)}</div>`;
+      $("#chat").appendChild(article);
+      if (scroll) $("#chat").scrollTo({ top: $("#chat").scrollHeight, behavior: prefersReducedMotion() ? "instant" : "smooth" });
+      return article;
+    }
+    async function askQuestion(question) {
+      if (state.busy || changingModel) return;
+      const chat = getActiveChat() || createChat({ silent: true });
+      state.busy = true;
+      activeRequest = { chatId: chat.id };
+      setAsking(true);
+      $("#send-button").disabled = true;
+      if (!chat.messages.length) $("#chat").innerHTML = "";
+      addMessage("user", question);
+      chat.messages.push({ role: "user", content: question, sources: [] });
+      if (chat.title === "Новый чат") chat.title = question.slice(0, 72);
+      chat.updatedAt = Date.now();
+      saveChats();
+      renderChatList();
+      $("#chat-title").textContent = chat.title;
+      addPendingMessage();
+      try {
+        const data = await api("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question }), signal: AbortSignal.timeout(360000) });
+        if (typeof data.answer !== "string" || !data.answer.trim()) throw new Error("Модель вернула пустой ответ. Повторите запрос.");
+        const sources = Array.isArray(data.chunks) ? data.chunks.filter((source) => source && typeof source === "object") : [];
+        chat.messages.push({ role: "assistant", content: data.answer, sources });
+        chat.updatedAt = Date.now();
+        saveChats();
+      } catch (error) {
+        const content = `Не удалось получить ответ: ${error.message}`;
+        chat.messages.push({ role: "assistant", content, sources: [] });
+        chat.updatedAt = Date.now();
+        saveChats();
+      } finally {
+        activeRequest = null;
+        state.busy = false;
+        setAsking(false);
+        $("#send-button").disabled = false;
+        renderChatList();
+        if (state.activeChatId === chat.id) renderChatThread();
+      }
+    }
+    function uploadWithProgress(file, onProgress) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/api/upload");
+        xhr.timeout = 600000;
+        xhr.addEventListener("timeout", () => reject(new Error("Индексация не завершилась вовремя. Обновите список документов.")));
+        xhr.upload.addEventListener("progress", (event) => {
+          if (event.lengthComputable && event.total > 0) onProgress(event.loaded / event.total);
+        });
+        xhr.addEventListener("load", () => {
+          let payload = {};
+          try { payload = JSON.parse(xhr.responseText || "{}"); } catch (_) {}
+          if (xhr.status >= 200 && xhr.status < 300) resolve(payload);
+          else reject(new Error(errorMessage(payload, xhr.status)));
+        });
+        xhr.addEventListener("error", () => reject(new Error("Сеть недоступна")));
+        xhr.addEventListener("abort", () => reject(new Error("Загрузка отменена")));
+        const body = new FormData();
+        body.append("file", file);
+        xhr.send(body);
+      });
+    }
+    async function uploadFiles(files) {
+      const allowed = new Set(["md", "txt", "pdf", ...imageTypes]);
+      const names = new Set([...state.files, ...state.uploads].map((file) => file.name.toLocaleLowerCase()));
+      const accepted = [...files].filter((file) => {
+        if (!file || !allowed.has(file.name.split(".").pop().toLowerCase())) { showToast(`Неподдерживаемый формат: ${file?.name || "файл"}`); return false; }
+        if (!file.size) { showToast(`Файл пуст: ${file.name}`); return false; }
+        const key = file.name.toLocaleLowerCase();
+        if (names.has(key)) { showToast(`Файл уже добавлен: ${file.name}`); return false; }
+        names.add(key);
+        return true;
+      });
+      const items = accepted.map((file) => ({
+        id: `up-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        name: file.name,
+        type: (file.name.split(".").pop() || "").toLowerCase(),
+        size: file.size,
+        progress: 0.04,
+        file,
+      }));
+      if (!items.length) return;
+      state.uploads.push(...items);
+      renderFiles();
+      for (const item of items) {
+        let stopPoll = false;
+        const poller = (async () => {
+          while (!stopPoll) {
+            try {
+              const health = await api("/api/health", { signal: AbortSignal.timeout(8000) });
+              applyIndexProgress(item, health);
+            } catch (_) {}
+            if (stopPoll) break;
+            await new Promise((resolve) => setTimeout(resolve, 400));
+          }
+        })();
+        try {
+          await uploadWithProgress(item.file, (ratio) => {
+            if (item.indexLabel) return;
+            item.progress = Math.max(item.progress, ratio);
+            updateUploadRow(item);
+          });
+          item.progress = 1;
+          item.indexLabel = item.indexLabel || "Готово";
+          updateUploadRow(item);
+          showToast(`${item.name} добавлен`);
+        } catch (error) {
+          item.error = error.message;
+          updateUploadRow(item);
+          showToast(`${item.name}: ${error.message}`);
+        } finally {
+          stopPoll = true;
+          await poller;
+        }
+        state.uploads = state.uploads.filter((entry) => entry.id !== item.id);
+        await Promise.all([loadFiles(), refreshHealth()]);
+      }
+    }
+    $("#question-form").addEventListener("submit", (event) => { event.preventDefault(); const input = $("#question"); const question = input.value.trim(); if (!question || state.busy || changingModel) return; input.value = ""; askQuestion(question); });
+    $("#upload-button").addEventListener("click", () => $("#file-input").click());
+    $("#file-input").addEventListener("change", (event) => { uploadFiles([...event.target.files]); event.target.value = ""; });
+    $("#model-button").addEventListener("click", () => toggleModelMenu());
+    $("#model-menu").addEventListener("keydown", (event) => {
+      if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+      if (event.target.id === "model-search" && !event.key.startsWith("Arrow")) return;
+      const options = [...$("#model-list").querySelectorAll("[data-model]")];
+      if (!options.length) return;
+      event.preventDefault();
+      const current = options.indexOf(document.activeElement);
+      const next = event.key === "Home" ? 0 : event.key === "End" ? options.length - 1 : current < 0 ? (event.key === "ArrowUp" ? options.length - 1 : 0) : (current + (event.key === "ArrowUp" ? -1 : 1) + options.length) % options.length;
+      options[next].focus();
+    });
+    $("#model-search").addEventListener("input", (event) => { state.modelQuery = event.target.value; renderModels(); });
+    $("#refresh-models").addEventListener("click", () => loadModels(true));
+    $("#connect-model-button").addEventListener("click", openModelDialog);
+    $("#model-dialog-close").addEventListener("click", closeModelDialog);
+    $("#model-dialog-cancel").addEventListener("click", closeModelDialog);
+    $("#model-dialog").addEventListener("click", (event) => { if (event.target.id === "model-dialog") closeModelDialog(); });
+    $("#provider").addEventListener("change", (event) => setProvider(event.target.value));
+    $("#connect-model-form").addEventListener("submit", connectModel);
+    $("#delete-dialog-close").addEventListener("click", closeDeleteDialog);
+    $("#delete-cancel").addEventListener("click", closeDeleteDialog);
+    $("#delete-confirm").addEventListener("click", confirmPendingDelete);
+    $("#delete-dialog").addEventListener("click", (event) => { if (event.target.id === "delete-dialog") closeDeleteDialog(); });
+    function togglePanel(panel) {
+      if (isMobileLayout()) setPanelVisibility(panel, !$(`#${panel}`).classList.contains("open"));
+      else setPanelVisibility(panel, !layout[`${panel}Visible`]);
+    }
+    $("#history-visibility").addEventListener("click", () => togglePanel("history"));
+    $("#library-visibility").addEventListener("click", () => togglePanel("library"));
+    $("#viewer-visibility").addEventListener("click", () => togglePanel("viewer"));
+    $("#file-search").addEventListener("input", (event) => { state.fileQuery = event.target.value; renderFiles(); });
+    bindResizer("#history-resizer", "history");
+    bindResizer("#library-resizer", "library");
+    bindResizer("#viewer-resizer", "viewer");
+    $("#history-toggle").addEventListener("click", () => openDrawer("history"));
+    $("#library-toggle").addEventListener("click", () => openDrawer("library"));
+    $("#new-chat-button").addEventListener("click", () => createChat());
+    $("#chat-new").addEventListener("click", () => createChat());
+    $("#viewer-close").addEventListener("click", () => setPanelVisibility("viewer", false));
+    $("#viewer-zoom-out").addEventListener("click", () => setViewerZoom(viewerZoom / 1.25));
+    $("#viewer-zoom-in").addEventListener("click", () => setViewerZoom(viewerZoom * 1.25));
+    $("#viewer-zoom-reset").addEventListener("click", () => setViewerZoom(1));
+    $("#viewer-body").addEventListener("wheel", (event) => {
+      if ($("#viewer-zoom").hidden || (!event.ctrlKey && !event.metaKey)) return;
+      event.preventDefault();
+      setViewerZoom(viewerZoom * (event.deltaY < 0 ? 1.15 : 1 / 1.15), { origin: event });
+    }, { passive: false });
+    $("#scrim").addEventListener("click", closePanels);
+    document.addEventListener("click", (event) => { if (!event.target.closest(".model-wrap")) toggleModelMenu(false); });
+    document.addEventListener("keydown", (event) => {
+      const dialog = document.querySelector('.dialog-layer:not([hidden])');
+      if (event.key === "Tab" && dialog) {
+        const controls = [...dialog.querySelectorAll('button, input, select, a[href]')].filter((el) => !el.disabled && !el.closest('[hidden]'));
+        const first = controls[0], last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }
+      if (!$("#viewer-zoom").hidden && (event.ctrlKey || event.metaKey) && !event.target.closest("input, textarea")) {
+        if (event.key === "=" || event.key === "+") { event.preventDefault(); setViewerZoom(viewerZoom * 1.25); }
+        else if (event.key === "-") { event.preventDefault(); setViewerZoom(viewerZoom / 1.25); }
+        else if (event.key === "0") { event.preventDefault(); setViewerZoom(1); }
+      }
+      if (event.key === "Escape") {
+        event.preventDefault();
+        if (!$("#delete-dialog").hidden) closeDeleteDialog();
+        else if (!$("#model-dialog").hidden) closeModelDialog();
+        else if (!$("#model-menu").hidden) toggleModelMenu(false);
+        else closePanels();
+      }
+    });
+    const dropHint = $("#drop-hint");
+    let dragDepth = 0;
+    const draggingFiles = (event) => Array.from(event.dataTransfer?.types || []).includes("Files");
+    document.addEventListener("dragenter", (event) => { if (draggingFiles(event)) { event.preventDefault(); dragDepth++; dropHint.classList.add("dragging"); } });
+    document.addEventListener("dragover", (event) => { if (draggingFiles(event)) event.preventDefault(); });
+    document.addEventListener("dragleave", () => { dragDepth = Math.max(0, dragDepth - 1); if (!dragDepth) dropHint.classList.remove("dragging"); });
+    document.addEventListener("drop", (event) => { if (!draggingFiles(event)) return; event.preventDefault(); dragDepth = 0; dropHint.classList.remove("dragging"); uploadFiles([...event.dataTransfer.files]); });
+    window.addEventListener("resize", () => applyLayout());
+    window.addEventListener("pointermove", (event) => {
+      document.documentElement.style.setProperty("--mx", (event.clientX / Math.max(window.innerWidth, 1)).toFixed(4));
+      document.documentElement.style.setProperty("--my", (event.clientY / Math.max(window.innerHeight, 1)).toFixed(4));
+    }, { passive: true });
+    function prefersReducedMotion() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+    function isIdle() { return document.body.classList.contains("is-idle"); }
+    let idleReturnFocus = null;
+    function enterIdle() {
+      if (isIdle()) return;
+      toggleModelMenu(false);
+      idleReturnFocus = document.activeElement;
+      document.body.classList.add("is-idle");
+      $(".topbar").inert = true;
+      $(".workspace").inert = true;
+      $("#idle-exit").hidden = false;
+      $("#idle-exit").focus();
+      $("#idle-toggle").setAttribute("aria-pressed", "true");
+      $("#idle-toggle-mobile").setAttribute("aria-pressed", "true");
+    }
+    function exitIdle() {
+      if (!isIdle()) return;
+      document.body.classList.remove("is-idle");
+      $(".topbar").inert = false;
+      $(".workspace").inert = false;
+      $("#idle-exit").hidden = true;
+      idleReturnFocus?.focus();
+      $("#idle-toggle").setAttribute("aria-pressed", "false");
+      $("#idle-toggle-mobile").setAttribute("aria-pressed", "false");
+    }
+    function setAsking(on) {
+      document.body.classList.toggle("is-asking", on);
+      const video = $("#car-idle");
+      if (video && !prefersReducedMotion()) {
+        if (on) {
+          video.pause();
+          try { video.currentTime = 0; } catch (_) {}
+        } else {
+          video.playbackRate = 1;
+          if (!document.hidden) video.play().catch(() => video.classList.remove("is-on"));
+        }
+      }
+    }
+    function onIdleToggle(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (isIdle()) exitIdle();
+      else enterIdle();
+    }
+    $("#idle-toggle").addEventListener("click", onIdleToggle);
+    $("#idle-toggle-mobile").addEventListener("click", onIdleToggle);
+    $("#idle-exit").addEventListener("click", exitIdle);
+    document.addEventListener("keydown", (event) => { if (isIdle() && event.key !== "Tab") { event.preventDefault(); event.stopImmediatePropagation(); exitIdle(); } }, true);
+    function initScene() {
+      const idle = $("#car-idle");
+      if (!idle || prefersReducedMotion()) return;
+      idle.loop = true;
+      idle.muted = true;
+      idle.playbackRate = 1;
+      const show = () => { if (!state.busy && !prefersReducedMotion() && !document.hidden) idle.classList.add("is-on"); };
+      idle.addEventListener("playing", show);
+      idle.addEventListener("error", () => idle.classList.remove("is-on"));
+      idle.addEventListener("canplay", () => { if (!state.busy && !document.hidden) idle.play().catch(() => {}); });
+      idle.play().then(show).catch(() => {});
+    }
+    function syncSceneMotion() {
+      const video = $("#car-idle");
+      if (document.hidden || prefersReducedMotion() || state.busy) {
+        video.pause();
+        if (prefersReducedMotion()) video.classList.remove("is-on");
+      } else video.play().then(() => video.classList.add("is-on")).catch(() => video.classList.remove("is-on"));
+    }
+    document.addEventListener("visibilitychange", syncSceneMotion);
+    matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", syncSceneMotion);
+    applyLayout();
+    loadChats();
+    renderChatList();
+    renderChatThread();
+    initScene();
+    Promise.all([refreshHealth(), loadFiles(), loadModels()]); setInterval(refreshHealth, 20000);
+  </script>
+</body>
+</html>

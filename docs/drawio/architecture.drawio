@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net" agent="Simply RAG" version="22.1.0">
+  <diagram id="arch" name="Архитектура">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Архитектура Simply RAG / НАМИ — база знаний" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=20;fontStyle=1;fontColor=#1c1e22;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="720" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="L1" value="Клиент" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f7f8fa;strokeColor=#e6e8ec;fontFamily=Segoe UI;fontSize=12;fontColor=#8a9098;align=left;spacingLeft=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="1520" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="c1" value="Браузер&#10;static/index.html" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2231a;strokeWidth=2;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="220" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="c2" value="Чат · документы · PDF.js" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7f6;strokeColor=#e2231a;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="340" y="120" width="240" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="c3" value="Ключ Gemini через UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="120" width="240" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="c4" value="Прогресс индексации" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="900" y="120" width="240" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="c1" target="s1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2" value="Сервер" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f7f8fa;strokeColor=#e6e8ec;fontFamily=Segoe UI;fontSize=12;fontColor=#8a9098;align=left;spacingLeft=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="1520" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="s1" value="FastAPI + uvicorn&#10;app.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1c1e22;strokeColor=#1c1e22;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#ffffff;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="310" width="300" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="rag.py&#10;конвейер из книги Huang" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2231a;strokeWidth=2;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="440" y="310" width="320" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="rag_ext.py&#10;GPU, инкремент, источники" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7f6;strokeColor=#e2231a;fontFamily=Segoe UI;fontSize=15;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="820" y="310" width="320" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="s1" target="s2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="s2" target="s3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3" value="Модели и хранилища" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f7f8fa;strokeColor=#e6e8ec;fontFamily=Segoe UI;fontSize=12;fontColor=#8a9098;align=left;spacingLeft=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="1520" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1" value="Chroma&#10;vector_db / rag-chroma" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="530" width="250" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="d2" value="BGE-M3&#10;эмбеддинги на CUDA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="370" y="530" width="250" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="d3" value="Gemini&#10;Google AI Studio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="660" y="530" width="250" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="d4" value="Файлы&#10;data/uploads, models.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d8dce3;fontFamily=Segoe UI;fontSize=14;fontStyle=1;fontColor=#1c1e22;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="950" y="530" width="250" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="s3" target="d1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="s3" target="d2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#e2231a;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="s2" target="d3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="note" value="Docker: порт 8000 · тома data, vector_db, huggingface_cache · GPU gpus: all" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Segoe UI;fontSize=12;fontColor=#8a9098;" vertex="1" parent="1">
+          <mxGeometry x="40" y="710" width="900" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

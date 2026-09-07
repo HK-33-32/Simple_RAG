@@ -1,0 +1,4 @@
+.env
+data/models.json
+__pycache__/
+*.pyc

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 980" role="img" aria-label="Ответ на вопрос">
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e2231a"/>
+    </marker>
+  </defs>
+  <rect width="720" height="980" fill="#f7f8fa"/>
+  <text x="40" y="48" font-family="Segoe UI, Inter, Arial" font-size="22" font-weight="800" fill="#1c1e22">Ответ по документам</text>
+  <text x="40" y="74" font-family="Segoe UI, Inter, Arial" font-size="13" fill="#5d626b">POST /api/ask · retrieve → assess → generate</text>
+  <rect x="580" y="28" width="84" height="8" rx="2" fill="#e2231a"/>
+
+  <rect x="160" y="110" width="400" height="64" rx="14" fill="#1c1e22"/>
+  <text x="360" y="148" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="700" fill="#fff">Вопрос пользователя</text>
+  <line x1="360" y1="174" x2="360" y2="204" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+
+  <rect x="160" y="206" width="400" height="64" rx="14" fill="#fff" stroke="#e2231a" stroke-width="1.6"/>
+  <text x="360" y="244" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">Эмбеддинг вопроса · BGE-M3</text>
+  <line x1="360" y1="270" x2="360" y2="300" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+
+  <rect x="160" y="302" width="400" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="360" y="340" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">Chroma · top_k = 5</text>
+  <line x1="360" y1="366" x2="360" y2="396" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+
+  <rect x="160" y="398" width="400" height="72" rx="14" fill="#fff7f6" stroke="#e2231a"/>
+  <text x="360" y="430" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">CRAG-оценщик</text>
+  <text x="360" y="452" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">порог релевантности 0.35</text>
+  <line x1="260" y1="470" x2="180" y2="520" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+  <line x1="460" y1="470" x2="540" y2="520" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+
+  <rect x="40" y="522" width="280" height="88" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="180" y="558" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#1c1e22">Ниже порога</text>
+  <text x="180" y="582" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">отказ без домыслов</text>
+  <rect x="400" y="522" width="280" height="88" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="540" y="558" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#1c1e22">Выше порога</text>
+  <text x="540" y="582" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">контекст для LLM</text>
+
+  <line x1="180" y1="610" x2="180" y2="700" stroke="#c5cad3" stroke-width="1.6"/>
+  <line x1="540" y1="610" x2="540" y2="650" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+
+  <rect x="400" y="652" width="280" height="88" rx="14" fill="#1c1e22"/>
+  <text x="540" y="688" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#fff">Gemini</text>
+  <text x="540" y="712" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#c8ccd3">только по retrieved context</text>
+  <line x1="540" y1="740" x2="360" y2="790" stroke="#e2231a" stroke-width="2" marker-end="url(#b)"/>
+  <line x1="180" y1="700" x2="360" y2="790" stroke="#c5cad3" stroke-width="1.6" marker-end="url(#b)"/>
+
+  <rect x="160" y="792" width="400" height="72" rx="14" fill="#e2231a"/>
+  <text x="360" y="824" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#fff">Ответ + источники</text>
+  <text x="360" y="846" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#ffd7d4">файл · страница · цитата в PDF</text>
+
+  <text x="40" y="930" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#8a9098">Если контекста мало, система отвечает фиксированной фразой NO_ANSWER.</text>
+</svg>

@@ -1,0 +1,26 @@
+name: simply-rag
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        TORCH_INDEX_URL: https://download.pytorch.org/whl/cu130
+    image: simply-rag:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      HF_HOME: /root/.cache/huggingface
+      HUGGINGFACE_HUB_CACHE: /root/.cache/huggingface
+      ANONYMIZED_TELEMETRY: "false"
+    volumes:
+      - ./data:/app/data
+      - ./vector_db:/app/vector_db
+      - huggingface_cache:/root/.cache/huggingface
+    gpus: all
+    restart: unless-stopped
+
+volumes:
+  huggingface_cache:

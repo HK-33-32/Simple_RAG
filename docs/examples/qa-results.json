@@ -1,0 +1,1478 @@
+[
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 1,
+    "question": "Как называется выпускная квалификационная работа «РАЗРАБОКА 6-ОСЕВОГО МАНИПУЛЯТОРА С АДАПТИВНОЙ СИСТЕМОЙ УПРАВЛЕНИЯ»?",
+    "answer": "Название выпускной квалификационной работы указано в тексте следующим образом: \n\n«РАЗРАБОКА 6-ОСЕВОГО МАНИПУЛЯТОРА С АДАПТИВНОЙ СИСТЕМОЙ УПРАВЛЕНИЯ»",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 8,
+        "score": 0.6502,
+        "snippet": "в проведении научно-исследовательской работы, направленной на разработку 6-осевого робота -манипулятора с адаптивной системой управления, способного эффективно обходить препятствия и предотвращать столкновения. Предполагаемый научно -технич"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.648,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 4,
+        "score": 0.6307,
+        "snippet": "4 РЕФЕРАТ Пояснительная записка: 77 с., 30 рисунков, 4 таблицы 16 источников, 29 приложений. Графическая часть : 5 листов формата А2, 21 лист формата А3, 36 листов формата А4. ШЕСТИОСЕВОЙ РОБОТ МАНИПУЛЯТОР ; ИНТЕЛЛЕКТУАЛЬНАЯ СИСТЕМА УПРАВЛЕ"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 75,
+        "score": 0.6252,
+        "snippet": "75 ЗАКЛЮЧЕНИЕ В данной исследовательской работе была поставлена задача разработки 6-осевого манипулятора с интеллектуальной системой управления, способного эффективно взаимодействовать с окружающей средой и предотвращать столкновения. Мы пр"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 20,
+        "score": 0.6102,
+        "snippet": "20 2 Анализ технического задания 2.1 Описание системы Разрабатываемая система представляет собой 6 -осевой робот - манипулятор с адаптивной системой управления, предназначенный для выполнения задач, в условиях динамически меняющегося окруже"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 2,
+    "question": "В каком университете имени академика С. П. Королёва выполнена ВКР Пешкова и какой год указан на титуле — Самара 2025?",
+    "answer": "ВКР Пешкова выполнена в Самарском национальном исследовательском университете имени академика С. П. Королёва, и на титуле указан год: Самара 2025.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5482,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5302,
+        "snippet": "Руководитель ВКР, профессор кафедры АСЭУ, д.т.н. ____________________________________________________________ С.П. Мурзин Консультант ВКР, Старший преподаватель_____________________________________________ М.В. Блохин Нормоконтролер, Старши"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 215,
+        "score": 0.4157,
+        "snippet": "215"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 364,
+        "score": 0.385,
+        "snippet": "supervised learning 253 SwiGLU (Swish-gated linear unit) 105 T target_chunk tensor 38 targets tensor 139 temperature scaling 151 –152, 154–155 tensor2d 259 tensor3d 259 Tensor class 258 tensor library 252 tensors 258 –261 common tensor oper"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 219,
+        "score": 0.3824,
+        "snippet": "219"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 3,
+    "question": "Кто руководитель ВКР Пешкова и какая у него степень?",
+    "answer": "Руководитель ВКР Пешкова — С.П. Мурзин, его научная степень: доктор технических наук (д.т.н.).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5265,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.4903,
+        "snippet": "Руководитель ВКР, профессор кафедры АСЭУ, д.т.н. ____________________________________________________________ С.П. Мурзин Консультант ВКР, Старший преподаватель_____________________________________________ М.В. Блохин Нормоконтролер, Старши"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 21,
+        "score": 0.3852,
+        "snippet": "xix about the author SEBASTIAN RASCHKA, PhD, has been working in machine learn- ing and AI for more than a decade. In addition to being a researcher, Sebastian has a strong passion for education. He is known for his bestselling books on mac"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 370,
+        "score": 0.3728,
+        "snippet": "Sebastian Raschka ISBN-13: 978-1-63343-716-6 P hysicist Richard P . Feynman reportedly said, “I don’t understand anything I can’t build.” Based on this same powerful principle, bestselling author Sebastian Raschka guides you step by step as"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 20,
+        "score": 0.3627,
+        "snippet": "discusses the latest AI research with a focus on LLMs. Need help getting up to speed with deep learning and PyTorch?  I offer several free courses on my website at https:/ /sebastianraschka.com/ teaching. These resources can help you quick"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 4,
+    "question": "Какая цель работы в реферате ВКР про шестиосевой робот-манипулятор и интеллектуальную систему управления?",
+    "answer": "Согласно реферату ВКР (стр. 4), цель работы заключается в следующем:\n\n«Цель работы - разработка 6-осевого манипулятора с интеллектуальной системой управления, способного эффективно взаимодействовать с окружающей средой, обходить препятствия и предотвращать столкновения.»",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 75,
+        "score": 0.6922,
+        "snippet": "75 ЗАКЛЮЧЕНИЕ В данной исследовательской работе была поставлена задача разработки 6-осевого манипулятора с интеллектуальной системой управления, способного эффективно взаимодействовать с окружающей средой и предотвращать столкновения. Мы пр"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 4,
+        "score": 0.6747,
+        "snippet": "4 РЕФЕРАТ Пояснительная записка: 77 с., 30 рисунков, 4 таблицы 16 источников, 29 приложений. Графическая часть : 5 листов формата А2, 21 лист формата А3, 36 листов формата А4. ШЕСТИОСЕВОЙ РОБОТ МАНИПУЛЯТОР ; ИНТЕЛЛЕКТУАЛЬНАЯ СИСТЕМА УПРАВЛЕ"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 8,
+        "score": 0.6553,
+        "snippet": "в проведении научно-исследовательской работы, направленной на разработку 6-осевого робота -манипулятора с адаптивной системой управления, способного эффективно обходить препятствия и предотвращать столкновения. Предполагаемый научно -технич"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 20,
+        "score": 0.6441,
+        "snippet": "20 2 Анализ технического задания 2.1 Описание системы Разрабатываемая система представляет собой 6 -осевой робот - манипулятор с адаптивной системой управления, предназначенный для выполнения задач, в условиях динамически меняющегося окруже"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5988,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 5,
+    "question": "Какая масса объектов, которые должен перемещать манипулятор Пешкова?",
+    "answer": "Согласно предоставленным документам, основной назначение манипулятора — обеспечение перемещения объектов массой до 8 кг.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 20,
+        "score": 0.5838,
+        "snippet": "20 2 Анализ технического задания 2.1 Описание системы Разрабатываемая система представляет собой 6 -осевой робот - манипулятор с адаптивной системой управления, предназначенный для выполнения задач, в условиях динамически меняющегося окруже"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 25,
+        "score": 0.5583,
+        "snippet": "25 4 Выбор и обоснование элементной базы Для обеспечения требуемых характеристик 6 -осевого манипулятора с адаптивной системой управления проведен расчет моментов сил на каждом звене с учетом их массы и расстояния до центра масс. Сумма рная"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 66,
+        "score": 0.4952,
+        "snippet": "66 − получение координат и данных LiDAR: считываются желаемые и реальные координаты инструмента, а также данные LiDAR; − расчет притягивающей силы: определяется сила, направляющая манипулятор к цели и рассчитывается по формуле: 𝐹𝑎𝑡𝑡̅̅̅̅̅ = "
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 147,
+        "score": 0.4894,
+        "snippet": "<inertial> <pose>0.036300648833915899 0.00085212005862833596 9.7723589664866495e-08 0 0 0</pose> <mass>0.1</mass> <inertia> <ixx>0.0544520712435956</ixx> <ixy>0.000123072795450505</ixy> <ixz>-9.2736408211455702e-08</ixz> <iyy>0.049137662162"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 49,
+        "score": 0.4878,
+        "snippet": "49 7 Проектирование манипулятора В данной главе приведено описание основных конструктивных узлов манипулятора и расчёты на прочность наиболее нагруженных деталей и узлов. 7.1 Основание После исследования подобных решений было принято решени"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 6,
+    "question": "Какие режимы работы манипулятора описаны в ВКР Пешкова?",
+    "answer": "В ВКР Пешкова описаны следующие режимы работы устройства (манипулятора):\n\n1. **Режим ожидания** — манипулятор находится в исходном положении, потребляет минимальную мощность и ожидает команды оператора. Это начальное состояние системы после включения и успешной инициализации.\n2. **Режим задания движения** — оператор вводит желаемые координаты TCP через устройство для задания движения. Контроллер планирует траекторию, избегая препятствий на основе данных от LiDAR, после чего манипулятор перемещается в заданную точку.\n3. **Аварийный режим** — активируется при возникновении потенциально опасных ситуаций. Манипулятор останавливается, сохраняя текущее положение, и ожидает пересчета траектории или вмешательства оператора.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 20,
+        "score": 0.5409,
+        "snippet": "2.2 Режимы работы устройства Для обеспечения функциональности и безопасности системы необходимо реализовать несколько режимов работы, учитывающих как штатные операции, так и возможные нештатные ситуации. − режим ожидания: Манипулятор находи"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 21,
+        "score": 0.5195,
+        "snippet": "21 − аварийный режим: Активируется при возникновении потенциально опасных ситуаций. Манипулятор останавливается, сохраняя текущее положение, и ожидает пересчета траектории или вмешательства оператора. 2.3 Аварийный режим работы Аварийный ре"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5036,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 20,
+        "score": 0.491,
+        "snippet": "20 2 Анализ технического задания 2.1 Описание системы Разрабатываемая система представляет собой 6 -осевой робот - манипулятор с адаптивной системой управления, предназначенный для выполнения задач, в условиях динамически меняющегося окруже"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 11,
+        "score": 0.4645,
+        "snippet": "столкновений манипулятора робота с использованием искусственной нейронной сети. Основная цель системы заключается в том, чтобы обеспечить безопасное взаимодействие робота с окружающей средой, предотвращая столкновения с людьми и объектами. "
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 7,
+    "question": "Когда включается аварийный режим манипулятора в ВКР Пешкова?",
+    "answer": "Согласно документам, аварийный режим манипулятора активируется при возникновении потенциально опасных ситуаций. В частности, он активируется в следующих случаях:\n\n1. **Обнаружение препятствия:** если лидары фиксируют объект на траектории движения.\n2. **Столкновение с препятствием:** если звенья манипулятора касаются препятствий.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 21,
+        "score": 0.6238,
+        "snippet": "21 − аварийный режим: Активируется при возникновении потенциально опасных ситуаций. Манипулятор останавливается, сохраняя текущее положение, и ожидает пересчета траектории или вмешательства оператора. 2.3 Аварийный режим работы Аварийный ре"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.4961,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 36,
+        "score": 0.4848,
+        "snippet": "36 − корпус: IP65. Рисунок 11 – Unitree 4D LiDAR L1 3.8 Кнопка аварийной остановки Кнопка предназначена для немедленного останова манипулятора в аварийной ситуации, обеспечивая безопасность оператора. Требования: − напряжение: до 200 В; − т"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 20,
+        "score": 0.4736,
+        "snippet": "2.2 Режимы работы устройства Для обеспечения функциональности и безопасности системы необходимо реализовать несколько режимов работы, учитывающих как штатные операции, так и возможные нештатные ситуации. − режим ожидания: Манипулятор находи"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 152,
+        "score": 0.4414,
+        "snippet": "152 <joint_name>J_6_Plecho_4_Kist</joint_name> </plugin> <plugin filename=\"gz-sim-joint-state-publisher-system\" name=\"gz::sim::systems::JointStatePublisher\"> <ros> <namespace>/robot</namespace> </ros> <joint_name>lidar_joint_1</joint_name> "
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 8,
+    "question": "Какие моменты на осях манипулятора указаны в ВКР Пешкова?",
+    "answer": "Согласно документам, в ВКР Пешкова указаны следующие моменты на осях манипулятора:\n\n− ось 1: 1000 Н×м; \n− ось 2: 600 Н×м; \n− ось 3: 400 Н×м; \n− ось 4: 60 Н×м; \n− ось 5: 80 Н×м; \n− ось 6: 15 Н×м.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5174,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 25,
+        "score": 0.5055,
+        "snippet": "25 4 Выбор и обоснование элементной базы Для обеспечения требуемых характеристик 6 -осевого манипулятора с адаптивной системой управления проведен расчет моментов сил на каждом звене с учетом их массы и расстояния до центра масс. Сумма рная"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 208,
+        "score": 0.4866,
+        "snippet": "208 ПРИЛОЖЕНИЕ АВ Временные диаграммы Рисунок Т1 – 3D временная диаграмма для координат инструмента манипулятора Рисунок Т2 – Временная диаграмма для углов Эйлера инструмента манипулятора"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 47,
+        "score": 0.4596,
+        "snippet": "47 6 Разработка кинематической модели манипулятора Проанализировав техническое задание и требовани я к системе , была составлена кинематическая модель 6-осевого манипулятора (рисунок 17). А также составлена таблица с параметрами Денавита-Ха"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 13,
+        "score": 0.4591,
+        "snippet": "13 − универсальность: система может быть применена в различных типах манипуляторов и робототехнических систем. Недостатки: − сложность: реализация и обучение нейронной сети могут быть сложными и требовать значительных вычислительных ресурсо"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 9,
+    "question": "Какая общая потребляемая мощность системы в ВКР Пешкова?",
+    "answer": "Согласно загруженным документам, общая потребляемая мощность системы составляет 2465 Вт.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 1,
+        "score": 0.5007,
+        "snippet": "1 МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ «САМАРСКИЙ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ ИМЕНИ АКАДЕМИКА С. П. КОРОЛЁВА» Инст"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 41,
+        "score": 0.4586,
+        "snippet": "41 Вентиляторы: 2 × 12 В × 0,15 А = 3,6 Вт Процессорный модуль: 25 Вт. Кнопки и прочее: 5 Вт. Общая мощность: 2416 + 20 + 3,6 + 25 + 5 = 2465 Вт 3.12 Преобразователь напряжения 12 В Преобразователь используется для питания LiDAR и вентилято"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 823,
+        "score": 0.4577,
+        "snippet": "attention mechanism, optimizing the KV cache, and writing kernels for attention computation. CALCULATING THE KV CACHE SIZE The memory needed for the KV cache, without any optimization, is calculated as follows: 2 × B × S × L × H × M B: batc"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 40,
+        "score": 0.4561,
+        "snippet": "40 − интерфейсы: Ethernet (1 Гбит/с), USB 3.0, CAN; − память: 16 ГБ LPDDR5; − хранилище: поддержка NVMe SSD; − рабочая температура: -25…+80 °C; − размеры: 100 x 87 x 16 мм; − вес: 0,3 кг; − поддержка: ROS. Рисунок 15 – NVIDIA Jetson Orin NX"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 43,
+        "score": 0.4487,
+        "snippet": "43 − вес: 0,3 кг; − корпус: металлический, с пассивным охлаждением. Рисунок 17 – Mean Well SD-25A-9 3.14 Блок питания Блок питания обеспечивает энергоснабжение всех компонентов системы, включая двигатели, драйверы и электронику. Требования:"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "ВКР_Пешков.pdf",
+    "n": 10,
+    "question": "В какой программе gazebo sim пакета ROS2 Jazzy создана симуляция манипулятора в ВКР Пешкова?",
+    "answer": "Симуляция 6-осевого манипулятора в ВКР Пешкова создана в программе gazebo sim пакета ROS2 Jazzy.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 60,
+        "score": 0.6467,
+        "snippet": "60 9 Создание симуляционной модели В данной главе приведено описание процесса создания и настройки симуляционной модели 6 -осевого манипулятора в программе gazebo sim пакета ROS2 Jazzy. 9.1 Создание проекта Для запуска и полной работоспособ"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 4,
+        "score": 0.557,
+        "snippet": "В процессе работы был а создана и импортирована в среду симуляции gazebo кинематическая модель 6-осевого манипулятора , а также проведены тесты на работоспособность кинематики робота."
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 62,
+        "score": 0.5351,
+        "snippet": "62 Файл описания со всеми доработками приведен в приложении К. 9.4 Создание файла запуска симуляции Для запуска симуляции со всеми плагинами и сенсорами, а также их корректной работы был разработан файл запуска, состоящий из следующих пункт"
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 152,
+        "score": 0.5251,
+        "snippet": "152 <joint_name>J_6_Plecho_4_Kist</joint_name> </plugin> <plugin filename=\"gz-sim-joint-state-publisher-system\" name=\"gz::sim::systems::JointStatePublisher\"> <ros> <namespace>/robot</namespace> </ros> <joint_name>lidar_joint_1</joint_name> "
+      },
+      {
+        "filename": "ВКР_Пешков.pdf",
+        "page": 76,
+        "score": 0.5109,
+        "snippet": "76 СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ 1 Документация по ROS2 / пер. с англ. [Электронный ресурс] . – URL: https://docs.ros.org/en/jazzy/index.html (дата обращения 15.10.2024). 2 Как смоделировать роботизированную руку в Gazebo – ROS2 / пер. с"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 1,
+    "question": "Кто автор книги AI Engineering?",
+    "answer": "Автор книги \"AI Engineering\" — Chip Huyen.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 3,
+        "score": 0.6301,
+        "snippet": "condensed her expertise for new AI Engineers entering the field. —swyx, Curator, AI.Engineer AI Engineering is a practical guide that provides the most up-to-date information on AI development, making it approachable for novice and expert l"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 2,
+        "score": 0.6148,
+        "snippet": "Praise for AI Engineering This book offers a comprehensive, well-structured guide to the essential aspects of building generative AI systems. A must-read for any professional looking to scale AI across the enterprise. —Vittorio Cretella, fo"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 4,
+        "score": 0.6089,
+        "snippet": "AI Engineering is a comprehensive guide that serves as an essential reference for both understanding and implementing AI systems in practice. —Han Lee, Director—Data Science, Moody’s AI Engineering is an essential guide for anyone building "
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 931,
+        "score": 0.5993,
+        "snippet": "For more resources about AI engineering, check out the book’s GitHub repository: https://github.com/chiphuyen/aie-book. AI engineering has a lot of challenges. Not all of them are fun, but all of them are opportunities for growth and impact"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 6,
+        "score": 0.5985,
+        "snippet": "AI Engineering by Chip Huyen Copyright © 2025 Developer Experience Advisory LLC. All rights reserved. Printed in the United States of America. Published by O’Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472. O’Reilly"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 2,
+    "question": "Как полностью называется книга AI Engineering и кто издатель O'Reilly?",
+    "answer": "На основании загруженных документов полное название книги: **AI Engineering: Building Applications with Foundation Models** (автор — Chip Huyen). \n\nИздатель: **O’Reilly Media, Inc.** (адрес: 1005 Gravenstein Highway North, Sebastopol, CA 95472).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 6,
+        "score": 0.6917,
+        "snippet": "AI Engineering by Chip Huyen Copyright © 2025 Developer Experience Advisory LLC. All rights reserved. Printed in the United States of America. Published by O’Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472. O’Reilly"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 13,
+        "score": 0.6222,
+        "snippet": "cases and application patterns. The content in this book is illustrated using case studies, many of which I worked on, backed by ample references and extensively reviewed by experts from a wide range of backgrounds. Although the book took t"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 25,
+        "score": 0.6131,
+        "snippet": "does require permission. We appreciate, but generally do not require, attribution. An attribution usually includes the title, author, publisher, and ISBN. For example: “AI Engineering by Chip Huyen (O’Reilly). Copyright 2025 Developer Exper"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 27,
+        "score": 0.6007,
+        "snippet": "We have a web page for this book, where we list errata, examples, and any additional information. You can access this page at https://oreil.ly/ai- engineering. For news and information about our books and courses, visit https://oreilly.com."
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 4,
+        "score": 0.5864,
+        "snippet": "AI Engineering is a comprehensive guide that serves as an essential reference for both understanding and implementing AI systems in practice. —Han Lee, Director—Data Science, Moody’s AI Engineering is an essential guide for anyone building "
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 3,
+    "question": "Когда вышло первое издание AI Engineering: December 2024 First Edition, First Release 2024-12-04?",
+    "answer": "В загруженных документах недостаточно информации для ответа.",
+    "n_context": 0,
+    "chunks": [],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 4,
+    "question": "Какой ISBN у книги AI Engineering Chip Huyen, 978-1-098-16630-4?",
+    "answer": "В загруженных документах недостаточно информации для ответа.",
+    "n_context": 0,
+    "chunks": [],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 5,
+    "question": "О чём глава 5 книги AI Engineering: prompt engineering, prompt attacks and how to defend?",
+    "answer": "Согласно предоставленным документам, Глава 5 книги посвящена следующим темам:\n\n* **Промпт-инжиниринг (prompt engineering):** начинается с того, что такое промпт, почему работает промпт-инжиниринг, а также рассматриваются лучшие практики промпт-инжиниринга (prompt engineering best practices). Также обсуждается написание эффективных инструкций, чтобы заставить модель выполнять нужные задачи (включая методы вроде zero-shot и few-shot).\n* **Промпт-атаки и защита от них:** рассматривается то, как злоумышленники могут использовать уязвимости приложений с помощью промпт-атак (включая такие темы, как джейлбрейк, прямой ручной хакинг промптов, прямая и непрямая инъекция промптов), и то, как защитить от них свое приложение (защитный промпт-инжиниринг, системные меры защиты).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 21,
+        "score": 0.6885,
+        "snippet": "The next three chapters of the book focus on how to optimize each of these aspects to improve a model’s performance for an application. Chapter 5 covers prompt engineering, starting with what a prompt is, why prompt engineering works, and p"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 491,
+        "score": 0.6759,
+        "snippet": "is an ever-evolving cat-and-mouse game, no security measurements will be foolproof. Security risks will remain a significant roadblock for AI adoption in high-stakes environments. This chapter also discusses techniques to write better instr"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 975,
+        "score": 0.6572,
+        "snippet": "prompt attacks, Defensive Prompt Engineering, Jailbreaking and Prompt Injection-Indirect prompt injection automated attacks, Automated attacks defense against, Defenses Against Prompt Attacks-System-level defense direct manual prompt hackin"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 417,
+        "score": 0.6473,
+        "snippet": "Prompt experiments should be conducted with the same rigor as any ML experiment, with systematic experimentation and evaluation. The importance of prompt engineering is perfectly summarized by a research manager at OpenAI that I interviewed"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 109,
+        "score": 0.6233,
+        "snippet": "Table 1-5. Different prompts can cause models to perform very differently, as seen in Gemini’s technic Gemini Ultra Gemini Pro GPT-4 GPT- MMLU performance 90.04% CoT@32 79.13% CoT@8 87.29% CoT@32 (via API) 70% 5-sho 83.7% 5-shot 71.8% 5-sho"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 6,
+    "question": "Какие два паттерна построения контекста разбирает глава 6 книги AI Engineering: RAG and agentic?",
+    "answer": "Глава 6 разбирает два доминирующих паттерна построения контекста: RAG (retrieval-augmented generation) и агентский паттерн (agentic pattern).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 494,
+        "score": 0.7009,
+        "snippet": "Chapter 6. RAG and Agents To solve a task, a model needs both the instructions on how to do it, and the necessary information to do so. Just like how a human is more likely to give a wrong answer when lacking information, AI models are more"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 21,
+        "score": 0.6799,
+        "snippet": "The next three chapters of the book focus on how to optimize each of these aspects to improve a model’s performance for an application. Chapter 5 covers prompt engineering, starting with what a prompt is, why prompt engineering works, and p"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 335,
+        "score": 0.6301,
+        "snippet": "relevant information from external databases to supplement the model’s context. The generated response should be factually consistent with the retrieved context. RAG is a central topic in Chapter 6."
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 494,
+        "score": 0.5995,
+        "snippet": "augmented generation, and agents. The RAG pattern allows the model to retrieve relevant information from external data sources. The agentic pattern allows the model to use tools such as web search and news APIs to gather information. While "
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 497,
+        "score": 0.5976,
+        "snippet": "You can think of RAG as a technique to construct context specific to each query, instead of using the same context for all queries. This helps with managing user data, as it allows you to include data specific to a user only in queries rela"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 7,
+    "question": "О чём глава 7 книги AI Engineering про finetuning и memory footprint?",
+    "answer": "Глава 7 книги *AI Engineering* посвящена адаптации модели к конкретному приложению или задаче путем изменения самой модели с помощью дообучения (finetuning). В ней рассматриваются следующие вопросы:\n\n* **Различные подходы к дообучению**, включая традиционное дообучение и доминирующий в этой сфере энергоэффективный подход PEFT (parameter-efficient finetuning) с акцентом на аддаптерные (adapter-based) техники. Также упоминается более экспериментальный подход — слияние моделей (model merging).\n* **Проблема нехватки памяти (Memory Bottlenecks):** объясняется, почему дообучение является ресурсоемким процессом с точки зрения памяти, и описываются факторы, влияющие на объем памяти модели.\n* **Технический раздел с расчетами:** приводятся формулы для приблизительного расчета объема памяти (memory footprint) модели, которые полезны для оценки требований к аппаратному обеспечению (железу), необходимому для обслуживания или дообучения модели.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 21,
+        "score": 0.6771,
+        "snippet": "pattern promises to be much more powerful, it’s also more complex and is still being explored. Chapter 7 is about how to adapt a model to an application by changing the model itself with finetuning. Due to the scale of foundation models, na"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 618,
+        "score": 0.6283,
+        "snippet": "Memory Bottlenecks Because finetuning is memory-intensive, many finetuning techniques aim to minimize their memory footprint. Understanding what causes this memory bottleneck is necessary to understand why and how these techniques work. Thi"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 19,
+        "score": 0.6272,
+        "snippet": "ABOUT THIS BOOK xvii of various sizes, and computing the number of parameters and storage requirements of GPT models. Chapter 5 implements the pretraining process of LLMs. It covers computing the training and validation set losses to assess"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 594,
+        "score": 0.6198,
+        "snippet": "Chapter 7. Finetuning Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model. Chapters 5 and 6 discuss prompt-based methods, which adapt a model by giving it instructions, c"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 595,
+        "score": 0.6161,
+        "snippet": "motivation for many finetuning techniques. This chapter dedicates one section to outlining factors contributing to a model’s memory footprint, which is important for understanding these techniques. A memory-efficient approach that has becom"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 8,
+    "question": "Какая модель начала революцию deep learning в 2010-х по книге Chip Huyen и на чём её учили?",
+    "answer": "Согласно загруженным документам, модель, которая начала революцию deep learning в 2010-х — это **AlexNet** (Krizhevsky et al., 2012). \n\nОна обучалась на классификации более чем 1 миллиона изображений в датасете **ImageNet** (каждое изображение классифицировалось на одну из 1 000 категорий, таких как «car», «balloon» или «monkey»).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 989,
+        "score": 0.6351,
+        "snippet": "About the Author Chip Huyen is a writer and computer scientist specializing in machine learning (ML) systems. She has worked at NVIDIA, Snorkel AI, founded an AI infrastructure startup (later acquired), and taught ML systems at Stanford Uni"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 41,
+        "score": 0.5911,
+        "snippet": "the model can be applied to new data. For example, to train a fraud detection model, you use examples of transactions, each labeled with “fraud” or “not fraud”. Once the model learns from these examples, you can use this model to predict wh"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 220,
+        "score": 0.5778,
+        "snippet": "The first hypothesis, originally expressed by Ortega et al. at DeepMind in 2021, is that a language model hallucinates because it can’t differentiate between the data it’s given and the data it generates. Let’s go through an example to illu"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 428,
+        "score": 0.5689,
+        "snippet": "DATA “ Jay and Maarten have continued their tradition of providing beautifully illustrated and insightful descriptions of complex topics. Their book is a valuable resource for anyone looking to understand the main techniques behind how larg"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 2,
+        "score": 0.5516,
+        "snippet": "looking to understand the main techniques behind how Large Language Models are built. —Andrew Ng, founder of DeepLearning.AI I can’t think of another book that is more important to read right now. On every single page, I learned something t"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 9,
+    "question": "Сколько по оценке Chip Huyen стоит разметить миллион картинок ImageNet по 5 центов за штуку?",
+    "answer": "По оценке из документов, разметить миллион картинок для ImageNet по цене 5 центов за одну картинку будет стоить $50,000.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 989,
+        "score": 0.5843,
+        "snippet": "About the Author Chip Huyen is a writer and computer scientist specializing in machine learning (ML) systems. She has worked at NVIDIA, Snorkel AI, founded an AI infrastructure startup (later acquired), and taught ML systems at Stanford Uni"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 41,
+        "score": 0.577,
+        "snippet": "consuming. If it costs 5 cents for one person to label one image, it’d cost $50,000 to label a million images for ImageNet. If you want two different people to label each image—so that you could cross-check label quality— it’d cost twice as"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 41,
+        "score": 0.505,
+        "snippet": "the model can be applied to new data. For example, to train a fraud detection model, you use examples of transactions, each labeled with “fraud” or “not fraud”. Once the model learns from these examples, you can use this model to predict wh"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 735,
+        "score": 0.4789,
+        "snippet": "10 test dataset and 16.04% of the ImageNet test images could be misclassified by changing just one pixel. This poses a serious risk if exploited. An attacker could trick an AI model into misidentifying them as an authorized employee or make"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 806,
+        "score": 0.469,
+        "snippet": "billions of transistors—an NVIDIA A100 has 54 billion transistors, while an NVIDIA H100 has 80 billion. When an accelerator is used efficiently, billions of transistors rapidly switch states, consuming a substantial amount of energy and gen"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+    "n": 10,
+    "question": "How much would ImageNet labeling cost to scale up to 1 million categories according to Chip Huyen?",
+    "answer": "Согласно книге Чип Хуен (Chip Huyen), при масштабировании до 1 миллиона категорий стоимость только аннотирования данных увеличится до 50 миллионов долларов.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 41,
+        "score": 0.6537,
+        "snippet": "consuming. If it costs 5 cents for one person to label one image, it’d cost $50,000 to label a million images for ImageNet. If you want two different people to label each image—so that you could cross-check label quality— it’d cost twice as"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 989,
+        "score": 0.5741,
+        "snippet": "About the Author Chip Huyen is a writer and computer scientist specializing in machine learning (ML) systems. She has worked at NVIDIA, Snorkel AI, founded an AI infrastructure startup (later acquired), and taught ML systems at Stanford Uni"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 41,
+        "score": 0.5467,
+        "snippet": "the model can be applied to new data. For example, to train a fraud detection model, you use examples of transactions, each labeled with “fraud” or “not fraud”. Once the model learns from these examples, you can use this model to predict wh"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 387,
+        "score": 0.4921,
+        "snippet": "evaluation harness can help you with that. Running benchmarks can be expensive. For example, Stanford spent approximately $80,000–$100,000 to evaluate 30 models on their full HELM suite. The more models you want to evaluate and the more ben"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 195,
+        "score": 0.4903,
+        "snippet": "class labels (“ham” or “spam”) and corresponding text messages. The dataset consists of 5,572 rows (text messages and labels)."
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 1,
+    "question": "Кто авторы книги Hands-On Large Language Models Jay Alammar and Maarten Grootendorst?",
+    "answer": "Авторами книги «Hands-On Large Language Models» являются Jay Alammar и Maarten Grootendorst.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 1,
+        "score": 0.7919,
+        "snippet": "Hands-On Large Language Models Language Understanding and Generation Jay Alammar & Maarten Grootendorst"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 425,
+        "score": 0.7765,
+        "snippet": "About the Authors Jay Alammar is Director and Engineering Fellow at Cohere (pioneering provider of large language models as an API). In this role, he advises and educates enterprises and the developer community on using language models for "
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 5,
+        "score": 0.7154,
+        "snippet": "978-1-098-15096-9 [LSI] Hands-On Large Language Models by Jay Alammar and Maarten Grootendorst Copyright © 2024 Jay Alammar and Maarten Pieter Grootendorst. All rights reserved. Printed in the United States of America. Published by O’Reilly"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 4,
+        "score": 0.6926,
+        "snippet": "Jay Alammar and Maarten Grootendorst Hands-On Large Language Models Language Understanding and Generation Boston Farnham Sebastopol TokyoBeijing Boston Farnham Sebastopol TokyoBeijing"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 2,
+        "score": 0.6516,
+        "snippet": "Praise for Hands-On Large Language Models This is an exceptional guide to the world of language models and their practical applications in industry. Its highly-visual coverage of generative, representational, and retrieval applications of l"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 2,
+    "question": "Какой подзаголовок у книги Hands-On Large Language Models: Language Understanding and Generation?",
+    "answer": "Судя по предоставленным документам, подзаголовок книги *Hands-On Large Language Models*: **Language Understanding and Generation**.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 1,
+        "score": 0.6993,
+        "snippet": "Hands-On Large Language Models Language Understanding and Generation Jay Alammar & Maarten Grootendorst"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 3,
+        "score": 0.6906,
+        "snippet": "—Tarun Narayanan Venkatachalam, AI Researcher, University of Washington Timely reading to get hands-on experience with language models. —Emir Muñoz, Genesys Hands-On Large Language Models brings clarity and practical examples to cut through"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 24,
+        "score": 0.663,
+        "snippet": "2 CHAPTER 1 Understanding large language models LLMs have remarkable capabilities to understand, generate, and interpret human language. However, it’s important to clarify that when we say language models “under- stand,” we mean that they c"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 6,
+        "score": 0.6557,
+        "snippet": "Table of Contents Preface. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . xi Part I. Understanding Language Models 1. An Introduction to Large Lang"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 22,
+        "score": 0.6531,
+        "snippet": "PART I Understanding Language Models"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 3,
+    "question": "Что пишет Nils Reimers, creator of sentence-transformers, о книге Hands-On Large Language Models?",
+    "answer": "Nils Reimers пишет о книге следующее:\n\n«This is an exceptional guide to the world of language models and their practical applications in industry. Its highly-visual coverage of generative, representational, and retrieval applications of language models empowers readers to quickly understand, use, and refine LLMs. Highly recommended!» \n\n*(Это исключительное руководство по миру языковых моделей и их практическому применению в индустрии. Высоко наглядное освещение генеративных, репрезентативных и поисковых приложений языковых моделей позволяет читателям быстро понять, использовать и дорабатывать LLM. Настоятельно рекомендуется!)*",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 2,
+        "score": 0.7177,
+        "snippet": "Praise for Hands-On Large Language Models This is an exceptional guide to the world of language models and their practical applications in industry. Its highly-visual coverage of generative, representational, and retrieval applications of l"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 3,
+        "score": 0.6365,
+        "snippet": "—Tarun Narayanan Venkatachalam, AI Researcher, University of Washington Timely reading to get hands-on experience with language models. —Emir Muñoz, Genesys Hands-On Large Language Models brings clarity and practical examples to cut through"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 2,
+        "score": 0.6165,
+        "snippet": "looking to understand the main techniques behind how Large Language Models are built. —Andrew Ng, founder of DeepLearning.AI I can’t think of another book that is more important to read right now. On every single page, I learned something t"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 3,
+        "score": 0.6019,
+        "snippet": "Build a Large Language Model (From Scratch)"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 12,
+        "score": 0.6005,
+        "snippet": "Preface Large language models (LLMs) have had a profound and far-reaching impact on the world. By enabling machines to better understand and generate human-like language, LLMs have opened new possibilities in the field of AI and impacted en"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 4,
+    "question": "Что Andrew Ng, founder of DeepLearning.AI, говорит о книге Hands-On Large Language Models?",
+    "answer": "Согласно предоставленным документам, Andrew Ng, основатель DeepLearning.AI, говорит о книге следующее:\n\n> «Jay and Maarten have continued their tradition of providing beautifully illustrated and insightful descriptions of complex topics. Their book is a valuable resource for anyone looking to understand the main techniques behind how large language models are built.»\n\n*(Перевод: «Джей и Маартен продолжили свою традицию предоставления прекрасно иллюстрированных и глубоких описаний сложных тем. Их книга является ценным ресурсом для всех, кто хочет понять основные методы построения больших языковых моделей»)*",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 428,
+        "score": 0.743,
+        "snippet": "DATA “ Jay and Maarten have continued their tradition of providing beautifully illustrated and insightful descriptions of complex topics. Their book is a valuable resource for anyone looking to understand the main techniques behind how larg"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 2,
+        "score": 0.7074,
+        "snippet": "looking to understand the main techniques behind how Large Language Models are built. —Andrew Ng, founder of DeepLearning.AI I can’t think of another book that is more important to read right now. On every single page, I learned something t"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 3,
+        "score": 0.6797,
+        "snippet": "—Tarun Narayanan Venkatachalam, AI Researcher, University of Washington Timely reading to get hands-on experience with language models. —Emir Muñoz, Genesys Hands-On Large Language Models brings clarity and practical examples to cut through"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 3,
+        "score": 0.6365,
+        "snippet": "Build a Large Language Model (From Scratch)"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 2,
+        "score": 0.6182,
+        "snippet": "Praise for Hands-On Large Language Models This is an exceptional guide to the world of language models and their practical applications in industry. Its highly-visual coverage of generative, representational, and retrieval applications of l"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 5,
+    "question": "В чём intuition-first philosophy книги Hands-On Large Language Models?",
+    "answer": "Согласно загруженным документам, главная цель философии «intuition-first» (интуиция прежде всего) заключается в том, чтобы дать читателю интуитивное понимание сферы больших языковых моделей (LLM). Поскольку темпы развития в области языкового ИИ невероятно высоки и попытки поспеть за новейшими технологиями могут вызывать разочарование, авторы сосредоточились на фундаментальных основах LLM и стремятся сделать процесс обучения увлекательным и простым. \n\nДля реализации этой философии авторы щедро используют визуальный язык (иллюстрации помогают создать визуальную идентичность основных концепций и процессов), а также делают упор на построение прочной интуиции, а не на вывод математических уравнений.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 12,
+        "score": 0.6598,
+        "snippet": "training methods, and fine-tuning techniques. We also examine various applications of LLMs in text classification, clustering, topic modeling, chatbots, search engines, and more. With its unique blend of intuition-building, applications, an"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 12,
+        "score": 0.6248,
+        "snippet": "trying to keep up with the latest technologies. Instead, we focus on the fundamentals of LLMs and intend to provide a fun and easy learning process. To achieve this intuition-first philosophy we liberally make use of visual language. Illust"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 3,
+        "score": 0.6095,
+        "snippet": "—Tarun Narayanan Venkatachalam, AI Researcher, University of Washington Timely reading to get hands-on experience with language models. —Emir Muñoz, Genesys Hands-On Large Language Models brings clarity and practical examples to cut through"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 13,
+        "score": 0.606,
+        "snippet": "are typically the first thing that comes to mind when thinking about LLMs, there is still much use for representation models. We are also loosely using the word “large” in large language models and often elect to simply call them language m"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 3,
+        "score": 0.6006,
+        "snippet": "Build a Large Language Model (From Scratch)"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 6,
+    "question": "Чем representation models отличаются от generative models по книге Hands-On Large Language Models?",
+    "answer": "На основании книги *Hands-On Large Language Models* основные отличия между representation models (моделями представления, основанными только на энкодере) и generative models (генеративными моделями, основанными только на декодере) заключаются в следующем:\n\n1. **Назначение и генерация текста:**\n   - **Representation models** в основном сосредоточены на представлении языка (например, путем создания эмбеддингов) и, как правило, не генерируют текст. Они часто используются для конкретных задач (task-specific), таких как классификация.\n   - **Generative models** сфокусированы в первую очередь на генерации текста (работают как sequence-to-sequence машины, принимающие текст на вход и автодополняющие его), при этом они обычно не обучаются генерации эмбеддингов.\n\n2. **Обозначения на иллюстрациях в книге:**\n   - Модели представления изображаются бирюзовым цветом (teal) с небольшим значком вектора (указывающим на их фокус на векторах и эмбеддингах).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 41,
+        "score": 0.7168,
+        "snippet": "Throughout the book, we will refer to encoder-only models as representation models to differentiate them from decoder-only, which we refer to as generative models . Note that the main distinction does not lie between the underlying architec"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 13,
+        "score": 0.6869,
+        "snippet": "1 J. Alammar. “Machine learning research communication via illustrated and interactive web articles. ” Beyond Static Papers: Rethinking How We Share Scientific Understanding in ML. ICLR 2021 Workshop (2021). in the learning process of LLMs."
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 148,
+        "score": 0.6745,
+        "snippet": "Text Classification with Generative Models Classification with generative language models, such as OpenAI’s GPT models, works a bit differently from what we have done thus far. These models take as input some text and generative text and ar"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 43,
+        "score": 0.6704,
+        "snippet": "These generative decoder-only models, especially the “larger” models, are commonly referred to as large language models (LLMs). As we will discuss later in this chapter, the term LLM is not only reserved for generative models (decoder-only)"
+      },
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 38,
+        "score": 0.6449,
+        "snippet": "generation, and for this reason, they are much more popular than masked language models. Figure 1-2 shows these two types of language models. Figure 1-2. Autoregressive language model and masked language model. NOTE In this book, unless exp"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 7,
+    "question": "Какие предварительные знания нужны читателю Hands-On Large Language Models: Python и machine learning?",
+    "answer": "Исходя из загруженных документов, книга *Hands-On Large Language Models* предполагает, что у читателя есть некоторый опыт программирования на Python и знакомство с основами машинного обучения. \n\nПри этом книга не требует предварительных знаний популярных фреймворков глубокого обучения (таких как PyTorch или TensorFlow) и генеративного моделирования.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 13,
+        "score": 0.7278,
+        "snippet": "are typically the first thing that comes to mind when thinking about LLMs, there is still much use for representation models. We are also loosely using the word “large” in large language models and often elect to simply call them language m"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 13,
+        "score": 0.6674,
+        "snippet": "book. This book assumes no prior knowledge of popular deep learning frameworks such as PyTorch or TensorFlow nor any prior knowledge of generative modeling. If you are not familiar with Python, a great place to start is Learn Python, where "
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 18,
+        "score": 0.6593,
+        "snippet": "ABOUT THIS BOOKxvi other resource provides such a complete and hands-on approach to building LLMs from the ground up. To understand the code examples in this book, you should have a solid grasp of Python programming. While some familiarity "
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 3,
+        "score": 0.6302,
+        "snippet": "—Tarun Narayanan Venkatachalam, AI Researcher, University of Washington Timely reading to get hands-on experience with language models. —Emir Muñoz, Genesys Hands-On Large Language Models brings clarity and practical examples to cut through"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 18,
+        "score": 0.6177,
+        "snippet": "in PyTorch is not a prerequisite. Appendix A provides a concise introduction to PyTorch, equipping you with the necessary skills to comprehend the code examples throughout the book. A high school–level understanding of mathematics, particul"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 8,
+    "question": "О чём глава 8 Hands-On Large Language Models: Semantic Search and Retrieval-Augmented Generation?",
+    "answer": "В загруженных документах недостаточно информации для ответа.",
+    "n_context": 0,
+    "chunks": [],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 9,
+    "question": "Что обсуждается в главе 7 Hands-On Large Language Models про LangChain, memory buffers и ReAct agents?",
+    "answer": "На основании загруженных документов в главе 7 обсужаются следующие темы, связанные с вашим вопросом:\n\n* **LangChain и memory (память):** \n  * Добавление памяти в цепочки (chains) для того, чтобы языковые модели могли запоминать беседы (страницы 9, 245).\n  * Рассмотрение трех различных методов добавления памяти (стр. 245), включая:\n    * Conversation Buffer (стр. 9)\n    * Windowed Conversation Buffer (стр. 9)\n    * Conversation Summary (стр. 9)\n* **Агенты (Agents) и ReAct:** \n  * Создание систем из LLM (агентов) (стр. 9).\n  * Пошаговые рассуждения, лежащие в основе агентов (стр. 9).\n  * Фреймворк ReAct в LangChain (стр. 9, 221), который использует промптинг для того, чтобы агенты могли рассуждать о своих мыслях, совершать действия и наблюдать за результатами (стр. 245).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 9,
+        "score": 0.6484,
+        "snippet": "Memory: Helping LLMs to Remember Conversations 209 Conversation Buffer 210 Windowed Conversation Buffer 212 Conversation Summary 214 Agents: Creating a System of LLMs 218 The Driving Power Behind Agents: Step-by-step Reasoning 219 ReAct in "
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 3,
+        "score": 0.6116,
+        "snippet": "—Tarun Narayanan Venkatachalam, AI Researcher, University of Washington Timely reading to get hands-on experience with language models. —Emir Muñoz, Genesys Hands-On Large Language Models brings clarity and practical examples to cut through"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 245,
+        "score": 0.6051,
+        "snippet": "Summary In this chapter, we explored several ways to extend the capabilities of LLMs by adding modular components. We began by creating a simple but reusable chain that connected the LLM with a prompt template. We then expanded on this conc"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 9,
+        "score": 0.6019,
+        "snippet": "ReAct in LangChain 221 Summary 224 8. Semantic Search and Retrieval-Augmented Generation. . . . . . . . . . . . . . . . . . . . . . . . 225 Overview of Semantic Search and RAG 226 Semantic Search with Language Models 228 Dense Retrieval 228"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 9,
+        "score": 0.6009,
+        "snippet": "Summary 198 7. Advanced Text Generation Techniques and Tools. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 199 Model I/O: Loading Quantized Models with LangChain 200 Chains: Extending the Capabilities of LLMs 202 A Single Link in"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+    "n": 10,
+    "question": "О чём глава 10 Hands-On Large Language Models: Creating Text Embedding Models, contrastive learning, SBERT?",
+    "answer": "Судя по оглавлению и вступительному тексту главы 10 («Creating Text Embedding Models»), эта глава посвящена созданию и тонкой настройке моделей текстовых эмбеддингов, которые лежат в основе многих приложений обработки естественного языка (таких как классификация, семантический поиск и память для генеративных моделей). \n\nВ главе рассматриваются следующие ключевые темы:\n* **Embedding Models** (Модели эмбеддингов);\n* **What Is Contrastive Learning?** (Что такое контрастное обучение);\n* **SBERT**;\n* **Creating an Embedding Model** (Создание модели эмбеддингов, включая генерацию контрастных примеров, обучение, функции потерь и оценку);\n* **Fine-Tuning** (Тонкая настройка: контролируемое обучение, Augmented SBERT, неконтролируемое обучение).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 10,
+        "score": 0.7266,
+        "snippet": "Part III. Training and Fine-Tuning Language Models 10. Creating Text Embedding Models. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 289 Embedding Models 289 What Is Contrastive Learning? 291 SBERT 293 "
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 423,
+        "score": 0.6473,
+        "snippet": "model selection, 115-116 task-specific models, 116-120 text clustering, 137-146 CLIP embedding model and, 265 common pipeline for, 139-146 cluster model, 142-144 dimensionality reduction model, 140-142 embedding model, 139 inspecting cluste"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 310,
+        "score": 0.6473,
+        "snippet": "CHAPTER 10 Creating Text Embedding Models Text embedding models lie at the foundation of many powerful natural language processing applications. They lay the groundwork for empowering already impres‐ sive technologies such as text generatio"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 331,
+        "score": 0.6468,
+        "snippet": "'spearman_euclidean': 0.8484676559567688, 'pearson_dot': 0.8489553386816947, 'spearman_dot': 0.8484676559567688, 'pearson_max': 0.8513115442079158, 'spearman_max': 0.8484676559567688} 310 | Chapter 10: Creating Text Embedding Models"
+      },
+      {
+        "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+        "page": 287,
+        "score": 0.6453,
+        "snippet": "product of their lengths. When we start training, the similarity between the image embedding and text embed‐ ding will be low as they are not yet optimized to be within the same vector space. During training, we optimize for the similarity "
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 1,
+    "question": "Кто автор книги Build a Large Language Model (From Scratch) и какое издательство Manning Shelter Island?",
+    "answer": "Автором книги «Build a Large Language Model (From Scratch)» является Себастьян Рашка (Sebastian Raschka), а издательством — Manning (Shelter Island).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 5,
+        "score": 0.7647,
+        "snippet": "Build a Large Language Model (From Scratch) SEBASTIAN RASCHKA MANNING SHELTER ISLAND"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 3,
+        "score": 0.7072,
+        "snippet": "Build a Large Language Model (From Scratch)"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 370,
+        "score": 0.6307,
+        "snippet": "https:/ /www.manning.com/freebook BUILD A Large Language Model (FROM SCRATCH) AI MANNING “ T ruly inspirational! It motivates you to put your new skills into action. ”—Benjamin Muskalla Senior Engineer, GitHub “ Th e most understandable and"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 20,
+        "score": 0.6225,
+        "snippet": "ABOUT THIS BOOKxviii liveBook discussion forum Purchase of Build a Large Language Model (From Scratch) includes free access to live- Book, Manning’s online reading platform. Using liveBook’s exclusive discussion fea- tures, you can attach c"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 370,
+        "score": 0.6053,
+        "snippet": "Sebastian Raschka ISBN-13: 978-1-63343-716-6 P hysicist Richard P . Feynman reportedly said, “I don’t understand anything I can’t build.” Based on this same powerful principle, bestselling author Sebastian Raschka guides you step by step as"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 2,
+    "question": "Какие три стадии сборки LLM показаны в книге Sebastian Raschka: architecture, pretraining foundation model, fine-tuning?",
+    "answer": "Согласно предоставленным документам, тремя основными стадиями создания (кодирования) большой языковой модели (LLM) являются:\n\n1. Реализация архитектуры LLM и процесса подготовки данных (stage 1);\n2. Предварительное обучение LLM для создания базовой модели (pretraining an LLM to create a foundation model, stage 2);\n3. Тонкая настройка (fine-tuning) базовой модели для превращения её в персонального помощника или текстовый классификатор (stage 3).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 36,
+        "score": 0.7143,
+        "snippet": "Instruction dataset Implements the data sampling and understand the basic mechanism Pretrains the LLM on unlabeled data to obtain a foundation model for further ﬁne-tuning Fine-tunes the pretrained LLM to create a classiﬁcation model Fine-t"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 115,
+        "score": 0.7018,
+        "snippet": "Building an LLM STAGE 1 Foundation model STAGE 2 STAGE 3 Classiﬁer Personal assistant Dataset with class labels Instruction dataset 4) Pretraining 9) Fine-tuning 5) Training loop 6) Model evaluation 7) Load pretrained weights 8) Fine-tuning"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 2,
+        "score": 0.6939,
+        "snippet": "The three main stages of coding a large language model (LLM) are implementing the LLM architecture and data preparation process (stage 1), pretraining an LLM to create a foundation model (stage 2), and fine-tuning the foundation model to be"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 270,
+        "score": 0.693,
+        "snippet": "building an LLM from scratch is the most effective way to gain a deep understanding of how LLMs work. I hope that this hands-on approach has provided you with valuable insights and a solid foundation in LLM development. Figure 7.21 The thre"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 151,
+        "score": 0.6845,
+        "snippet": "loop along with model evaluation metrics. Finally, we load openly available pretrained weights into the model. 1) Data preparation & sampling 2) Attention mechanism Building an LLM STAGE 1 Foundation model STAGE 2 STAGE 3 Classiﬁer Personal"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 3,
+    "question": "Как называются главы 1–4 книги Build a Large Language Model From Scratch: Understanding LLMs, text data, attention, GPT from scratch?",
+    "answer": "В загруженных документах недостаточно информации для ответа.",
+    "n_context": 0,
+    "chunks": [],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 4,
+    "question": "Чему посвящена глава 5 книги Build a Large Language Model From Scratch: Pretraining on unlabeled data?",
+    "answer": "Глава 5 книги «Build a Large Language Model From Scratch» посвящена предварительному обучению (претренингу) языковых моделей на неразмеченных данных (Pretraining on unlabeled data). \n\nВ этой главе рассматриваются такие темы, как:\n* Использование GPT для генерации текста (начиная с инициализации модели и настройки параметров, таких как `GPT_CONFIG_124M`).\n* Разделение данных и их загрузка (например, разделение текста на обучающую и валидационную выборки с помощью `train_ratio`).\n* Обучение модели с использованием данных, представленных в виде чанков одинакового размера (для простоты и эффективности), а также упоминается полезность работы с входами переменной длины на практике.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 3,
+        "score": 0.7082,
+        "snippet": "Build a Large Language Model (From Scratch)"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 17,
+        "score": 0.6373,
+        "snippet": "xv about this book Build a Large Language Model (From Scratch) was written to help you understand and c r e a t e y o u r o w n G P T - l i k e l a r g e l a n g u a g e m o d e l s ( L L M s ) f r o m t h e g r o u n d u p . I t begins by "
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 164,
+        "score": 0.6356,
+        "snippet": "142 CHAPTER 5 Pretraining on unlabeled data NOTE We are training the model with training data presented in similarly sized chunks for simplicity and efficiency. However, in practice, it can also be beneficial to train an LLM with variable-l"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 152,
+        "score": 0.6338,
+        "snippet": "130 CHAPTER 5 Pretraining on unlabeled data 5.1.1 Using GPT to generate text Let’s set up the LLM and briefly recap the text generation process we implemented in chapter 4. We begin by initializing the GPT model that we will later evaluate "
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 28,
+        "score": 0.6298,
+        "snippet": "paradigm. However, this is not the case for the pretraining stage of LLMs. In this phase, LLMs use self-supervised learning, where the model generates its own labels from the input data. • Internet texts • Books • Wikipedia • Research artic"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 5,
+    "question": "Чему посвящены главы 6 и 7 книги Raschka: Fine-tuning for classification и Fine-tuning to follow instructions?",
+    "answer": "На основании загруженных документов:\n\n* **Глава 6** («Fine-tuning for classification») посвящена классификационной тонкой настройке (classification fine-tuning). В ней рассматриваются добавление классификационной головки, расчет потерь и точности классификации, тонкая настройка модели на контролируемых (supervised) данных и использование языковой модели (LLM) в качестве классификатора спама.\n* **Глава 7** («Fine-tuning to follow instructions») посвящена процессу настройки языковых моделей для следования инструкциям (instruction fine-tuning). В ней рассматриваются подготовка набора данных для контролируемой настройки инструкций, организация данных по батчам (обучающим пакетам), создание загрузчиков данных, загрузка предварительно обученной LLM и ее тонкая настройка на данных инструкций, извлечение и сохранение ответов, а также оценка полученной модели.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+        "page": 594,
+        "score": 0.6397,
+        "snippet": "Chapter 7. Finetuning Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model. Chapters 5 and 6 discuss prompt-based methods, which adapt a model by giving it instructions, c"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 11,
+        "score": 0.635,
+        "snippet": "6.5 Adding a classification head 183 6.6 Calculating the classification loss and accuracy 190 6.7 Fine-tuning the model on supervised data 195 6.8 Using the LLM as a spam classifier 200 7 Fine-tuning to follow instructions 204 7.1 Introduct"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 192,
+        "score": 0.6245,
+        "snippet": "170 CHAPTER 6 Fine-tuning for classification 6.1 Different categories of fine-tuning The most common ways to fine-tune language models are instruction fine-tuning and classification fine-tuning. Instruction fine-tuning involves training a l"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 19,
+        "score": 0.6108,
+        "snippet": "classifier. Chapter 7 explores the instruction fine-tuning process of LLMs. It covers prepar- ing a dataset for supervised instruction fine-tuning, organizing instruction data in training batches, loading a pretrained LLM and fine-tuning it"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 218,
+        "score": 0.6076,
+        "snippet": "196 CHAPTER 6 Fine-tuning for classification def train_classifier_simple( model, train_loader, val_loader, optimizer, device, num_epochs, eval_freq, eval_iter): train_losses, val_losses, train_accs, val_accs = [], [], [], [] examples_seen, "
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 6,
+    "question": "Что в приложениях A и E книги Raschka: Introduction to PyTorch и Parameter-efficient fine-tuning with LoRA?",
+    "answer": "На основании предоставленных документов:\n\n* **Приложение A (Introduction to PyTorch)** находится на странице 251 (согласно оглавлению на странице 12).\n* **Приложение E (Parameter-efficient fine-tuning with LoRA)** посвящено методу эффективной настройки параметров с использованием LoRA (Low-rank adaptation). В нем рассматривается адаптация предварительно обученной модели под конкретный небольшой датасет путем настройки лишь небольшого подмножества весовых параметров модели (основано на примере классификации спама из главы 6, но также применимо к контролируемой настройке инструкций из главы 7). Также в приложении приводится программный код класса `LoRALayer` на PyTorch, где ранг (`rank`) управляет внутренней размерностью матриц A и B и определяет количество дополнительных параметров, вводимых LoRA.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 12,
+        "score": 0.6888,
+        "snippet": "CONTENTSx appendix A Introduction to PyTorch 251 appendix B References and further reading 289 appendix C Exercise solutions 300 appendix D Adding bells and whistles to the training loop 313 appendix E Parameter-efficient fine-tuning with L"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 344,
+        "score": 0.6403,
+        "snippet": "322 appendix E Parameter-efficient fine-tuning with LoRA Low-rank adaptation (LoRA) is one of the most widely used techniques for parameter- efficient fine-tuning. The following discussion is based on the spam classification fine- tuning ex"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 20,
+        "score": 0.6344,
+        "snippet": "discusses the latest AI research with a focus on LLMs. Need help getting up to speed with deep learning and PyTorch?  I offer several free courses on my website at https:/ /sebastianraschka.com/ teaching. These resources can help you quick"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 362,
+        "score": 0.634,
+        "snippet": "parameter-efficient fine-tuning 324, 326 loss.backward() function 112 losses 140 , 142 loss metric 132 lr (learning rate) 275 M machine learning 253 Machine Learning Q and AI (Raschka) 290 macOS 282 main function 286 masked attention 74 .ma"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 351,
+        "score": 0.6236,
+        "snippet": "329E.4 Parameter-efficient fine-tuning with LoRA import math class LoRALayer(torch.nn.Module): def __init__(self, in_dim, out_dim, rank, alpha): super().__init__() self.A = torch.nn.Parameter(torch.empty(in_dim, rank)) torch.nn.init.kaiming"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 7,
+    "question": "С какого проекта Sebastian Raschka начал путь в AI: модель настроения песни по тексту lyrics?",
+    "answer": "Да, согласно предоставленным документам, путь Себастьяна Рашки в искусственный интеллект начался более десяти лет назад с класса статистической классификации образов, который привел к его первому независимому проекту: разработке модели и веб-приложения для определения настроения песни по ее тексту (lyrics).",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 21,
+        "score": 0.615,
+        "snippet": "xix about the author SEBASTIAN RASCHKA, PhD, has been working in machine learn- ing and AI for more than a decade. In addition to being a researcher, Sebastian has a strong passion for education. He is known for his bestselling books on mac"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 370,
+        "score": 0.5991,
+        "snippet": "Sebastian Raschka ISBN-13: 978-1-63343-716-6 P hysicist Richard P . Feynman reportedly said, “I don’t understand anything I can’t build.” Based on this same powerful principle, bestselling author Sebastian Raschka guides you step by step as"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 13,
+        "score": 0.5656,
+        "snippet": "xi preface I’ve always been fascinated with language models. More than a decade ago, my jour- ney into AI began with a statistical pattern classification class, which led to my first independent project: developing a model and web applicati"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 370,
+        "score": 0.5383,
+        "snippet": "conversational instructions. And you’ll really understand it because you built it yourself! What’s Inside ● Plan and code an LLM comparable to GPT-2 ● Load pretrained weights ● Construct a complete training pipeline ● Fine-tune your LLM for"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 20,
+        "score": 0.5214,
+        "snippet": "discusses the latest AI research with a focus on LLMs. Need help getting up to speed with deep learning and PyTorch?  I offer several free courses on my website at https:/ /sebastianraschka.com/ teaching. These resources can help you quick"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 8,
+    "question": "Для кого написана книга Build a Large Language Model From Scratch и нужен ли PyTorch заранее, если есть appendix A?",
+    "answer": "Исходя из загруженных документов:\n\n1. **Для кого написана книга:**\n   * Книга написана для тех, кто хочет понять внутреннее устройство и реализовать большие языковые модели (LLM) с нуля.\n   * Для понимания примеров кода требуется **уверенное знание языка программирования Python**. \n   * Обширный бэкграунд в области машинного обучения, глубокого обучения и искусственного интеллекта не требуется, так как LLM — это уникальная подгруппа ИИ, и следовать материалу можно даже новичкам в этой сфере.\n   * Также полезно иметь понимание математики на уровне старшей школы (особенно работу с векторами и матрицами), но продвинутые математические знания не обязательны.\n\n2. **Нужен ли PyTorch заранее:**\n   * **Нет**, предварительное владение PyTorch не требуется. \n   * В книге есть **Приложение А (Appendix A)** («Введение в PyTorch»), которое служит кратким пособием и дает необходимые навыки для понимания примеров кода во всей книге.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 273,
+        "score": 0.72,
+        "snippet": "251 appendix A Introduction to PyTorch This appendix is designed to equip you with the necessary skills and knowledge to put deep learning into practice and implement large language models (LLMs) from scratch. PyTorch, a popular Python-base"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 18,
+        "score": 0.6911,
+        "snippet": "ABOUT THIS BOOKxvi other resource provides such a complete and hands-on approach to building LLMs from the ground up. To understand the code examples in this book, you should have a solid grasp of Python programming. While some familiarity "
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 3,
+        "score": 0.6832,
+        "snippet": "Build a Large Language Model (From Scratch)"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 18,
+        "score": 0.6728,
+        "snippet": "in PyTorch is not a prerequisite. Appendix A provides a concise introduction to PyTorch, equipping you with the necessary skills to comprehend the code examples throughout the book. A high school–level understanding of mathematics, particul"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 278,
+        "score": 0.6594,
+        "snippet": "GPUs are not required for the initial chapters in this book, which are focused on implementing LLMs for educational purposes, they can significantly speed up deep learning–related computations. PyTorch and Torch The Python library is named "
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 9,
+    "question": "Где лежит код примеров книги Raschka: github.com/rasbt/LLMs-from-scratch?",
+    "answer": "Согласно загруженным документам, код примеров книги можно найти:\n\n1. На GitHub по адресу: https://github.com/rasbt/LLMs-from-scratch (также упоминается, что там они доступны в формате Jupyter notebook).\n2. На сайте издательства Manning по адресу: https://www.manning.com/books/build-a-large-language-model-from-scratch.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 19,
+        "score": 0.7491,
+        "snippet": "GitHub at https:/ /github.com/rasbt/LLMs-from-scratch. And don’t worry about get- ting stuck—solutions to all the code exercises can be found in appendix C. This book contains many examples of source code both in numbered listings and in li"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 20,
+        "score": 0.6741,
+        "snippet": "discusses the latest AI research with a focus on LLMs. Need help getting up to speed with deep learning and PyTorch?  I offer several free courses on my website at https:/ /sebastianraschka.com/ teaching. These resources can help you quick"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 370,
+        "score": 0.6413,
+        "snippet": "Sebastian Raschka ISBN-13: 978-1-63343-716-6 P hysicist Richard P . Feynman reportedly said, “I don’t understand anything I can’t build.” Based on this same powerful principle, bestselling author Sebastian Raschka guides you step by step as"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 229,
+        "score": 0.6187,
+        "snippet": "file_path = \"instruction-data.json\" url = ( \"https://raw.githubusercontent.com/rasbt/LLMs-from-scratch\" \"/main/ch07/01_main-chapter-code/instruction-data.json\" ) data = download_and_load_file(file_path, url) print(\"Number of entries:\", len("
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 19,
+        "score": 0.6156,
+        "snippet": "classifier. Chapter 7 explores the instruction fine-tuning process of LLMs. It covers prepar- ing a dataset for supervised instruction fine-tuning, organizing instruction data in training batches, loading a pretrained LLM and fine-tuning it"
+      }
+    ],
+    "error": null
+  },
+  {
+    "source": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+    "n": 10,
+    "question": "Что делает глава 6 книги Raschka на практике: fine-tuning LLM to identify spam messages?",
+    "answer": "На практике в главе 6 рассматривается классификация текстов (на примере классификации текстовых сообщений как «spam» или «not spam»). В ней выполняются следующие основные этапы:\n\n1. **Подготовка датасета:** скачивание, предварительная обработка и создание загрузчиков данных для классификации.\n2. **Настройка модели:** инициализация модели, загрузка предобученных весов и модификация предобученной LLM для тонкой настройки (в частности, замена исходного выходного слоя на меньший выходной слой, отображающий скрытое представление на два класса: 0 («not spam») и 1 («spam»)).\n3. **Тонкая настройка и использование:** реализация утилит оценки, тонкая настройка LLM (fine-tuning) для идентификации спам-сообщений, оценка полученной модели и использование её для классификации новых текстов.",
+    "n_context": 5,
+    "chunks": [
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 203,
+        "score": 0.6837,
+        "snippet": "Figure 6.8 The three-stage process for classification fine-tuning the LLM. Having completed stage 1, preparing the dataset, we now must initialize the LLM, which we will then fine-tune to classify spam messages."
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 223,
+        "score": 0.6794,
+        "snippet": "predicted_label = torch.argmax(logits, dim=-1).item() return \"spam\" if predicted_label == 1 else \"not spam\" Listing 6.12 Using the model to classify new texts Stage 1: Dataset preparation 1) Download the dataset 2) Preprocess dataset 3) Cre"
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 191,
+        "score": 0.6694,
+        "snippet": "169 Fine-tuning for classification So far, we have coded the LLM architecture, pretrained it, and learned how to import pretrained weights from an external source, such as OpenAI, into our model. Now we will reap the fruits of our labor by "
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 346,
+        "score": 0.6656,
+        "snippet": "matrices need to be adjusted and saved when we customize LLMs for each specific cus- tomer or application. Next, let’s see how LoRA can be used to fine-tune an LLM for spam classification, similar to the fine-tuning example in chapter 6. E."
+      },
+      {
+        "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+        "page": 205,
+        "score": 0.6578,
+        "snippet": "you have been specially selected to receive $1000 cash or a $2000 award.' The following text 'spam'? Answer with 'yes' or 'no': 'You are a winner Based on the output, it’s apparent that the model is struggling to follow instructions. This r"
+      }
+    ],
+    "error": null
+  }
+]
