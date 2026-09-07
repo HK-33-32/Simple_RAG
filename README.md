@@ -22,14 +22,11 @@ uvicorn app:app --host 127.0.0.1 --port 8000
 docker compose up
 ```
 
-Откройте [http://127.0.0.1:8000](http://127.0.0.1:8000). Ключ Google AI Studio задаётся в меню модели → **Подключить API**, не в коде и не в `.env`.
+Откройте [http://127.0.0.1:8000](http://127.0.0.1:8000). Ключ Google AI Studio задаётся в меню модели → **Подключить API**.
 
 ---
 
 ## Архитектура
-
-Редактируемые блок-схемы: [архитектура](docs/drawio/architecture.drawio) · [индексация](docs/drawio/ingest.drawio) · [ответ](docs/drawio/ask.drawio).  
-Откройте `.drawio` в [diagrams.net](https://app.diagrams.net/).
 
 <p align="center">
   <img src="docs/images/architecture.svg" alt="Архитектура системы" width="100%"/>
