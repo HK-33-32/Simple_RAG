@@ -13,7 +13,7 @@
   </defs>
   <rect width="1120" height="720" fill="url(#bg)"/>
   <text x="56" y="48" font-family="Segoe UI, Inter, Arial" font-size="22" font-weight="800" fill="#1c1e22">Архитектура системы</text>
-  <text x="56" y="74" font-family="Segoe UI, Inter, Arial" font-size="13" fill="#5d626b">НАМИ — база знаний · Simply RAG</text>
+  <text x="56" y="74" font-family="Segoe UI, Inter, Arial" font-size="13" fill="#5d626b">Simple RAG</text>
   <rect x="980" y="28" width="84" height="8" rx="2" fill="#e2231a"/>
 
   <!-- Layer labels -->
@@ -37,7 +37,7 @@
   <text x="230" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#c8ccd3">app.py · /api/upload · /api/ask</text>
   <rect x="410" y="306" width="300" height="84" rx="14" fill="#fff" stroke="#e2231a" stroke-width="1.8"/>
   <text x="560" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#1c1e22">rag.py</text>
-  <text x="560" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">конвейер из книги Huang</text>
+  <text x="560" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">конвейер по книге</text>
   <rect x="740" y="306" width="300" height="84" rx="14" fill="#fff7f6" stroke="#e2231a"/>
   <text x="890" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#1c1e22">rag_ext.py</text>
   <text x="890" y="366" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">GPU, инкремент, источники</text>
@@ -55,13 +55,11 @@
   <text x="190" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">коллекция rag-chroma</text>
 
   <rect x="324" y="514" width="220" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
-  <text x="434" y="552" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">BGE-M3</text>
-  <text x="434" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">эмбеддинги</text>
-  <text x="434" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">CUDA · RTX 5080</text>
+  <text x="434" y="572" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">BGE-M3</text>
+  <text x="434" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">эмбеддинги</text>
 
   <rect x="568" y="514" width="220" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
-  <text x="678" y="552" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">Gemini</text>
-  <text x="678" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">Google AI Studio</text>
+  <text x="678" y="572" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="800" fill="#1c1e22">Gemini</text>
   <text x="678" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">генерация ответа</text>
 
   <rect x="812" y="514" width="228" height="120" rx="14" fill="#fff" stroke="#d8dce3"/>
@@ -69,5 +67,4 @@
   <text x="926" y="576" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">data/uploads · docs</text>
   <text x="926" y="596" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">models.json</text>
 
-  <text x="56" y="694" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#8a9098">Docker: uvicorn 0.0.0.0:8000 · тома data, vector_db, huggingface_cache</text>
 </svg>

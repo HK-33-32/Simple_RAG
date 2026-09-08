@@ -6,7 +6,6 @@
   </defs>
   <rect width="720" height="980" fill="#f7f8fa"/>
   <text x="40" y="48" font-family="Segoe UI, Inter, Arial" font-size="22" font-weight="800" fill="#1c1e22">Ответ по документам</text>
-  <text x="40" y="74" font-family="Segoe UI, Inter, Arial" font-size="13" fill="#5d626b">POST /api/ask · retrieve → assess → generate</text>
   <rect x="580" y="28" width="84" height="8" rx="2" fill="#e2231a"/>
 
   <rect x="160" y="110" width="400" height="64" rx="14" fill="#1c1e22"/>
@@ -46,6 +45,4 @@
   <rect x="160" y="792" width="400" height="72" rx="14" fill="#e2231a"/>
   <text x="360" y="824" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="800" fill="#fff">Ответ + источники</text>
   <text x="360" y="846" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#ffd7d4">файл · страница · цитата в PDF</text>
-
-  <text x="40" y="930" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#8a9098">Если контекста мало, система отвечает фиксированной фразой NO_ANSWER.</text>
 </svg>

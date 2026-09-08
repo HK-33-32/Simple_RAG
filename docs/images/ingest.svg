@@ -6,42 +6,41 @@
   </defs>
   <rect width="720" height="980" fill="#f7f8fa"/>
   <text x="40" y="48" font-family="Segoe UI, Inter, Arial" font-size="22" font-weight="800" fill="#1c1e22">Индексация документа</text>
-  <text x="40" y="74" font-family="Segoe UI, Inter, Arial" font-size="13" fill="#5d626b">POST /api/upload · asyncio.to_thread</text>
   <rect x="580" y="28" width="84" height="8" rx="2" fill="#e2231a"/>
 
   <rect x="160" y="110" width="400" height="64" rx="14" fill="#1c1e22"/>
   <text x="360" y="148" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="700" fill="#fff">Файл сохранён в data/uploads</text>
   <line x1="360" y1="174" x2="360" y2="204" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
 
-  <rect x="160" y="206" width="400" height="64" rx="14" fill="#fff" stroke="#e2231a" stroke-width="1.6"/>
+  <rect x="70" y="206" width="580" height="64" rx="14" fill="#fff" stroke="#e2231a" stroke-width="1.6"/>
   <text x="360" y="244" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="16" font-weight="700" fill="#1c1e22">SHA-256 · уже в индексе?</text>
-  <line x1="360" y1="270" x2="360" y2="300" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="525" y1="270" x2="525" y2="300" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="195" y1="270" x2="195" y2="300" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
 
   <rect x="70" y="302" width="250" height="70" rx="14" fill="#fff7f6" stroke="#e2231a"/>
   <text x="195" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#1c1e22">Пропуск, если хеш тот же</text>
-  <rect x="400" y="302" width="250" height="70" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <rect x="380" y="302" width="280" height="70" rx="14" fill="#fff" stroke="#d8dce3"/>
   <text x="525" y="344" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="14" font-weight="700" fill="#1c1e22">PyPDFLoader / TXT / MD</text>
   <line x1="525" y1="372" x2="525" y2="412" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
   <line x1="195" y1="372" x2="195" y2="860" stroke="#c5cad3" stroke-width="1.5" stroke-dasharray="5 5"/>
 
-  <rect x="325" y="414" width="400" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <rect x="380" y="414" width="280" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
   <text x="525" y="452" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">RecursiveCharacterTextSplitter</text>
   <text x="525" y="470" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">chunk 800 · overlap 120</text>
   <line x1="525" y1="478" x2="525" y2="508" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
 
-  <rect x="325" y="510" width="400" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
-  <text x="525" y="548" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">BGE-M3 на GPU</text>
+  <rect x="380" y="510" width="280" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <text x="525" y="548" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">BGE-M3</text>
   <text x="525" y="566" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">батчи · прогресс в UI</text>
   <line x1="525" y1="574" x2="525" y2="604" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
 
-  <rect x="325" y="606" width="400" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <rect x="380" y="606" width="280" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
   <text x="525" y="644" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">Chroma.add_documents</text>
   <text x="525" y="662" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">filename · page · file_hash</text>
   <line x1="525" y1="670" x2="525" y2="700" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
 
-  <rect x="325" y="702" width="400" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
+  <rect x="380" y="702" width="280" height="64" rx="14" fill="#fff" stroke="#d8dce3"/>
   <text x="525" y="740" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="15" font-weight="700" fill="#1c1e22">store_snapshot</text>
-  <text x="525" y="758" text-anchor="middle" font-family="Segoe UI, Inter, Arial" font-size="12" fill="#5d626b">без второго клиента Chroma</text>
   <line x1="525" y1="766" x2="360" y2="860" stroke="#e2231a" stroke-width="2" marker-end="url(#a)"/>
 
   <rect x="160" y="862" width="400" height="64" rx="14" fill="#e2231a"/>
