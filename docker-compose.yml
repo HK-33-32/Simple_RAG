@@ -1,4 +1,4 @@
-name: simply-rag
+name: simple-rag
 
 services:
   app:
@@ -9,6 +9,8 @@ services:
     image: simply-rag:latest
     ports:
       - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     env_file:
       - .env
     environment:

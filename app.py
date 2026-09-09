@@ -19,6 +19,7 @@ from __future__ import annotations
 import asyncio
 import json
 import mimetypes
+import os
 import re
 
 mimetypes.add_type("text/javascript", ".mjs")
@@ -61,6 +62,7 @@ _indexing = False
 _index_owner: str | None = None
 _chunks_cached = 0
 _indexed_names_cached: set[str] = set()
+_indexed_files_cached: list[dict] = []
 _index_status: dict = {
     "indexing": False,
     "filename": None,
@@ -85,24 +87,36 @@ class ModelConnectRequest(BaseModel):
     name: str | None = None
     base_url: str | None = None
     api_key: str | None = None
-    device: str = "auto"
 
 
 _models_lock = threading.RLock()
 _models_registry: dict = {"active_id": None, "models": []}
 
 
+def _entry_ready(entry: dict | None) -> bool:
+    if not entry:
+        return False
+    return rag.llm_configured(
+        provider=entry.get("provider"),
+        api_key=entry.get("api_key"),
+        model=entry.get("model"),
+        base_url=entry.get("base_url"),
+    )
+
+
 def _public_entry(entry: dict) -> dict:
+    provider = rag.normalize_provider(entry.get("provider"))
+    meta = rag.PROVIDERS.get(provider) or {}
     return {
         "id": entry["id"],
         "selection_id": entry["id"],
         "name": entry.get("name") or entry.get("model") or "Модель",
-        "source": entry.get("source") or "Google AI Studio",
+        "source": entry.get("source") or meta.get("source") or "API",
         "format": entry.get("format") or "API",
         "size": "",
-        "provider": entry.get("provider") or "google",
+        "provider": provider,
         "model": entry.get("model") or "",
-        "available": bool((entry.get("api_key") or "").strip()),
+        "available": _entry_ready(entry),
     }
 
 
@@ -191,13 +205,33 @@ def _apply_store_snapshot(store) -> None:
 
 
 def _refresh_index_cache() -> None:
-    global _chunks_cached, _indexed_names_cached
+    global _chunks_cached, _indexed_names_cached, _indexed_files_cached
     try:
         files = rag.list_indexed_files()
     except Exception:
         return
-    _indexed_names_cached = {item["filename"] for item in files}
-    _chunks_cached = sum(item["chunks"] for item in files)
+    _indexed_files_cached = files
+    ready = [item for item in files if item.get("status") == rag.STATUS_READY]
+    _indexed_names_cached = {item["filename"] for item in ready}
+    _chunks_cached = sum(item["chunks"] for item in ready)
+
+
+def _indexed_records() -> list[dict]:
+    if _indexing:
+        return list(_indexed_files_cached)
+    _refresh_index_cache()
+    return list(_indexed_files_cached)
+
+
+@app.on_event("startup")
+def _recover_index() -> None:
+    for directory in FILE_DIRS:
+        if not directory.exists():
+            continue
+        for leftover in directory.glob("*.part"):
+            leftover.unlink(missing_ok=True)
+    rag.recover_incomplete_documents()
+    _refresh_index_cache()
 
 
 def _chunk_count() -> int:
@@ -262,7 +296,7 @@ def health():
             "error": _index_status["error"],
             "device": embed["device"],
         },
-        "llm_loaded": bool((_active_entry() or {}).get("api_key")),
+        "llm_loaded": _entry_ready(_active_entry()),
         "embedding_model": rag.EMBEDDING_MODEL,
         "embedding_device": embed["device"],
         "embedding_gpu": embed.get("gpu"),
@@ -298,26 +332,35 @@ def select_model(req: ModelSelectRequest):
 
 @app.post("/api/models/connect")
 def connect_model(req: ModelConnectRequest):
-    provider = (req.provider or "").strip().lower()
-    if provider in {"gemini"}:
-        provider = "google"
-    if provider != "google":
-        raise HTTPException(400, "Подключите Google AI Studio.")
+    provider = rag.normalize_provider(req.provider)
+    meta = rag.PROVIDERS.get(provider)
+    if meta is None:
+        raise HTTPException(400, "Неизвестный провайдер модели.")
     api_key = (req.api_key or "").strip()
-    if not api_key:
-        raise HTTPException(400, "Укажите ключ Google AI Studio.")
-    model_name = (req.model or rag.GEMINI_MODEL).strip() or rag.GEMINI_MODEL
+    if meta["requires_key"] and not api_key:
+        raise HTTPException(400, f"Укажите ключ {meta['source']}.")
+    model_name = (req.model or meta["default_model"]).strip() or meta["default_model"]
+    if not model_name:
+        raise HTTPException(400, "Укажите имя модели.")
+    if provider in {"google", "openai"}:
+        base_url = meta["default_base_url"]
+    else:
+        base_url = (req.base_url or meta["default_base_url"] or "").strip()
+    if meta["requires_base_url"] and not base_url:
+        raise HTTPException(400, "Укажите адрес API.")
     display_name = (req.name or model_name).strip() or model_name
-    entry_id = f"google::{model_name}"
+    entry_id = f"{provider}::{model_name}"
+    if provider == "openai_compatible" and base_url:
+        entry_id = f"{provider}::{model_name}::{base_url}"
     entry = {
         "id": entry_id,
         "name": display_name,
-        "provider": "google",
+        "provider": provider,
         "model": model_name,
-        "source": "Google AI Studio",
+        "source": meta["source"],
         "format": "API",
         "api_key": api_key,
-        "base_url": (req.base_url or "").strip(),
+        "base_url": base_url,
     }
     with _models_lock:
         existing = next((item for item in _models_registry["models"] if item.get("id") == entry_id), None)
@@ -355,7 +398,15 @@ def delete_model(id: str):
 
 @app.get("/api/files")
 def list_files():
-    indexed = _indexed_names()
+    try:
+        indexed = {item["filename"]: item for item in _indexed_records()}
+    except Exception:
+        indexed = {}
+    current = _index_status.get("filename") if _indexing else None
+    if current:
+        record = dict(indexed.get(current) or {})
+        record["status"] = rag.STATUS_INDEXING
+        indexed[current] = record
     files = []
     seen: set[str] = set()
     for directory in FILE_DIRS:
@@ -367,12 +418,17 @@ def list_files():
             if path.name in seen:
                 continue
             seen.add(path.name)
+            record = indexed.get(path.name) or {}
+            status = record.get("status")
             files.append(
                 {
                     "name": path.name,
                     "type": path.suffix.lower().lstrip("."),
                     "size": path.stat().st_size,
-                    "in_corpus": path.name in indexed,
+                    "in_corpus": status == rag.STATUS_READY,
+                    "index_status": status,
+                    "index_error": record.get("error"),
+                    "chunks": record.get("chunks") or 0,
                 }
             )
     return files
@@ -429,10 +485,10 @@ def ask(req: AskRequest):
     if _indexing:
         raise HTTPException(409, "Идёт индексация документа. Повторите вопрос через несколько секунд.")
     active = _active_entry()
-    if not active or not (active.get("api_key") or "").strip():
+    if not _entry_ready(active):
         raise HTTPException(
             503,
-            "Подключите модель Google AI Studio: меню модели -> Подключить API.",
+            "Подключите модель через меню: Подключить API.",
         )
     try:
         with _lock:
@@ -450,6 +506,8 @@ def ask(req: AskRequest):
                 store,
                 api_key=active.get("api_key"),
                 model=active.get("model"),
+                provider=active.get("provider"),
+                base_url=active.get("base_url"),
             )
     except RuntimeError as exc:
         raise HTTPException(503, str(exc)) from exc
@@ -489,14 +547,20 @@ def _ingest_file(path: str, name: str):
     with _lock:
         _store = None
         _set_index_status(filename=name, stage="model", current=0, total=0, error=None)
-        result = rag.ingest_pdfs(
-            [path],
-            embeddings=_embeddings_cached(),
-            progress=_index_progress,
-        )
-        _store = result.store
-        _apply_store_snapshot(result.store)
-        return result
+        try:
+            result = rag.ingest_pdfs(
+                [path],
+                embeddings=_embeddings_cached(),
+                progress=_index_progress,
+                filenames={path: name},
+            )
+            _store = result.store
+            _refresh_index_cache()
+            return result
+        except Exception:
+            _store = None
+            _refresh_index_cache()
+            raise
 
 
 @app.post("/api/upload")
@@ -506,38 +570,69 @@ async def upload(file: UploadFile = File(...)):
     suffix = Path(name).suffix.lower()
     if suffix not in VIEWABLE:
         raise HTTPException(400, f"unsupported type: {suffix or '(none)'}")
-    target = UPLOADS_DIR / name
-    target.write_bytes(await file.read())
+    payload = await file.read()
     kind = "image" if suffix in IMAGE_TYPES else "document"
-    chunks_total = _chunks_cached if _indexing else _chunk_count()
-    if suffix in INDEXABLE:
-        owner = f"{name}:{id(target)}"
-        _index_owner = owner
-        _indexing = True
-        _set_index_status(
-            indexing=True,
-            filename=name,
-            stage="model",
-            current=0,
-            total=0,
-            error=None,
-        )
-        try:
-            await asyncio.to_thread(_ingest_file, str(target), name)
-            chunks_total = _chunks_cached
-        except Exception as exc:
-            _set_index_status(error=str(exc))
-            raise HTTPException(500, f"Не удалось проиндексировать документ: {exc}") from exc
-        finally:
-            if _index_owner == owner:
-                _indexing = False
-                _index_owner = None
-                _set_index_status(indexing=False, stage=None)
+    existing = _find_file(name)
+    staging: Path | None = None
+    if suffix in INDEXABLE and _indexing:
+        raise HTTPException(409, "Дождитесь окончания индексации")
+    if suffix not in INDEXABLE:
+        target = UPLOADS_DIR / name
+        target.write_bytes(payload)
+        return {
+            "kind": kind,
+            "name": name,
+            "chunks_total": _chunks_cached if _indexing else _chunk_count(),
+            "url": f"/api/raw?name={quote(name)}",
+            "index_status": None,
+            "replaced": existing is not None,
+        }
+    if existing is not None:
+        staging = UPLOADS_DIR / f"{name}.part"
+        staging.write_bytes(payload)
+        ingest_path = staging
+    else:
+        ingest_path = UPLOADS_DIR / name
+        ingest_path.write_bytes(payload)
+    owner = f"{name}:{id(ingest_path)}"
+    _index_owner = owner
+    _indexing = True
+    _set_index_status(
+        indexing=True,
+        filename=name,
+        stage="model",
+        current=0,
+        total=0,
+        error=None,
+    )
+    chunks_total = _chunks_cached
+    ingest_ok = False
+    try:
+        await asyncio.to_thread(_ingest_file, str(ingest_path), name)
+        ingest_ok = True
+        if staging is not None:
+            os.replace(str(staging), str(existing))
+            staging = None
+        chunks_total = _chunks_cached
+    except Exception as exc:
+        if staging is not None:
+            staging.unlink(missing_ok=True)
+        if ingest_ok:
+            raise HTTPException(500, f"Документ проиндексирован, но файл на диске не заменён: {exc}") from exc
+        _set_index_status(error=str(exc))
+        raise HTTPException(500, f"Не удалось проиндексировать документ: {exc}") from exc
+    finally:
+        if _index_owner == owner:
+            _indexing = False
+            _index_owner = None
+            _set_index_status(indexing=False, stage=None)
     return {
         "kind": kind,
         "name": name,
         "chunks_total": chunks_total,
         "url": f"/api/raw?name={quote(name)}",
+        "index_status": rag.STATUS_READY,
+        "replaced": existing is not None,
     }
 
 

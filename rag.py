@@ -4,6 +4,7 @@ import os
 import threading
 from dataclasses import dataclass, field
 from pathlib import Path
+from urllib.parse import urlsplit, urlunsplit
 
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
@@ -20,12 +21,58 @@ PERSIST_DIR = os.getenv("CHROMA_DIR", str(_ROOT / "vector_db"))
 COLLECTION_NAME = "rag-chroma"
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434/v1")
+LM_STUDIO_BASE_URL = os.getenv("LM_STUDIO_BASE_URL", "http://127.0.0.1:1234/v1")
+PROVIDERS = {
+    "google": {
+        "source": "Google AI Studio",
+        "default_model": GEMINI_MODEL,
+        "default_base_url": "",
+        "requires_key": True,
+        "requires_base_url": False,
+        "kind": "google",
+    },
+    "openai": {
+        "source": "OpenAI",
+        "default_model": OPENAI_MODEL,
+        "default_base_url": OPENAI_BASE_URL,
+        "requires_key": True,
+        "requires_base_url": False,
+        "kind": "openai",
+    },
+    "ollama": {
+        "source": "Ollama",
+        "default_model": os.getenv("OLLAMA_MODEL", "llama3.1"),
+        "default_base_url": OLLAMA_BASE_URL,
+        "requires_key": False,
+        "requires_base_url": False,
+        "kind": "openai",
+    },
+    "lm_studio": {
+        "source": "LM Studio",
+        "default_model": "",
+        "default_base_url": LM_STUDIO_BASE_URL,
+        "requires_key": False,
+        "requires_base_url": False,
+        "kind": "openai",
+    },
+    "openai_compatible": {
+        "source": "Другой API",
+        "default_model": "",
+        "default_base_url": "",
+        "requires_key": False,
+        "requires_base_url": True,
+        "kind": "openai",
+    },
+}
 TOP_K = int(os.getenv("TOP_K", "5"))
 RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "0.35"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "800"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "120"))
 
-# separators по убыванию «крупности» границы (RecursiveCharacterTextSplitter).
+# separators по убыванию «крупности» границы.
 SEPARATORS = ["\n\n", "\n", ". ", ", ", " ", ""]
 
 RAG_PROMPT = ChatPromptTemplate.from_messages(
@@ -210,19 +257,95 @@ def format_docs(docs: list[Document]) -> str:
     return "\n\n".join(parts)
 
 
-def get_llm(api_key: str | None = None, model: str | None = None):
-    from langchain_google_genai import ChatGoogleGenerativeAI
+def normalize_provider(provider: str | None) -> str:
+    value = (provider or "google").strip().lower()
+    if value in {"gemini"}:
+        return "google"
+    return value
 
+
+def llm_configured(
+    provider: str | None = None,
+    api_key: str | None = None,
+    model: str | None = None,
+    base_url: str | None = None,
+) -> bool:
+    provider = normalize_provider(provider)
+    meta = PROVIDERS.get(provider)
+    if meta is None:
+        return False
+    if not (model or meta["default_model"] or "").strip():
+        return False
+    if meta["requires_key"] and not (api_key or "").strip():
+        return False
+    if meta["requires_base_url"] and not (base_url or "").strip():
+        return False
+    return True
+
+
+def _in_docker() -> bool:
+    return Path("/.dockerenv").exists()
+
+
+def resolve_api_base_url(url: str) -> str:
+    """From a container, loopback is the container itself — reach the host instead."""
+    value = (url or "").strip().rstrip("/")
+    if not value or not _in_docker():
+        return value
+    parts = urlsplit(value)
+    host = (parts.hostname or "").lower()
+    if host not in {"127.0.0.1", "localhost", "::1"}:
+        return value
+    port = f":{parts.port}" if parts.port else ""
+    return urlunsplit((parts.scheme, f"host.docker.internal{port}", parts.path, parts.query, parts.fragment))
+
+
+def get_llm(
+    api_key: str | None = None,
+    model: str | None = None,
+    provider: str | None = None,
+    base_url: str | None = None,
+):
+    provider = normalize_provider(provider)
+    meta = PROVIDERS.get(provider)
+    if meta is None:
+        raise RuntimeError("Неизвестный провайдер модели.")
+
+    model_name = (model or meta["default_model"] or "").strip()
+    if not model_name:
+        raise RuntimeError("Укажите имя модели.")
     key = (api_key or "").strip()
-    if not key:
-        raise RuntimeError(
-            "Подключите модель Google AI Studio через интерфейс: меню модели -> Подключить API."
+    url = resolve_api_base_url(base_url or meta["default_base_url"] or "")
+
+    if meta["kind"] == "google":
+        from langchain_google_genai import ChatGoogleGenerativeAI
+
+        if not key:
+            raise RuntimeError(
+                "Подключите модель Google AI Studio через интерфейс: меню модели -> Подключить API."
+            )
+        return ChatGoogleGenerativeAI(
+            model=model_name,
+            temperature=0,
+            google_api_key=key,
         )
-    return ChatGoogleGenerativeAI(
-        model=(model or GEMINI_MODEL).strip() or GEMINI_MODEL,
-        temperature=0,
-        google_api_key=key,
-    )
+
+    from langchain_openai import ChatOpenAI
+
+    if meta["requires_key"] and not key:
+        raise RuntimeError(
+            "Подключите модель OpenAI через интерфейс: меню модели -> Подключить API."
+        )
+    if meta["requires_base_url"] and not url:
+        raise RuntimeError("Укажите адрес OpenAI-compatible API.")
+    kwargs = {
+        "model": model_name,
+        "temperature": 0,
+        "api_key": key or "not-needed",
+    }
+    if url:
+        kwargs["base_url"] = url
+    return ChatOpenAI(**kwargs)
 
 
 def generate_answer(
@@ -230,12 +353,32 @@ def generate_answer(
     docs: list[Document],
     api_key: str | None = None,
     model: str | None = None,
+    provider: str | None = None,
+    base_url: str | None = None,
 ) -> str:
     from langchain_core.output_parsers import StrOutputParser
 
-    llm = get_llm(api_key=api_key, model=model)
+    llm = get_llm(
+        api_key=api_key,
+        model=model,
+        provider=provider,
+        base_url=base_url,
+    )
     chain = RAG_PROMPT | llm | StrOutputParser()
-    return chain.invoke({"context": format_docs(docs), "question": question}).strip()
+    try:
+        return chain.invoke({"context": format_docs(docs), "question": question}).strip()
+    except Exception as exc:
+        kind = type(exc).__name__
+        text = str(exc) or kind
+        if "connect" not in f"{kind} {text}".lower():
+            raise
+        url = resolve_api_base_url(base_url or "")
+        raise RuntimeError(
+            f"Не удалось подключиться к модели по адресу {url or '(не задан)'}. "
+            "Проверьте, что сервер модели запущен и модель загружена. "
+            "Если Unsloth Studio слушает только localhost, запустите его с доступом с хоста "
+            "(например unsloth studio -H 0.0.0.0)."
+        ) from exc
 
 
 @dataclass
@@ -253,11 +396,20 @@ def ask(
     threshold: float = RELEVANCE_THRESHOLD,
     api_key: str | None = None,
     model: str | None = None,
+    provider: str | None = None,
+    base_url: str | None = None,
 ) -> RAGResult:
     ranked = search(vectorstore, question, k=k)
     relevant = filter_relevant(ranked, threshold=threshold)
     if not relevant:
         return RAGResult(answer=NO_ANSWER, retrieved=ranked, relevant=[])
     docs = [doc for doc, _ in relevant]
-    answer = generate_answer(question, docs, api_key=api_key, model=model)
+    answer = generate_answer(
+        question,
+        docs,
+        api_key=api_key,
+        model=model,
+        provider=provider,
+        base_url=base_url,
+    )
     return RAGResult(answer=answer, retrieved=ranked, relevant=relevant)

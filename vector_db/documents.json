@@ -1,0 +1,48 @@
+{
+  "documents": {
+    "ВКР_Пешков.pdf": {
+      "filename": "ВКР_Пешков.pdf",
+      "file_hash": "2448897ccd2ec881251b5521bee850a8da7e165749384fb0130f237a11ac9955",
+      "status": "ready",
+      "generation": 1,
+      "chunks": 392,
+      "pages": 219,
+      "expected_chunks": 392,
+      "error": null,
+      "previous": null
+    },
+    "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf": {
+      "filename": "Alammar_Jay_Grootendorst_Maarten_Hands_On_Large_Language_Models.pdf",
+      "file_hash": "f9ce11754ae6954ed9bc045fcab327afb90e1d8ba395ad5d61f0022a222ece28",
+      "status": "ready",
+      "generation": 1,
+      "chunks": 1095,
+      "pages": 416,
+      "expected_chunks": 1095,
+      "error": null,
+      "previous": null
+    },
+    "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf": {
+      "filename": "AI_Engineering_Building_Applications_with_Foundation_Models_Chip.pdf",
+      "file_hash": "fb0915c2768d16bf146b730475e1fb3f4c0d942968705916fd614fee72c6ce03",
+      "status": "ready",
+      "generation": 1,
+      "chunks": 1834,
+      "pages": 988,
+      "expected_chunks": 1834,
+      "error": null,
+      "previous": null
+    },
+    "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf": {
+      "filename": "Build_a_Large_Language_Model_From_Scratch_Sebastian_Raschka_1_2024.pdf",
+      "file_hash": "d7865cabfb42af2e51adc5d4895d656623fa42edf3e1c7c9c6761a88f176b930",
+      "status": "ready",
+      "generation": 1,
+      "chunks": 1147,
+      "pages": 367,
+      "expected_chunks": 1147,
+      "error": null,
+      "previous": null
+    }
+  }
+}

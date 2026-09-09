@@ -144,7 +144,6 @@
     .field input, .field select { width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: rgba(255,255,255,.78); color: var(--ink); font-size: 14px; }
     .field input:focus, .field select:focus { border-color: var(--ink); outline: 0; }
     .field-note { color: var(--muted); font-size: 12px; line-height: 1.45; }
-    .form-row { display: grid; grid-template-columns: 1fr 145px; gap: 12px; }
     .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 6px; }
     .dialog-actions .primary-button { margin: 0; }
     .workspace {
@@ -213,7 +212,8 @@
     .file-item:disabled { cursor: wait; }
     .file-row.uploading .file-item { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.4); }
     .file-row.uploading .file-delete { display: none; }
-    .file-row.uploading .file-meta { color: var(--orange-deep); }
+    .file-row.uploading .file-meta, .file-row.indexing .file-meta { color: var(--orange-deep); }
+    .file-row.failed .file-meta { color: var(--red); }
     .file-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(240, 74, 66, .16); pointer-events: none; }
     .file-progress > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f6b16a, var(--orange) 52%, var(--orange-deep)); box-shadow: 0 0 10px rgba(240, 74, 66, .4); transition: width .12s linear; }
     .file-icon { width: 36px; height: 36px; min-width: 36px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 10px; color: var(--muted); background: rgba(255,255,255,.58); font-size: 8px; font-weight: 800; letter-spacing: .03em; position: relative; overflow: hidden; }
@@ -341,7 +341,6 @@
       .model-wrap { position: static; }
       .panel-controls { display: none; }
       .model-menu { position: absolute; top: calc(100% + 10px); left: 0; right: 0; width: auto; max-height: calc(100dvh - 96px); }
-      .form-row { grid-template-columns: minmax(0,1fr); }
       .scene-car { width: min(92vw, calc(52vh * 1.755)); }
       body.is-idle .scene-car { width: min(96vw, calc(72vh * 1.755)); }
       .chat-panel { height: 100%; }
@@ -436,18 +435,11 @@
       <div class="dialog-body">
         <div class="found-models" id="found-models"></div>
         <form id="connect-model-form">
-          <div class="field"><label for="provider">Подключение</label><select id="provider"><option value="google">Google AI Studio</option><option value="huggingface">Модель в папке</option><option value="ollama">Ollama</option><option value="lm_studio">LM Studio</option><option value="openai_compatible">Другой API</option></select></div>
-          <div id="local-fields" hidden>
-            <div class="form-row">
-              <div class="field"><label for="local-model-path">Папка модели</label><input id="local-model-path" placeholder="C:\models\my-model" autocomplete="off"></div>
-              <div class="field"><label for="model-device">Устройство</label><select id="model-device"><option value="auto">Авто</option><option value="cpu">CPU</option><option value="cuda">CUDA</option></select></div>
-            </div>
-            <div class="field-note">Поддерживаются модели Transformers с файлом config.json.</div>
-          </div>
+          <div class="field"><label for="provider">Подключение</label><select id="provider"><option value="google">Google AI Studio</option><option value="openai">OpenAI</option><option value="ollama">Ollama</option><option value="lm_studio">LM Studio</option><option value="openai_compatible">Другой API</option></select></div>
           <div id="api-fields">
             <div class="field" id="api-base-url-field" hidden><label for="api-base-url">Адрес API</label><input id="api-base-url" placeholder="http://127.0.0.1:1234/v1" autocomplete="url"></div>
             <div class="field"><label for="api-model-name">Имя модели</label><input id="api-model-name" placeholder="gemini-3.6-flash" autocomplete="off"></div>
-            <div class="field"><label for="api-key">API-ключ</label><input id="api-key" type="password" placeholder="Ключ Google AI Studio" autocomplete="off"><span class="field-note">Ключ хранится только на этом компьютере, в исходный код не попадает.</span></div>
+            <div class="field"><label for="api-key">API-ключ</label><input id="api-key" type="password" placeholder="Ключ Google AI Studio" autocomplete="off"><span class="field-note" id="api-key-note">Ключ хранится только на этом компьютере, в исходный код не попадает.</span></div>
           </div>
           <div class="dialog-actions"><button class="ghost-button" id="model-dialog-cancel" type="button">Отмена</button><button class="primary-button" id="connect-submit" type="submit">Подключить</button></div>
         </form>
@@ -668,7 +660,20 @@
       if (!response.ok) throw new Error(errorMessage(payload, response.status));
       return payload;
     }
-    async function refreshHealth() { try { state.health = await api("/api/health"); } catch (_) { state.health = null; } }
+    let wasIndexing = false;
+    async function refreshHealth() {
+      try { state.health = await api("/api/health"); } catch (_) { state.health = null; }
+      const indexing = Boolean(state.health?.indexing);
+      if (indexing) {
+        wasIndexing = true;
+        const name = state.health?.index?.filename;
+        const target = state.uploads.find((item) => item.name === name) || state.files.find((item) => item.name === name);
+        if (target) applyIndexProgress(target, state.health);
+      } else if (wasIndexing) {
+        wasIndexing = false;
+        await loadFiles();
+      }
+    }
     function fileKind(type) { if (imageTypes.has(type)) return "image"; return type === "pdf" ? "pdf" : "text"; }
     function formatTime(ts) {
       try { return new Date(ts).toLocaleString("ru", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); }
@@ -686,6 +691,7 @@
       if (!health?.indexing) return;
       const index = health.index || {};
       if (index.filename && index.filename !== item.name) return;
+      item.index_status = "indexing";
       item.indexLabel = indexStageLabel(index);
       if (index.stage === "embed" && index.total > 0) item.progress = 0.15 + 0.85 * (index.current / index.total);
       else if (index.stage === "split") item.progress = Math.max(item.progress || 0, 0.12);
@@ -693,14 +699,30 @@
       else item.progress = Math.max(item.progress || 0, 0.05);
       updateUploadRow(item);
     }
+    function fileStatusLabel(file, { uploading = false } = {}) {
+      const progress = Math.round((file.progress || 0) * 100);
+      if (file.error) return file.error;
+      if (uploading) return file.indexLabel || (progress >= 100 ? "Индексируется" : `${progress}%`);
+      if (file.index_status === "indexing") return file.indexLabel || "Индексируется";
+      if (file.index_status === "failed") return file.index_error || "Провал индексации";
+      if (file.index_status === "ready") {
+        const size = formatSize(file.size);
+        return size ? `${size} · готов` : "Готов";
+      }
+      return formatSize(file.size);
+    }
     function fileRowHtml(file, { uploading = false } = {}) {
       const kind = fileKind(file.type);
       const progress = Math.round((file.progress || 0) * 100);
-      const meta = uploading ? (file.error ? file.error : (file.indexLabel || (progress >= 100 ? "Индексация…" : `${progress}%`))) : formatSize(file.size);
-      const progressHtml = uploading ? `<span class="file-progress" aria-hidden="true"><span style="width:${progress}%"></span></span>` : "";
+      const indexing = uploading || file.index_status === "indexing";
+      const failed = !uploading && file.index_status === "failed";
+      const meta = fileStatusLabel(file, { uploading });
+      const progressHtml = indexing ? `<span class="file-progress" aria-hidden="true"><span style="width:${progress}%"></span></span>` : "";
       const openAttr = uploading ? "disabled" : `data-open-file="${esc(file.name)}"`;
       const deleteBtn = uploading ? "" : `<button class="file-delete" type="button" data-delete-file="${esc(file.name)}" aria-label="Удалить ${esc(file.name)}">${trashSvg}</button>`;
-      return `<div class="file-row${uploading ? " uploading" : ""}"${uploading ? ` data-upload-id="${esc(file.id)}"` : ""}"><button class="file-item ${!uploading && state.activeFile === file.name ? "active" : ""}" type="button" ${openAttr}><span class="file-icon ${kind}">${esc((file.type || "").toUpperCase())}</span><span class="file-copy"><span class="file-name">${esc(file.name)}</span><span class="file-meta">${esc(meta)}</span></span>${progressHtml}</button>${deleteBtn}</div>`;
+      const rowClass = uploading ? " uploading" : indexing ? " indexing" : failed ? " failed" : "";
+      const rowId = uploading ? ` data-upload-id="${esc(file.id)}"` : "";
+      return `<div class="file-row${rowClass}" data-file-name="${esc(file.name)}"${rowId}><button class="file-item ${!uploading && state.activeFile === file.name ? "active" : ""}" type="button" ${openAttr}><span class="file-icon ${kind}">${esc((file.type || "").toUpperCase())}</span><span class="file-copy"><span class="file-name">${esc(file.name)}</span><span class="file-meta">${esc(meta)}</span></span>${progressHtml}</button>${deleteBtn}</div>`;
     }
     function renderFiles() {
       $("#file-count").textContent = state.files.length;
@@ -718,15 +740,24 @@
       list.querySelectorAll("[data-delete-file]").forEach((button) => button.addEventListener("click", () => confirmDeleteFile(button.dataset.deleteFile)));
     }
     function updateUploadRow(item) {
-      const row = document.querySelector(`[data-upload-id="${item.id}"]`);
+      const row = (item.id && document.querySelector(`[data-upload-id="${item.id}"]`)) || [...document.querySelectorAll("[data-file-name]")].find((node) => node.dataset.fileName === item.name);
       if (!row) return;
       const bar = row.querySelector(".file-progress > span");
       const meta = row.querySelector(".file-meta");
       const progress = Math.max(0, Math.min(100, Math.round((item.progress || 0) * 100)));
       if (bar) bar.style.width = `${progress}%`;
-      if (meta) meta.textContent = item.error ? item.error : (item.indexLabel || (progress >= 100 ? "Индексация…" : `${progress}%`));
+      if (meta) meta.textContent = fileStatusLabel(item, { uploading: Boolean(item.id) });
     }
-    async function loadFiles() { try { state.files = await api("/api/files"); renderFiles(); } catch (error) { showToast(error.message); } }
+    async function loadFiles() {
+      try {
+        state.files = await api("/api/files");
+        if (state.health?.indexing) {
+          const current = state.files.find((item) => item.name === state.health.index?.filename);
+          if (current) applyIndexProgress(current, state.health);
+        }
+        renderFiles();
+      } catch (error) { showToast(error.message); }
+    }
     function confirmDeleteFile(name) {
       state.pendingDelete = { type: "file", name };
       $("#delete-dialog-title").textContent = "Удалить документ?";
@@ -1117,27 +1148,33 @@
       if (dialogReturnFocus?.isConnected) dialogReturnFocus.focus();
     }
     function closeModelDialog() { if (changingModel) return; hideDialog("#model-dialog"); $("#api-key").value = ""; }
+    const providerDefaults = {
+      google: { model: "gemini-3.6-flash", base: "", hideBase: true, keyPlaceholder: "Ключ Google AI Studio", modelPlaceholder: "gemini-3.6-flash" },
+      openai: { model: "gpt-4o-mini", base: "https://api.openai.com/v1", hideBase: true, keyPlaceholder: "Ключ OpenAI (sk-...)", modelPlaceholder: "gpt-4o-mini" },
+      ollama: { model: "llama3.1", base: "http://127.0.0.1:11434/v1", hideBase: false, keyPlaceholder: "Необязательно", modelPlaceholder: "llama3.1", keyNote: "Для локального сервера ключ не обязателен." },
+      lm_studio: { model: "", base: "http://127.0.0.1:1234/v1", hideBase: false, keyPlaceholder: "Необязательно", modelPlaceholder: "имя загруженной модели", keyNote: "Для локального сервера ключ не обязателен." },
+      openai_compatible: { model: "", base: "", hideBase: false, keyPlaceholder: "API-ключ, если нужен", modelPlaceholder: "имя модели", keyNote: "Подойдёт любой OpenAI-compatible endpoint, например https://api.openai.com/v1." },
+    };
     function setProvider(provider) {
       $("#provider").value = provider;
-      const local = provider === "huggingface";
-      const google = provider === "google";
-      $("#local-fields").hidden = !local;
-      $("#api-fields").hidden = local;
-      $("#api-base-url-field").hidden = google || local;
-      if (google && !$("#api-model-name").value.trim()) $("#api-model-name").value = "gemini-3.6-flash";
-      if (provider === "ollama") $("#api-base-url").value = "http://127.0.0.1:11434/v1";
-      if (provider === "lm_studio") $("#api-base-url").value = "http://127.0.0.1:1234/v1";
+      const defaults = providerDefaults[provider] || providerDefaults.openai_compatible;
+      $("#api-base-url-field").hidden = defaults.hideBase;
+      if (provider === "ollama" || provider === "lm_studio") $("#api-base-url").value = defaults.base;
       if (provider === "openai_compatible" && /127\.0\.0\.1:(11434|1234)/.test($("#api-base-url").value)) $("#api-base-url").value = "";
+      const knownDefaults = Object.values(providerDefaults).map((item) => item.model).filter(Boolean);
+      const currentModel = $("#api-model-name").value.trim();
+      if (defaults.model && (!currentModel || knownDefaults.includes(currentModel))) $("#api-model-name").value = defaults.model;
+      $("#api-model-name").placeholder = defaults.modelPlaceholder || "";
+      $("#api-key").placeholder = defaults.keyPlaceholder || "API-ключ";
     }
     async function openModelDialog() {
       toggleModelMenu(false); $("#found-models").innerHTML = ""; setProvider("google"); showDialog("#model-dialog", "#api-key");
     }
     async function connectModel(event) {
-      event.preventDefault(); const provider = $("#provider").value; const local = provider === "huggingface";
+      event.preventDefault(); const provider = $("#provider").value;
+      const defaults = providerDefaults[provider] || providerDefaults.openai_compatible;
       if (changingModel || state.busy) { showToast("Дождитесь завершения текущего запроса"); return; }
-      const payload = local
-        ? { provider, model: $("#local-model-path").value.trim(), device: $("#model-device").value }
-        : { provider, model: $("#api-model-name").value.trim(), name: $("#api-model-name").value.trim(), base_url: $("#api-base-url").value.trim(), api_key: $("#api-key").value };
+      const payload = { provider, model: $("#api-model-name").value.trim(), name: $("#api-model-name").value.trim(), base_url: defaults.hideBase ? "" : $("#api-base-url").value.trim(), api_key: $("#api-key").value };
       $("#connect-submit").disabled = true;
       changingModel = true;
       ++modelRevision;
@@ -1335,13 +1372,21 @@
     }
     async function uploadFiles(files) {
       const allowed = new Set(["md", "txt", "pdf", ...imageTypes]);
-      const names = new Set([...state.files, ...state.uploads].map((file) => file.name.toLocaleLowerCase()));
+      const batchNames = new Set();
+      const uploadingNames = new Set(state.uploads.map((item) => item.name.toLocaleLowerCase()));
       const accepted = [...files].filter((file) => {
         if (!file || !allowed.has(file.name.split(".").pop().toLowerCase())) { showToast(`Неподдерживаемый формат: ${file?.name || "файл"}`); return false; }
         if (!file.size) { showToast(`Файл пуст: ${file.name}`); return false; }
         const key = file.name.toLocaleLowerCase();
-        if (names.has(key)) { showToast(`Файл уже добавлен: ${file.name}`); return false; }
-        names.add(key);
+        if (uploadingNames.has(key) || batchNames.has(key)) {
+          showToast(`Файл уже загружается: ${file.name}`);
+          return false;
+        }
+        const existing = state.files.find((item) => item.name.toLocaleLowerCase() === key);
+        if (existing?.index_status === "indexing") { showToast(`Дождитесь окончания индексации: ${file.name}`); return false; }
+        batchNames.add(key);
+        uploadingNames.add(key);
+        if (existing?.index_status === "ready") showToast(`${file.name} будет заменён после полной индексации`);
         return true;
       });
       const items = accepted.map((file) => ({
@@ -1548,7 +1593,12 @@
     renderChatList();
     renderChatThread();
     initScene();
-    Promise.all([refreshHealth(), loadFiles(), loadModels()]); setInterval(refreshHealth, 20000);
+    Promise.all([refreshHealth(), loadFiles(), loadModels()]).finally(() => {
+      (function pollHealth() {
+        const delay = state.health?.indexing ? 400 : 20000;
+        setTimeout(async () => { await refreshHealth(); pollHealth(); }, delay);
+      })();
+    });
   </script>
 </body>
 </html>
